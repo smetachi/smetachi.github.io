@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ta'mir smetasi — uy ta'miri kalkulyatori | Smetachi Quvonchbek</title>
+<meta name="description" content="Kvartira va hovli uy ta'miri narxini bepul hisoblang: 14 viloyat, OLX narxlari, material tanlash, deraza-eshik, fasad. Aniq smeta uchun smetachi: +998 50 708 82 27.">
+<meta name="keywords" content="ta'mir smetasi, remont narxi, uy ta'miri kalkulyator, smeta, smetachi, kvartira remont, ремонт смета">
+<meta property="og:title" content="Ta'mir smetasi — uy ta'miri narxini bepul hisoblang">
+<meta property="og:description" content="Xona o'lchamlarini kiriting — smeta, do'kon ro'yxati va muddat bir zumda tayyor.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://toxtamurodovquvonchbek08-creator.github.io/smeta/kalk.jpg">
+<meta property="og:url" content="https://toxtamurodovquvonchbek08-creator.github.io/smeta/">
+<link rel="canonical" href="https://toxtamurodovquvonchbek08-creator.github.io/smeta/">
+<meta name="theme-color" content="#1f4fd1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f4fd1'/%3E%3Cpath d='M14 34 32 18l18 16v16H14z' fill='%23fff'/%3E%3Crect x='28' y='38' width='8' height='12' fill='%23f26b1d'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: as plain as a calculator on a phone — three questions, a list of rooms, one number
+   IDEA: a builder's tally sheet: rooms as lines, the price at the bottom
+   PICTURE: the live total itself, large, under the rooms list
+   COLOUR and TYPE: blueprint blue band, white sheet, orange money; Golos Text
+   LAYOUT: one narrow column; total bar pinned on phones */
+:root{color-scheme:light dark;--bg:light-dark(#f2f5fb,#0d1220);--card:light-dark(#fff,#151c2d);--ink:light-dark(#141821,#e8ecf4);--mut:light-dark(#5a6477,#9ba6bd);--line:light-dark(#dbe2ee,#27314b);--blue:light-dark(#1f4fd1,#2b5ae6);--blue2:light-dark(#e8eefc,#1a2443);--acc:#ff6a1a}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Golos Text",system-ui,sans-serif;overflow-x:clip}
+input,select,button{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.top{background:var(--blue);color:#fff;padding:clamp(22px,4vw,36px) 16px 64px;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:24px 24px}
+.abc{max-width:720px;margin:-6px auto 12px;display:flex;justify-content:flex-end;gap:0}
+.abc button{border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;min-height:36px;padding:0 14px;font-weight:600;font-size:14px}
+.abc button:first-child{border-radius:999px 0 0 999px}.abc button:last-child{border-radius:0 999px 999px 0;border-left:0}
+.abc button[aria-pressed=true]{background:#fff;color:var(--blue)}
+.hwrap{max-width:720px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:16px;align-items:center}
+.pill{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 12px;font-size:13px;margin-bottom:10px}
+.top h1{font-size:clamp(28px,4.6vw,40px);line-height:1.08;margin:0 0 8px;text-wrap:balance}
+.top p{margin:0;opacity:.92;font-size:16px;max-width:46ch}
+.badges{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.badges li{font-size:13px;background:#fff;color:var(--blue);border-radius:999px;padding:3px 10px;font-weight:600}
+.hero{width:100%;height:auto;display:block}
+.roll{animation:roll 3.2s ease-in-out infinite;transform-origin:146px 92px}
+@keyframes roll{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
+@media(prefers-reduced-motion:reduce){.roll{animation:none}}
+@media(max-width:560px){.hwrap{grid-template-columns:minmax(0,1fr) 110px;gap:10px;align-items:start}.hero{max-width:110px;margin:0;order:0}.badges,.pill{display:none}.top{padding-top:16px;padding-bottom:56px}.top h1{font-size:24px}.top p{font-size:14px}}
+main{max-width:720px;margin:-44px auto 0;padding:0 16px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,26px);margin-bottom:16px}
+h2{font-size:20px;margin:0 0 14px;display:flex;gap:10px;align-items:center}
+h2 i{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:inline-grid;place-items:center;font-size:15px}
+.q{font-weight:600;margin:16px 0 8px;font-size:16px}.q:first-of-type{margin-top:0}
+select.big{width:100%;min-height:52px;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card);font-weight:600}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px}
+.seg button{border:2px solid var(--line);background:var(--card);border-radius:12px;min-height:58px;padding:6px 8px;font-weight:600;line-height:1.2}
+.seg button small{display:block;font-weight:400;font-size:13px;color:var(--mut)}
+.seg button[aria-pressed=true]{border-color:var(--blue);background:var(--blue2);color:var(--blue)}
+.rows{display:grid;gap:10px}
+.hd,.rw{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr)) repeat(2,minmax(0,.8fr)) 40px;gap:6px;align-items:center}
+.hd{font-size:13px;color:var(--mut);text-align:center}.hd span:first-child{text-align:left}
+.rw select,.rw input{width:100%;min-height:50px;border:1px solid var(--line);border-radius:10px;padding:6px 8px;background:var(--card);font-size:17px}
+.rw input{text-align:center;color:var(--ink)}
+.mat{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.mat label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mut)}
+.mat label span{display:inline!important;flex:none}
+.rw .mat select{min-height:40px;font-size:15px;padding:4px 6px;background:var(--blue2);border-color:transparent;color:var(--ink)}
+.rows .rw{padding-bottom:10px;border-bottom:1px solid var(--line)}
+.rw .x{border:0;background:none;color:var(--mut);font-size:20px;height:44px;border-radius:10px}
+.rw .x:hover{background:var(--blue2);color:#c92a2a}
+.addb{margin-top:12px;width:100%;min-height:52px;border:2px dashed var(--blue);background:transparent;color:var(--blue);border-radius:12px;font-weight:700}
+.gen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.gen label,.yard label{display:grid;gap:4px;font-size:13px;color:var(--mut)}
+.gen input,.yard input{min-height:46px;border:1px solid var(--line);border-radius:10px;padding:6px 10px;background:var(--card);text-align:center;font-size:17px;color:var(--ink)}
+.yard{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+.hint{font-size:13px;color:var(--mut);margin:8px 0 0}
+.res{border:2px solid var(--acc)}
+.res .l{color:var(--mut);font-size:15px}
+.total{font-size:clamp(38px,8vw,56px);font-weight:700;line-height:1.05;color:var(--acc);margin:4px 0}
+.total small{font-size:.4em;color:var(--mut);font-weight:500}
+.ck1{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.ck1 input{width:24px;height:24px;accent-color:var(--blue);flex:none;margin:0}
+.ck1 b{display:block}.ck1 small{display:block;color:var(--mut);font-size:13px}
+.ck1:has(input:checked){border-color:var(--blue);background:var(--blue2)}
+.outv{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;background:var(--blue2);font-weight:700;color:var(--ink);font-size:17px}
+.fopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.fopts button{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:8px 10px;text-align:left;min-height:64px}
+.fopts button b{display:block;font-size:15px}.fopts button small{display:block;color:var(--mut);font-size:13px}
+.fopts button[aria-pressed=true]{border-color:var(--blue);background:var(--blue2)}
+.fold{padding:0}
+.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:clamp(16px,2.6vw,22px) clamp(18px,3vw,26px);min-height:auto}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary h2{margin:0}
+.fold>summary::after{content:"";width:10px;height:10px;border-right:2.5px solid var(--mut);border-bottom:2.5px solid var(--mut);transform:rotate(45deg);flex:none;margin:-4px 4px 0 0;transition:transform .2s}
+.fold[open]>summary::after{transform:rotate(-135deg);margin-top:4px}
+.fold>summary .fsum{margin-left:auto;font-size:14px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fold>*:not(summary){margin-left:clamp(18px,3vw,26px);margin-right:clamp(18px,3vw,26px)}
+.fold[open]{padding-bottom:clamp(16px,2.6vw,22px)}
+.fold>summary+*{margin-top:0}
+.more{margin:14px 0 4px;border-top:1px solid var(--line);padding-top:6px}
+.more>summary{font-weight:600;justify-content:space-between}
+.more>summary::after{content:"▾";color:var(--blue);font-size:18px}.more[open]>summary::after{content:"▴"}
+@media(max-width:560px){.fold>summary h2{font-size:17px}.fold>summary h2 i{width:26px;height:26px;font-size:13px}.fold>summary .fsum{font-size:12px;max-width:38%}}
+.msum{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:8px;border:0;background:var(--blue2);border-radius:10px;min-height:38px;padding:4px 12px;font-size:14px;text-align:left;color:var(--ink)}
+.msum .mt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msum .me{color:var(--blue);font-weight:600;white-space:nowrap;flex:none}
+.exl{display:grid;gap:8px}
+.ex{display:grid;grid-template-columns:auto minmax(0,1fr) 92px;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.ex.on{border-color:var(--blue);background:var(--blue2)}
+.ex label{display:flex;gap:10px;align-items:center;cursor:pointer;grid-column:1/3}
+.ex input[type=checkbox]{width:24px;height:24px;accent-color:var(--blue);flex:none;margin:0}
+.ex b{display:block;font-weight:600}.ex small{display:block;color:var(--mut);font-size:13px}
+.ex .qq{display:flex;align-items:center;gap:4px}
+.ex .qq input{width:100%;min-height:40px;border:1px solid var(--line);border-radius:8px;text-align:center;background:var(--card);color:var(--ink);font-size:16px}
+.ex .qq span{font-size:13px;color:var(--mut);white-space:nowrap}
+.ex:not(.on) .qq{opacity:.45}
+.rhd{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cur{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px}
+.cur button{border:0;background:none;border-radius:999px;min-height:34px;min-width:52px;font-weight:600;color:var(--mut)}
+.cur button[aria-pressed=true]{background:var(--blue);color:#fff}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0 6px}
+.facts div{background:var(--blue2);border-radius:12px;padding:10px 12px}
+.facts span{display:block;font-size:13px;color:var(--mut)}.facts b{font-size:17px;white-space:nowrap}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cmp button{border:2px solid var(--line);background:var(--card);border-radius:12px;padding:8px;min-height:62px;text-align:left}
+.cmp button span{display:block;font-size:13px;color:var(--mut)}.cmp button b{font-size:16px;white-space:nowrap}
+.cmp button[aria-pressed=true]{border-color:var(--acc)}
+.stg{display:grid;gap:10px;margin-bottom:18px}
+.stg .r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;font-size:15px}
+.stg .r b{white-space:nowrap}
+.stg .r small{grid-column:1/-1;color:var(--mut);font-size:13px}
+.stg .t{grid-column:1/-1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.stg .t i{display:block;height:100%;background:var(--blue)}
+#shopT td:last-child{text-align:right;white-space:nowrap;font-weight:600}
+@media(max-width:480px){.facts{grid-template-columns:1fr 1fr}.facts div:last-child{grid-column:1/-1}.cmp button{padding:6px}.cmp button b{font-size:14px;white-space:normal;line-height:1.2;display:block}}
+.split{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:15px;margin:10px 0 16px}
+.split b{white-space:nowrap}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btns button{min-height:52px;border-radius:12px;font-weight:700;border:1px solid var(--line);background:var(--card)}
+.btns .pri{background:var(--acc);border-color:var(--acc);color:#1a0d04}
+.btns .solo{grid-column:1/-1}
+.msg{font-size:14px;color:var(--mut);min-height:20px;margin-top:6px}
+details{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:600;min-height:36px;display:flex;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;color:var(--mut);font-size:12px;text-align:left}
+.num{text-align:right;white-space:nowrap}
+tr.g td{background:var(--blue2);font-weight:600}
+.pt input{width:100px;min-height:36px;border:1px solid var(--line);border-radius:8px;text-align:right;padding:2px 6px;background:var(--card);color:var(--ink)}
+.pt input.ch{border-color:var(--acc)}
+.note{font-size:13px;color:var(--mut);margin:12px 0 0}
+.cta{border:2px dashed var(--blue);background:var(--blue2);border-radius:14px;padding:14px 16px;margin:4px 0 14px;display:grid;gap:10px}
+.cta-t b{display:block;font-size:16px}.cta-t span{display:block;font-size:14px;color:var(--mut);margin-top:2px}
+.cta-n{font-size:24px;font-weight:700;letter-spacing:.5px;color:var(--blue);white-space:nowrap}
+.cta-b,.pro-c{display:flex;flex-wrap:wrap;gap:8px}
+.cta-b a,.cta-b button,.pro-c a,.pro-c button{min-height:46px;display:inline-flex;align-items:center;padding:0 16px;border-radius:12px;font-weight:700;text-decoration:none;font-size:15px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.cta-b .c1,.pro-c a:first-of-type{background:var(--blue);border-color:var(--blue);color:#fff}
+.cta-b .c2{background:#229ed9;border-color:#229ed9;color:#fff}
+.exp{display:inline-block;margin-left:8px;background:#ff6a1a;color:#1a0d04;font-weight:700;font-size:13px;border-radius:999px;padding:2px 10px;vertical-align:middle}
+.svc{list-style:none;margin:10px 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.svc li{background:var(--blue2);border-radius:999px;padding:4px 11px;font-size:13px;font-weight:600;position:relative;padding-left:24px}
+.svc li::before{content:"";position:absolute;left:9px;top:50%;width:8px;height:4px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:translateY(-70%) rotate(-45deg)}
+.pro-c .tg{background:#229ed9!important;border-color:#229ed9!important;color:#fff!important}
+.pro-c .ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);border:0;color:#fff}
+.soc{font-size:13px!important;margin:8px 0 0!important}
+.cta2{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--blue2);font-size:14px}
+.cta2 b{font-weight:600}
+.cta2-b{display:flex;gap:6px}
+.cta2-b a{min-height:38px;display:inline-flex;align-items:center;padding:0 14px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;background:var(--blue);color:#fff}
+.cta2-b .tg{background:#229ed9}
+.pro2{max-width:688px;margin:0 auto 18px;border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+@media(max-width:720px){.pro2{margin:0 16px 18px}}
+.p2-top{background:var(--blue);color:#fff;padding:22px 22px 20px;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:20px 20px}
+.p2-badge{display:inline-block;background:#ff6a1a;color:#1a0d04;font-weight:700;font-size:13px;border-radius:999px;padding:3px 12px}
+.p2-top h3{font-size:clamp(26px,4vw,34px);line-height:1.1;margin:10px 0 8px}
+.p2-hook{margin:0;font-size:16px;opacity:.95;line-height:1.45}
+.p2-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:18px;padding:18px 22px}
+.p2-h{display:block;font-size:13px;color:var(--mut);font-weight:600;margin-bottom:6px;text-transform:none}
+.p2-col ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.p2-col li{position:relative;padding-left:24px;font-weight:600;font-size:15px}
+.p2-col li::before{content:"";position:absolute;left:3px;top:6px;width:10px;height:5px;border-left:2.5px solid var(--blue);border-bottom:2.5px solid var(--blue);transform:rotate(-45deg)}
+.p2-call{border-top:1px solid var(--line);padding:16px 22px 20px;display:grid;gap:12px}
+.p2-phone{display:block;text-decoration:none;color:var(--ink);font-size:28px;font-weight:700;letter-spacing:.3px;white-space:nowrap}
+.p2-phone small{display:block;font-size:13px;color:var(--mut);font-weight:500;letter-spacing:0}
+.p2-btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.p2-btns a,.p2-btns button{min-height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.p2-btns .tg{background:#229ed9;border-color:#229ed9;color:#fff}
+.p2-btns .ig{background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af);border:0;color:#fff}
+@media(max-width:560px){.p2-grid{grid-template-columns:1fr}.p2-btns{grid-template-columns:1fr 1fr}.p2-btns button{grid-column:1/-1}}
+.pro{max-width:720px;margin:0 auto 18px;padding:0 16px}
+.pro-in{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:start}
+.pro-in b{font-size:19px}.pro-in p{margin:4px 0 10px;color:var(--mut);font-size:15px}
+.pro-n{font-size:20px;font-weight:700;align-self:center;margin-right:6px;white-space:nowrap}
+.foot{max-width:720px;margin:0 auto 40px;padding:0 16px;text-align:center;color:var(--mut);font-size:14px}.foot b{display:block;color:var(--ink);font-size:17px;margin-bottom:2px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px;display:none;justify-content:space-between;align-items:center;box-shadow:0 -4px 18px rgba(0,0,0,.08);z-index:5}
+.bar b{font-size:21px;color:var(--acc)}.bar a{color:var(--blue);font-weight:700;text-decoration:none;padding:10px 0}
+@media(max-width:640px){.ex{grid-template-columns:auto minmax(0,1fr) 76px;padding:10px}.ex .qq span{display:none}.mat{grid-template-columns:minmax(0,1fr)}.bar{display:flex}body{padding-bottom:72px}
+ .hd{display:none}.rw{grid-template-columns:repeat(4,minmax(0,1fr)) 40px;padding:10px;border:1px solid var(--line);border-radius:12px}
+ .rw select{grid-column:1/5}.mat{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.mat label{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--mut)}
+.mat label span{display:inline!important;flex:none}
+.rw .mat select{min-height:40px;font-size:15px;padding:4px 6px;background:var(--blue2);border-color:transparent;color:var(--ink)}
+.rows .rw{padding-bottom:10px;border-bottom:1px solid var(--line)}
+.rw .x{grid-column:5;grid-row:1}
+ .rw label{display:grid;gap:2px;font-size:12px;color:var(--mut);text-align:center}
+ .gen{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:641px){.rw label span{display:none}}
+@media(max-width:640px){.rw .mat{grid-template-columns:minmax(0,1fr)}.rw .mat label{display:grid;grid-template-columns:52px minmax(0,1fr);align-items:center;text-align:left;font-size:13px}}
+#vdlg{padding:0;border:0;background:transparent;max-width:none;max-height:none}
+#vdlg::backdrop{background:rgba(5,9,20,.88)}
+#vdlg video{display:block;height:min(86vh,calc(92vw*16/9));aspect-ratio:9/16;border-radius:16px;background:#000}
+#vdlg .vx{position:fixed;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:24px;cursor:pointer}
+.hvid{display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:7px 16px 7px 7px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer;text-align:left}
+.hvid i{flex:0 0 34px;height:34px;border-radius:50%;background:#ff6a1a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7v10l8-5z' fill='%231a0d04'/%3E%3C/svg%3E") center/22px no-repeat}
+.hvid small{display:block;font-weight:500;font-size:12px;opacity:.85}
+.hvid:hover{background:rgba(255,255,255,.22)}.hvid:focus-visible{outline:3px solid #fff;outline-offset:2px}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+<header class="top">
+ <div class="abc" role="group" aria-label="Yozuv"><button data-abc="lat">Lotin</button><button data-abc="cyr">Кирилл</button></div>
+ <div class="hwrap">
+  <div class="htxt">
+   <span class="pill">Yetti o'lchab, bir kes — hisobini biz qilamiz</span>
+   <h1>Har bir g'isht — hisobda, har bir so'm — nazoratda</h1>
+   <p>Xona o'lchamlarini kiriting, pol, devor va shiftga material tanlang — smeta, do'kon ro'yxati va muddat bir zumda tayyor.</p>
+   <button class="hvid" type="button" data-src="kalk.mp4" data-poster="kalk.jpg"><i aria-hidden="true"></i><span>Qanday ishlaydi? <small>44 soniyalik video</small></span></button>
+   <ul class="badges"><li>OLX narxlari asosida</li><li>14 hudud</li><li>Kvartira va hovli</li><li>PDF smeta</li></ul>
+  </div>
+  <svg class="hero" viewBox="0 0 320 230" role="img" aria-label="Ta'mirlanayotgan uy: havozalar, bo'yoq valigi va o'lcham chizig'i">
+   <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="rgba(255,255,255,.18)" stroke-width="3"/></pattern></defs>
+   <ellipse cx="160" cy="212" rx="140" ry="9" fill="rgba(0,0,0,.18)"/>
+   <!-- house -->
+   <path d="M70 110 L160 48 L250 110" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+   <rect x="84" y="104" width="152" height="104" fill="rgba(255,255,255,.1)" stroke="#fff" stroke-width="4"/>
+   <rect x="84" y="104" width="62" height="104" fill="url(#hatch)"/>
+   <rect x="200" y="62" width="18" height="30" fill="rgba(255,255,255,.12)" stroke="#fff" stroke-width="3"/>
+   <!-- painted part -->
+   <rect x="146" y="104" width="90" height="104" fill="#ff6a1a" opacity=".9"/>
+   <rect x="160" y="124" width="36" height="32" fill="#1f4fd1" stroke="#fff" stroke-width="3"/><line x1="178" y1="124" x2="178" y2="156" stroke="#fff" stroke-width="2"/><line x1="160" y1="140" x2="196" y2="140" stroke="#fff" stroke-width="2"/>
+   <rect x="208" y="162" width="20" height="46" fill="#1f4fd1" stroke="#fff" stroke-width="3"/><circle cx="223" cy="186" r="2" fill="#fff"/>
+   <!-- scaffolding -->
+   <g stroke="#ffd29c" stroke-width="3" stroke-linecap="round"><line x1="44" y1="208" x2="44" y2="96"/><line x1="78" y1="208" x2="78" y2="96"/><line x1="40" y1="170" x2="82" y2="170"/><line x1="40" y1="132" x2="82" y2="132"/><line x1="44" y1="208" x2="78" y2="170"/><line x1="44" y1="170" x2="78" y2="132"/></g>
+   <rect x="38" y="127" width="48" height="6" rx="2" fill="#ffd29c"/>
+   <!-- paint roller -->
+   <g class="roll"><line x1="146" y1="92" x2="146" y2="60" stroke="#fff" stroke-width="3"/><path d="M146 60 L120 60 L120 50" fill="none" stroke="#fff" stroke-width="3"/><rect x="104" y="36" width="34" height="14" rx="7" fill="#ff6a1a" stroke="#fff" stroke-width="3"/></g>
+   <!-- bucket -->
+   <path d="M262 176 L292 176 L288 208 L266 208 Z" fill="#fff"/><rect x="260" y="170" width="34" height="8" rx="3" fill="#ff6a1a"/><path d="M264 172 Q277 150 290 172" fill="none" stroke="#fff" stroke-width="2.5"/>
+   <!-- dimension line -->
+   <g stroke="#fff" stroke-width="2" opacity=".85"><line x1="84" y1="222" x2="236" y2="222"/><line x1="84" y1="216" x2="84" y2="228"/><line x1="236" y1="216" x2="236" y2="228"/></g>
+   <rect x="140" y="214" width="40" height="16" rx="8" fill="#fff"/><text x="160" y="226" text-anchor="middle" font-size="11" font-weight="700" fill="#1f4fd1">8,5 m</text>
+   <!-- sparkle -->
+   <g fill="#fff"><path d="M270 40 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z" opacity=".9"/><circle cx="292" cy="80" r="3" opacity=".7"/><circle cx="34" cy="60" r="3" opacity=".6"/></g>
+  </svg>
+ </div>
+</header>
+<main>
+ <section class="card">
+  <h2><i>1</i>Asosiy</h2>
+  <div class="q">Viloyat</div>
+  <select class="big" id="reg"></select>
+  <div class="q">Uy</div>
+  <div class="seg" id="s-obj"></div>
+  <div class="q">Ta'mir</div>
+  <div class="seg" id="s-kind"></div>
+ </section>
+
+ <section class="card">
+  <h2><i>2</i>Xonalar</h2>
+  <div class="hd"><span>Xona</span><span>Bo'yi, m</span><span>Eni, m</span><span>Deraza</span><span>Eshik</span><span></span></div>
+  <div class="rows" id="rooms"></div>
+  <button class="addb" id="add">+ Xona qo'shish</button>
+  <div class="gen">
+   <label>Shift balandligi, m<input id="H" inputmode="decimal"></label>
+   <label>Deraza eni, m<input id="ww" inputmode="decimal"></label>
+   <label>Deraza bo'yi, m<input id="wh" inputmode="decimal"></label>
+  </div>
+  <p class="hint">Deraza o'lchami — o'rtacha bitta derazaniki. Eshiklar standart (0,8 × 2 m).</p>
+  <div class="yard" id="yard">
+   <label>Tom maydoni, m² (kerak bo'lmasa 0)<input data-y="roof" inputmode="decimal"></label>
+   <label>Hovliga plitka, m² (kerak bo'lmasa 0)<input data-y="plit" inputmode="decimal"></label>
+  </div>
+ </section>
+
+ <details class="card fold" id="fasC">
+  <summary><h2><i>3</i>Tashqi fasad</h2><span class="fsum" id="sumF"></span></summary>
+  <label class="ck1"><input type="checkbox" id="fOn"><span><b>Fasadni ham qilaman</b><small>uyning tashqi devorlari</small></span></label>
+  <div id="fBody">
+   <div class="gen" style="border:0;padding-top:0;margin-top:12px">
+    <label>Uy atrofi (perimetr), m<input id="fP" inputmode="decimal"></label>
+    <label>Fasad balandligi, m<input id="fH" inputmode="decimal"></label>
+    <label>Fasad maydoni<output id="fA" class="outv"></output></label>
+   </div>
+   <div class="q">Fasad materiali</div>
+   <div class="fopts" id="fM"></div>
+   <div class="exl" style="margin-top:10px">
+    <label class="ck1"><input type="checkbox" id="fSuv"><span><b>Avval suvoq qilish kerak</b><small>g'isht yoki blok ochiq bo'lsa · <span id="fSuvP"></span></small></span></label>
+    <label class="ck1"><input type="checkbox" id="fIzo"><span><b>Penoplast bilan isitish</b><small>qishda issiq, gaz tejaladi · <span id="fIzoP"></span></small></span></label>
+   </div>
+   <p class="hint">Derazalar maydoni o'zi ayiriladi. Perimetr bilmasangiz, bo'sh qoldiring — xonalardan taxmin qilinadi.</p>
+  </div>
+ </details>
+
+ <details class="card fold" id="extC">
+  <summary><h2><i>4</i>Qo'shimcha ishlar</h2><span class="fsum" id="sumE"></span></summary>
+  <p class="hint" style="margin:-6px 0 12px">Keraklisini belgilang — narxga qo'shiladi. Miqdor o'zi hisoblanadi, xohlasangiz o'zgartiring.</p>
+  <div class="exl" id="ext"></div>
+ </details>
+
+ <section class="card res" id="res">
+  <div class="rhd"><div class="l">Taxminiy narx</div><div class="cur" role="group" aria-label="Valyuta"><button data-cur="som">so'm</button><button data-cur="usd">$</button></div></div>
+  <div class="total" id="tot">0</div>
+  <div class="l" id="per"></div>
+  <div class="facts"><div><span>Ustalar ishi</span><b id="ti"></b></div><div><span>Materiallar</span><b id="tm"></b></div><div><span>Muddat</span><b id="dur"></b></div></div>
+  <details class="more"><summary>Solishtirish va to'lov bosqichlari</summary>
+  <div class="q">Boshqa ta'mir turlari bilan solishtiring</div>
+  <div class="cmp" id="cmp"></div>
+  <div class="q">Pul qachon kerak bo'ladi</div>
+  <div class="stg" id="stg"></div>
+  </details>
+  <div class="btns"><button class="pri" id="pdf" hidden>PDF yuklab olish</button><button id="copy">Telegram uchun nusxalash</button></div>
+  <div class="msg" id="msg" role="status"></div>
+  <div class="cta2"><span>Aniq smeta kerakmi? <b>Smetachiga murojaat qiling</b></span><span class="cta2-b"><a href="tel:+998507088227">Qo'ng'iroq</a><a class="tg" href="https://t.me/Quvonchbek_0727">Telegram</a></span></div>
+  <details><summary>Nimalar hisoblandi?</summary><div style="overflow-x:auto"><table id="detT"></table></div></details>
+  <details class="pt"><summary>Usta narxlarini o'zgartirish</summary><div style="overflow-x:auto"><table id="priceT"></table></div><button class="addb" id="resetP" style="border-style:solid;min-height:44px">Standart narxlarga qaytarish</button></details>
+  <p class="note" id="note"></p>
+ </section>
+
+ <details class="card fold" id="shop">
+  <summary><h2><i>5</i>Do'kon uchun ro'yxat</h2><span class="fsum" id="sumS"></span></summary>
+  <p class="hint" style="margin:-6px 0 10px">Qancha material olish kerakligi (zaxira bilan). Sotuvchi bilan aniqlashtiring.</p>
+  <table id="shopT"></table>
+  <button class="addb" id="copyShop" style="border-style:solid">Ro'yxatni nusxalash</button>
+  <div class="msg" id="msg2" role="status"></div>
+ </details>
+</main>
+<section class="pro2">
+ <div class="p2-top">
+  <span class="p2-badge">3 yil tajriba</span>
+  <h3>Smeta xizmati mavjud</h3>
+  <p class="p2-hook">Qurilishda xato pul bilan to'lanadi.<br>Men uni qog'ozda topaman — ish boshlanmasdan oldin.</p>
+ </div>
+ <div class="p2-grid">
+  <div class="p2-col"><span class="p2-h">Uy egalari uchun</span><ul><li>Обмеры — obyektga chiqib o'lchash</li><li>Дефектный акт</li><li>Смета</li></ul></div>
+  <div class="p2-col"><span class="p2-h">Qurilish tashkilotlari uchun</span><ul><li>Ф-2 · Ф-3</li><li>М-29</li><li>Накопительная ведомость</li><li>Сличительная ведомость</li><li>Исполнительная схема</li></ul></div>
+ </div>
+ <div class="p2-call">
+  <a class="p2-phone" href="tel:+998507088227"><small>Qo'ng'iroq qiling</small>+998 50 708 82 27</a>
+  <div class="p2-btns"><a class="tg" href="https://t.me/Quvonchbek_0727">Telegram</a><a class="ig" href="https://instagram.com/tuxtamurodov_0727">Instagram</a><button data-copyph>Raqamni nusxalash</button></div>
+ </div>
+</section>
+<footer class="foot"><b>Ta'mirni pul tugaganda emas, hisob tugaganda boshlang.</b><span>Usta haqi, material va muddat — barchasi bir sahifada, bepul.</span></footer>
+<dialog id="vdlg"><button class="vx" id="vclose" aria-label="Yopish">×</button><video id="vv" controls playsinline preload="none"></video></dialog>
+<div class="bar"><div><div class="l" style="font-size:12px;color:var(--mut)">Jami</div><b id="btot">0</b></div><a href="#res">Batafsil ↓</a></div>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=v=>{const n=parseFloat(String(v??'').replace(',','.').replace(/\s/g,''));return isFinite(n)&&n>0?n:0};
+const fmt=n=>Math.round(n||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+const fk=n=>fmt(Math.round((n||0)/1000)*1000);
+const fq=n=>(Math.round((n||0)*100)/100).toString().replace('.',',');
+const mln=n=>(n/1e6).toFixed(n>=1e8?0:1).replace('.',',')+' mln';
+const RATE=12000;let CUR='som';try{CUR=localStorage.getItem('smeta-cur')||'som'}catch(e){}
+const money=n=>CUR==='usd'?'$'+fmt(Math.round(n/RATE/10)*10):fk(n)+" so'm";
+const moneyS=n=>CUR==='usd'?'$'+(n/RATE/1000).toFixed(1).replace('.',',')+' ming':mln(n)+" so'm";
+const uid=()=>Math.random().toString(36).slice(2,8);
+/* key: [name, unit, kind(i=ish,m=material), [ekonom, o'rta, yaxshi]] */
+const P={
+ dem:["Eski qoplamalarni buzish","m²","i",[25e3,30e3,35e3]],
+ styaj_i:["Pol styajkasi (tekislash)","m²","i",[40e3,45e3,55e3]],
+ styaj_m:["Styajka aralashmasi","m²","m",[35e3,40e3,45e3]],
+ suvoq_i:["Devor suvog'i (rotband)","m²","i",[35e3,45e3,55e3]],
+ suvoq_m:["Suvoq aralashmasi va mayaklar","m²","m",[16e3,18e3,22e3]],
+ gidro:["Gidroizolyatsiya (material bilan)","m²","i",[50e3,60e3,80e3]],
+ shp2_i:["Shpaklyovka, 2 qatlam","m²","i",[35e3,45e3,55e3]],
+ shp1_i:["Shpaklyovka, 1 qatlam","m²","i",[20e3,25e3,30e3]],
+ shp_m:["Shpaklyovka va gruntovka","m²","m",[5e3,7e3,12e3]],
+ paint_i:["Devorni bo'yash (2 qatlam)","m²","i",[20e3,25e3,32e3]],
+ paint_m:["Emulsiya bo'yoq","m²","m",[4200,8000,21000]],
+ oboy_i:["Oboy yopishtirish","m²","i",[20e3,25e3,35e3]],
+ oboy_m:["Oboy (kley bilan)","m²","m",[9000,16000,34000]],
+ deco_i:["Atachenta (Ottocento) surtish","m²","i",[60e3,80e3,120e3]],
+ deco_m:["Atachenta (Ottocento) va grunt","m²","m",[35e3,60e3,110e3]],
+ pvx_i:["PVX panel o'rnatish","m²","i",[25e3,30e3,40e3]],
+ pvx_m:["PVX panel va profil","m²","m",[45e3,70e3,100e3]],
+ tile_fi:["Polga kafel terish","m²","i",[90e3,100e3,130e3]],
+ tile_wi:["Devorga kafel terish","m²","i",[100e3,120e3,150e3]],
+ tile_m:["Kafel (kley va zatirka bilan)","m²","m",[90e3,170e3,320e3]],
+ lam_i:["Pol qoplamasini yotqizish","m²","i",[30e3,35e3,45e3]],
+ lam_m:["Laminat (podlojka bilan)","m²","m",[57000,85000,128000]],
+ lino_m:["Linoleum","m²","m",[40e3,55e3,85e3]],
+ ceil_i:["Natyajnoy shift o'rnatish","m²","i",[18e3,25e3,40e3]],
+ ceil_m:["Natyajnoy shift polotnosi va profil","m²","m",[27e3,40e3,70e3]],
+ cp_i:["Shiftni shpaklyovka qilib bo'yash","m²","i",[45e3,55e3,70e3]],
+ cp_m:["Shift uchun shpaklyovka va emulsiya","m²","m",[8000,12000,26000]],
+ gk_i:["Gipsokarton shift montaji va pardozi","m²","i",[70e3,80e3,100e3]],
+ gk_m:["Gipsokarton, profil, shpaklyovka","m²","m",[55e3,65e3,85e3]],
+ plint_i:["Plintus o'rnatish","m","i",[8e3,10e3,15e3]],
+ plint_m:["Plintus","m","m",[15e3,25e3,45e3]],
+ otkos:["Deraza otkoslari (material bilan)","m","i",[60e3,80e3,120e3]],
+ el_i:["Elektr nuqtasi montaji (sim, quti)","nuqta","i",[60e3,70e3,90e3]],
+ el_m:["Rozetka / viklyuchatel va sim","nuqta","m",[45e3,70e3,120e3]],
+ san_i:["Santexnika ishlari (quvur tortish, o'rnatish)","komplekt","i",[1.2e6,1.5e6,2e6]],
+ san_m:["Quvurlar va fitinglar","komplekt","m",[.8e6,1.2e6,1.8e6]],
+ fix:["Santexnika jihozlari (unitaz, rakovina, smesitel, vanna/dush)","komplekt","m",[3e6,6e6,12e6]],
+ door_m:["Ichki eshik (ramka, furnitura bilan)","dona","m",[1e6,1.7e6,3e6]],
+ door_i:["Eshik o'rnatish","dona","i",[250e3,300e3,450e3]],
+ win:["Plastik deraza (o'rnatish bilan)","m²","m",[850e3,1.2e6,1.8e6]],
+ ac:["Konditsioner 12 (o'rnatish bilan)","dona","m",[2514000,3117000,4525000]],
+ warm:["Elektr issiq pol (o'rnatish bilan)","m²","m",[80000,114000,183000]],
+ entr:["Metall kirish eshigi (o'rnatish bilan)","dona","m",[1423000,2190000,3613000]],
+ boil:["Suv isitgich (boyler) va o'rnatish","dona","m",[1.5e6,2.5e6,4e6]],
+ light:["Chiroqlar (lyustra, spot) va o'rnatish","xona","m",[350e3,700e3,1.4e6]],
+ kitch:["Oshxona mebeli va shkaflar","komplekt","m",[8e6,15e6,30e6]],
+ kot:["Gaz kotyoli (o'rnatish bilan)","dona","m",[2.8e6,3.5e6,6e6]],
+ heat:["Radiator va isitish quvurlari","xona","m",[1.2e6,1.6e6,2.5e6]],
+ design:["Dizayn loyiha","m²","i",[80e3,120e3,200e3]],
+ clean:["Ta'mirdan keyingi tozalash","m²","i",[25e3,30e3,35e3]],
+ fsd_emu:["Fasad: suvoq ustidan fasad emulsiya (ish va material)","m²","m",[35e3,45e3,60e3]],
+ fsd_doj:["Fasad: dojdik / koroed (ish va material)","m²","m",[60e3,72e3,90e3]],
+ fsd_trv:["Fasad: suyuq travertin (ish va material)","m²","m",[72e3,84e3,100e3]],
+ fsd_mar:["Fasad: marmarino / leonardo / mineralka (ish va material)","m²","m",[108e3,144e3,170e3]],
+ fsd_trm:["Fasad: termopanel (ish va material)","m²","m",[161000,184000,230000]],
+ fsd_suv:["Fasad suvog'i: sement, setka (ish va material)","m²","m",[70e3,80e3,95e3]],
+ fsd_izo:["Fasadni penoplast bilan isitish (ish va material)","m²","m",[55e3,60e3,75e3]],
+ musor:["Qurilish chiqindisini olib chiqish","reys","i",[400e3,500e3,600e3]],
+ deliv:["Materiallarni yetkazish va ko'tarish","xizmat","i",[800e3,1e6,1.5e6]],
+ fas_i:["Fasad suvog'i va pardozi (ish)","m²","i",[70e3,85e3,110e3]],
+ fas_m:["Fasad materiali (suvoq, setka, bo'yoq)","m²","m",[45e3,75e3,140e3]],
+ roof:["Tom yopish (material va ish bilan)","m²","m",[170e3,260e3,420e3]],
+ plit:["Hovliga plitka (asosi bilan)","m²","m",[140e3,200e3,300e3]],
+ zabor:["Devor / zabor, 2 m (material va ish bilan)","m","m",[450e3,700e3,1.1e6]]};
+
+/* ustalar ishi koeffitsienti (Toshkent shahri = 1). Materiallar narxi deyarli bir xil, uzoq hududlarda yetkazish hisobiga biroz qimmat. */
+const REG=[["tsh","Toshkent shahri",1,1],["tv","Toshkent viloyati",.88,1],["sam","Samarqand viloyati",.85,1],["bux","Buxoro viloyati",.82,1.01],["and","Andijon viloyati",.8,1],["far","Farg'ona viloyati",.8,1],["nam","Namangan viloyati",.78,1],["nav","Navoiy viloyati",.85,1.01],["qash","Qashqadaryo viloyati",.78,1.02],["sur","Surxondaryo viloyati",.75,1.03],["jiz","Jizzax viloyati",.76,1.01],["sir","Sirdaryo viloyati",.76,1.01],["xor","Xorazm viloyati",.76,1.03],["qq","Qoraqalpog'iston Respublikasi",.74,1.04]];
+const reg=()=>REG.find(r=>r[0]===S.reg)||REG[0];
+const T={meh:{n:"Mehmonxona",L:5,W:4},yot:{n:"Yotoqxona",L:4,W:3.5},bol:{n:"Bolalar xonasi",L:3.5,W:3},osh:{n:"Oshxona",L:3.5,W:2.8},ham:{n:"Hammom",L:2.2,W:1.7},hoj:{n:"Hojatxona",L:1.5,W:1},kor:{n:"Koridor",L:5,W:1.5},bal:{n:"Balkon",L:3,W:1.2}};
+const PTS={meh:a=>Math.max(5,Math.round(a/3)),yot:a=>Math.max(4,Math.round(a/3)),bol:a=>Math.max(4,Math.round(a/3)),osh:()=>8,ham:()=>3,hoj:()=>2,kor:()=>3,bal:()=>2};
+
+const FL=[['laminat','Laminat'],['lino','Linoleum'],['kafel','Kafel']];
+const WA=[['emul','Emulsiya'],['oboy','Oboy'],['deco','Atachenta'],['kafel','Kafel'],['pvx','PVX panel']];
+const CE=[['natyaj','Natyajnoy'],['paint','Emulsiya'],['gk','Gipsokarton'],['pvx','PVX panel']];
+function mats(r){const wet=r.t==='ham'||r.t==='hoj',dfl=wet||r.t==='osh'||r.t==='bal'?'kafel':S.kind==='yengil'?'lino':'laminat';
+ return{fl:r.fl||dfl,wa:r.wa||(wet?'kafel':'emul'),ce:r.ce||'natyaj'}}
+/* qo'shimcha ishlar: key, nom, izoh, miqdor funksiyasi */
+const LIV=r=>['meh','yot','bol'].includes(r.t);
+const EXT=[
+ ['ac',"Konditsioner","yashash xonalari soniga qarab",()=>S.rooms.filter(LIV).length],
+ ['warm',"Elektr issiq pol","kafel pol ostiga",()=>Math.round(S.rooms.filter(r=>mats(r).fl==='kafel').reduce((a,r)=>a+geo(r).pol,0)*10)/10],
+ ['win',"Derazalarni plastikka almashtirish","kiritilgan derazalar bo'yicha",()=>Math.round(S.rooms.reduce((a,r)=>a+geo(r).win,0)*10)/10],
+ ['entr',"Metall kirish eshigi","",()=>1],
+ ['boil',"Suv isitgich (boyler)","",()=>1],
+ ['light',"Chiroqlar","har bir xonaga",()=>S.rooms.length],
+ ['heat',"Isitish tizimi","gaz kotyoli va radiatorlar — hovli uy uchun",()=>S.rooms.filter(r=>r.t!=='hoj').length],
+ ['kitch',"Oshxona mebeli va shkaflar","",()=>1],
+ ['design',"Dizayn loyiha","umumiy maydon bo'yicha",()=>Math.round(S.rooms.reduce((a,r)=>a+geo(r).pol,0)*10)/10],
+ ['clean',"Ta'mirdan keyingi tozalash","umumiy maydon bo'yicha",()=>Math.round(S.rooms.reduce((a,r)=>a+geo(r).pol,0)*10)/10]];
+const FAS=[['emu',"Fasad emulsiya","eng arzon"],['doj',"Dojdik / koroed","6$ atrofida"],['trv',"Suyuq travertin","6–8$"],['mar',"Marmarino / leonardo / mineralka","9–12$"],['trm',"Termopanel","isitadi ham"]];
+const fasAuto=()=>{const fl=S.rooms.reduce((a,r)=>a+geo(r).pol,0);return{p:Math.round(4*Math.sqrt(fl)*1.15),h:S.obj==='hovli'?3.3:3}};
+function fasArea(){const A=fasAuto(),f=S.fas,win=S.rooms.reduce((a,r)=>a+geo(r).win,0);return Math.max(0,Math.round(((num(f.p)||A.p)*(num(f.h)||A.h)-win)*10)/10)}
+const KIND=[["yengil","Yengil","bo'yoq, pol, shift"],["toliq","To'liq","noldan, o'rtacha"],["lyuks","Lyuks","noldan, qimmat"]];
+const kindOf=()=>({yengil:['kos',1],toliq:['kap',1],lyuks:['kap',2]})[S.kind]||['kap',1];
+const mk=(t)=>({id:uid(),t,L:T[t].L,W:T[t].W,wn:['meh','yot','bol','osh','bal'].includes(t)?1:0,dn:1});
+const fresh=()=>({fas:{on:false,p:'',h:'',m:'trv',suv:false,izo:false},ext:{},reg:'tsh',obj:'kv',kind:'toliq',H:'',ww:1.5,wh:1.5,rooms:['meh','yot','osh','ham','hoj','kor'].map(mk),yard:{roof:'',plit:''},ov:{}});
+let S;try{S=JSON.parse(localStorage.getItem('smeta-v3'))}catch(e){}
+if(!S||!S.rooms)S=fresh();if(!S.ext)S.ext={};if(!S.fas)S.fas={on:false,p:'',h:'',m:'trv',suv:false,izo:false};
+const save=()=>{try{localStorage.setItem('smeta-v3',JSON.stringify(S))}catch(e){}};
+const lvl=()=>kindOf()[1];
+const pr=k=>S.ov[k]!=null?S.ov[k]:Math.round(P[k][3][lvl()]*(P[k][2]==='i'?reg()[2]:reg()[3])/1000)*1000;
+const Hd=()=>num(S.H)||(S.obj==='hovli'?3:2.8);
+function names(){const c={},o={};for(const r of S.rooms)c[r.t]=(c[r.t]||0)+1;const k={};for(const r of S.rooms){k[r.t]=(k[r.t]||0)+1;o[r.id]=T[r.t].n+(c[r.t]>1?' '+k[r.t]:'')}return o}
+function geo(r){const L=num(r.L),W=num(r.W),H=Hd(),wn=Math.round(num(r.wn)),dn=Math.round(num(r.dn)),wet=r.t==='ham'||r.t==='hoj',dw=wet?.7:.8,dh=2;
+ const win=wn*num(S.ww)*num(S.wh),per=2*(L+W);return{L,W,H,pol:L*W,per,win,wn,dn,dw,wall:Math.max(0,per*H-win-dn*dw*dh),otk:wn*(2*num(S.wh)+num(S.ww))}}
+function calc(kind){const K0=S.kind;if(kind)S.kind=kind;try{return calc_()}finally{S.kind=K0}}
+function calc_(){const out=[],[type]=kindOf(),kap=type==='kap',lv=lvl(),nm_=names();let floor=0,win=0,doors=0;const sh={paint:0,suv:0,tile:0,lam:0,lino:0,scr:0,gid:0,pl:0,pts:0,ceil:0,shp:0,oboy:0,deco:0,pvx:0,cpaint:0,gk:0};
+ const add=(g,k,q,name,price)=>{if(q>.001)out.push({g,k,name:name||P[k][0],unit:P[k][1],kind:P[k][2],q:Math.round(q*100)/100,price:price??pr(k)})};
+ for(const r of S.rooms){const g=geo(r),nm=nm_[r.id],wet=r.t==='ham'||r.t==='hoj',kit=r.t==='osh',bal=r.t==='bal';floor+=g.pol;win+=g.win;if(r.t!=='kor')doors+=g.dn;
+  if(kap){sh.scr+=g.pol;sh.suv+=g.wall}
+  if(kap){add(nm,'dem',g.pol);add(nm,'styaj_i',g.pol);add(nm,'styaj_m',g.pol);add(nm,'suvoq_i',g.wall);add(nm,'suvoq_m',g.wall)}
+  if(kap&&wet){add(nm,'gidro',g.pol+g.per*.3);sh.gid+=g.pol+g.per*.3}
+  const M=mats(r);
+  if(M.fl==='kafel'){sh.tile+=g.pol;add(nm,'tile_fi',g.pol);add(nm,'tile_m',g.pol*1.1,'Pol kafeli (kley bilan)')}
+  else if(M.fl==='lino'){sh.lino+=g.pol;add(nm,'lam_i',g.pol,'Linoleum yotqizish');add(nm,'lino_m',g.pol*1.05)}
+  else{sh.lam+=g.pol;add(nm,'lam_i',g.pol,'Laminat yotqizish');add(nm,'lam_m',g.pol*1.08)}
+  let fin=g.wall;
+  if(kit&&M.wa!=='kafel'){const f=Math.min(3,fin);sh.tile+=f;add(nm,'tile_wi',f,'Oshxona fartugiga kafel');add(nm,'tile_m',f*1.1,'Fartuk kafeli (kley bilan)');fin-=f}
+  if(fin>0){if(M.wa==='kafel'){sh.tile+=fin;add(nm,'tile_wi',fin);add(nm,'tile_m',fin*1.1,'Devor kafeli (kley bilan)')}
+   else if(M.wa==='pvx'){sh.pvx+=fin;add(nm,'pvx_i',fin,"Devorga PVX panel o'rnatish");add(nm,'pvx_m',fin*1.1)}
+   else{sh.shp+=fin;add(nm,kap?'shp2_i':'shp1_i',fin);add(nm,'shp_m',fin*(kap?1:.6));
+    if(M.wa==='oboy'){sh.oboy+=fin;add(nm,'oboy_i',fin);add(nm,'oboy_m',fin*1.15)}
+    else if(M.wa==='deco'){sh.deco+=fin;add(nm,'deco_i',fin);add(nm,'deco_m',fin)}
+    else{sh.paint+=fin;add(nm,'paint_i',fin,"Devorni emulsiya bilan bo'yash");add(nm,'paint_m',fin)}}}
+  if(M.ce==='paint'){sh.cpaint+=g.pol;add(nm,'cp_i',g.pol);add(nm,'cp_m',g.pol)}
+  else if(M.ce==='gk'){sh.gk+=g.pol;add(nm,'gk_i',g.pol);add(nm,'gk_m',g.pol)}
+  else if(M.ce==='pvx'){sh.pvx+=g.pol;add(nm,'pvx_i',g.pol,"Shiftga PVX panel o'rnatish");add(nm,'pvx_m',g.pol*1.1)}
+  else{sh.ceil+=g.pol;add(nm,'ceil_i',g.pol);add(nm,'ceil_m',g.pol)}
+  if(M.fl!=='kafel'){const pl=Math.max(0,g.per-g.dn*g.dw);sh.pl+=pl;add(nm,'plint_i',pl);add(nm,'plint_m',pl*1.05)}
+  if(kap)add(nm,'otkos',g.otk);
+  if(kap){const n=PTS[r.t](g.pol);sh.pts+=n;add(nm,'el_i',n);add(nm,'el_m',n)}
+  if(kap&&(wet||kit)){const f=r.t==='ham'?1:r.t==='hoj'?.5:.35;add(nm,'san_i',1,null,pr('san_i')*f);add(nm,'san_m',1,null,pr('san_m')*f)}
+  if(kap&&(wet||kit)){const f=r.t==='ham'?1:r.t==='hoj'?.45:.2;add(nm,'fix',1,r.t==='osh'?'Oshxona moykasi va smesitel':r.t==='hoj'?'Unitaz va rakovina (smesitel bilan)':null,pr('fix')*f)}}
+ const G='Umumiy';
+ if(kap&&doors){add(G,'door_m',doors);add(G,'door_i',doors)}
+ if(S.fas.on){const F='Fasad',a=fasArea(),k='fsd_'+S.fas.m,pp=pr(k),nm=FAS.find(x=>x[0]===S.fas.m)[1];
+  if(S.fas.suv){const q=pr('fsd_suv');add(F,'fsd_suv',a,"Fasad suvog'i (ish)",q*.55);out[out.length-1].kind='i';add(F,'fsd_suv',a,"Fasad suvog'i: sement, setka",q*.45)}
+  if(S.fas.izo){const q=pr('fsd_izo');add(F,'fsd_izo',a,"Penoplast bilan isitish (ish)",q*.4);out[out.length-1].kind='i';add(F,'fsd_izo',a,"Penoplast, kley, dyubel",q*.6)}
+  add(F,k,a,`Fasad: ${nm.toLowerCase()} (ish)`,pp*.45);out[out.length-1].kind='i';add(F,k,a,`Fasad: ${nm.toLowerCase()} (material)`,pp*.55)}
+ const X="Qo'shimcha";for(const[k,n,,auto]of EXT){const e=S.ext[k];if(!e||!e.on)continue;const q=num(e.q)||auto();if(k==='heat'){add(X,'kot',1);add(X,'heat',q)}else add(X,k,q)}
+ add(G,'musor',kap?Math.max(1,Math.ceil(floor/25)):1);add(G,'deliv',1);
+ if(S.obj==='hovli'){const Y='Hovli va tashqi';add(Y,'roof',num(S.yard.roof));add(Y,'plit',num(S.yard.plit))}
+ for(const l of out)l.sum=l.q*l.price;
+ let i=0,m=0;for(const l of out)l.kind==='i'?i+=l.sum:m+=l.sum;const sub=i+m,z=sub*.1;
+ sh.kap=kap;sh.doors=kap?doors:0;
+ if(sub)out.push({g:G,k:'zax',name:"Kutilmagan xarajatlar (10%)",unit:'',kind:'i',q:1,price:z,sum:z});
+ return{out,floor,i:i+z,m,tot:sub+z,z,sh,kap}}
+
+/* ---------- UI ---------- */
+function seg(id,list,key){$('#'+id).innerHTML=list.map(([v,b,s])=>`<button data-k="${key}" data-v="${v}" aria-pressed="${S[key]===v}">${b}${s?`<small>${s}</small>`:''}</button>`).join('')}
+function renderTop(){$('#reg').innerHTML=REG.map(r=>`<option value="${r[0]}"${S.reg===r[0]?' selected':''}>${r[1]}</option>`).join('');
+ seg('s-obj',[["kv","Kvartira"],["hovli","Hovli uy"]],'obj');seg('s-kind',KIND,'kind');
+ $('#yard').hidden=S.obj!=='hovli';$('#H').placeholder=fq(S.obj==='hovli'?3:2.8);$('#H').value=S.H;$('#ww').value=S.ww;$('#wh').value=S.wh;
+ document.querySelectorAll('[data-y]').forEach(el=>el.value=S.yard[el.dataset.y]??'')}
+document.addEventListener('click',e=>{const b=e.target.closest('.seg [data-k], .cmp [data-k]');if(!b)return;S[b.dataset.k]=b.dataset.v;renderTop();renderRooms();update()});
+$('#reg').addEventListener('change',e=>{S.reg=e.target.value;update()});
+for(const k of['H','ww','wh'])$('#'+k).addEventListener('input',e=>{S[k]=e.target.value;update()});
+$('#yard').addEventListener('input',e=>{const k=e.target.dataset.y;if(k){S.yard[k]=e.target.value;update()}});
+const f=(r,k,l)=>`<label><span>${l}</span><input data-f="${k}" inputmode="decimal" value="${esc(r[k])}" aria-label="${l}"></label>`;
+function renderRooms(){$('#rooms').innerHTML=S.rooms.map(r=>`<div class="rw" data-id="${r.id}"><select data-f="t" aria-label="Xona turi">${Object.entries(T).map(([k,v])=>`<option value="${k}"${r.t===k?' selected':''}>${v.n}</option>`).join('')}</select>${f(r,'L',"Bo'yi, m")}${f(r,'W','Eni, m')}${f(r,'wn','Deraza')}${f(r,'dn','Eshik')}<button class="x" data-del aria-label="O'chirish">✕</button>${matRow(r)}</div>`).join('')}
+const OPENM=new Set();const nm_=(L,v)=>L.find(x=>x[0]===v)[1];
+const msumT=r=>{const M=mats(r);return`${nm_(FL,M.fl)} · ${nm_(WA,M.wa)} · ${nm_(CE,M.ce)}`};
+function matRow(r){const M=mats(r),sel=(k,l,list)=>`<label><span>${l}</span><select data-f="${k}" aria-label="${l}">${list.map(([v,n])=>`<option value="${v}"${M[k]===v?' selected':''}>${n}</option>`).join('')}</select></label>`;
+ return`<button class="msum" data-msum aria-expanded="${OPENM.has(r.id)}"><span class="mt">${msumT(r)}</span><span class="me">Materiallar ${OPENM.has(r.id)?'▴':'▾'}</span></button><div class="mat"${OPENM.has(r.id)?'':' hidden'}>${sel('fl','Pol',FL)}${sel('wa','Devor',WA)}${sel('ce','Shift',CE)}</div>`}
+const RE=$('#rooms');
+RE.addEventListener('input',e=>{const t=e.target,row=t.closest('.rw');if(!row||t.tagName==='SELECT')return;S.rooms.find(r=>r.id===row.dataset.id)[t.dataset.f]=t.value;update()});
+RE.addEventListener('change',e=>{const t=e.target;if(t.tagName!=='SELECT')return;const r=S.rooms.find(x=>x.id===t.closest('.rw').dataset.id);const k=t.dataset.f;r[k]=t.value;if(k==='t'){delete r.fl;delete r.wa;delete r.ce;renderRooms()}else{const m=t.closest('.rw').querySelector('.mt');if(m)m.textContent=msumT(r)}update()});
+RE.addEventListener('click',e=>{const ms=e.target.closest('[data-msum]');if(ms){const id=ms.closest('.rw').dataset.id,o=!OPENM.has(id);o?OPENM.add(id):OPENM.delete(id);ms.setAttribute('aria-expanded',o);ms.nextElementSibling.hidden=!o;ms.querySelector('.me').textContent=window.__cyr('Materiallar ')+(o?'▴':'▾');return}
+ if(!e.target.closest('[data-del]'))return;const id=e.target.closest('.rw').dataset.id;S.rooms=S.rooms.filter(r=>r.id!==id);renderRooms();update()});
+$('#add').addEventListener('click',()=>{const r=mk('yot');S.rooms.push(r);renderRooms();update();const el=RE.querySelector(`[data-id="${r.id}"] select`);el?.focus()});
+
+function renderExt(){$('#ext').innerHTML=EXT.map(([k,n,h,auto])=>{const e=S.ext[k]||{},P0=k==='heat'?pr('kot'):0,u=k==='heat'?'xona':P[k][1];
+ return`<div class="ex${e.on?' on':''}" data-x="${k}"><label><input type="checkbox" data-xe${e.on?' checked':''}><span><b>${n}</b><small>${h?h+' · ':''}${fmt(pr(k))} so'm / ${u}${P0?` + kotyol ${mln(P0)}`:''}</small></span></label><div class="qq"><input data-xq inputmode="decimal" value="${esc(e.q??'')}" placeholder="${fq(auto())}" aria-label="${n} miqdori"><span>${u}</span></div></div>`}).join('')}
+$('#ext').addEventListener('change',e=>{const row=e.target.closest('[data-x]');if(!row||!e.target.matches('[data-xe]'))return;const k=row.dataset.x;S.ext[k]={...(S.ext[k]||{}),on:e.target.checked};row.classList.toggle('on',e.target.checked);update(true)});
+$('#ext').addEventListener('input',e=>{const row=e.target.closest('[data-x]');if(!row||!e.target.matches('[data-xq]'))return;const k=row.dataset.x;S.ext[k]={...(S.ext[k]||{}),q:e.target.value,on:true};row.classList.add('on');row.querySelector('[data-xe]').checked=true;update(true)});
+function renderFas(){const f=S.fas,A=fasAuto();$('#fOn').checked=!!f.on;$('#fBody').hidden=!f.on;$('#fP').placeholder=A.p;$('#fH').placeholder=fq(A.h);
+ if(document.activeElement!==$('#fP'))$('#fP').value=f.p;if(document.activeElement!==$('#fH'))$('#fH').value=f.h;$('#fA').textContent=fq(fasArea())+' m²';
+ $('#fM').innerHTML=FAS.map(([k,n,h])=>`<button data-fm="${k}" aria-pressed="${f.m===k}"><b>${n}</b><small>${fmt(pr('fsd_'+k))} so'm/m² · ${h}</small></button>`).join('');
+ $('#fSuv').checked=!!f.suv;$('#fIzo').checked=!!f.izo;$('#fSuvP').textContent=fmt(pr('fsd_suv'))+" so'm/m²";$('#fIzoP').textContent=fmt(pr('fsd_izo'))+" so'm/m²"}
+$('#fasC').addEventListener('change',e=>{const id=e.target.id,f=S.fas;if(!['fOn','fSuv','fIzo'].includes(id))return;if(id==='fOn')f.on=e.target.checked;if(id==='fSuv')f.suv=e.target.checked;if(id==='fIzo')f.izo=e.target.checked;renderFas();update(true)});
+$('#fasC').addEventListener('input',e=>{const id=e.target.id;if(id==='fP')S.fas.p=e.target.value;else if(id==='fH')S.fas.h=e.target.value;else return;$('#fA').textContent=fq(fasArea())+' m²';update(true)});
+$('#fasC').addEventListener('click',e=>{const b=e.target.closest('[data-fm]');if(!b)return;S.fas.m=b.dataset.fm;renderFas();update(true)});
+function renderPrices(){$('#priceT').innerHTML=`<tr><th>Ish / material</th><th>Birlik</th><th class="num">So'm</th></tr>`+Object.entries(P).filter(([k])=>!['zabor','fas_i','fas_m'].includes(k)&&(S.obj==='hovli'||!['roof','plit'].includes(k))).map(([k,v])=>`<tr><td>${v[0]}</td><td>${v[1]}</td><td class="num"><input data-p="${k}" inputmode="numeric" value="${Math.round(pr(k))}" class="${S.ov[k]!=null?'ch':''}" aria-label="${esc(v[0])}"></td></tr>`).join('')}
+$('#priceT').addEventListener('input',e=>{const k=e.target.dataset.p;if(!k)return;const v=num(e.target.value);if(v){S.ov[k]=v;e.target.classList.add('ch')}else delete S.ov[k];update(true)});
+$('#resetP').addEventListener('click',()=>{S.ov={};update()});
+
+let last;
+const STG=[["Qora ishlar","buzish, suvoq, styajka, elektr, santexnika — boshida",['dem','styaj_i','styaj_m','suvoq_i','suvoq_m','gidro','el_i','el_m','san_i','san_m','musor','deliv','roof','plit','warm','kot','heat','design','fsd_suv','fsd_izo']],
+ ["Pardoz ishlari","kafel, shpaklyovka, bo'yoq, pol, shift — o'rtada",['shp2_i','shp1_i','shp_m','paint_i','paint_m','oboy_i','oboy_m','tile_fi','tile_wi','tile_m','lam_i','lam_m','ceil_i','ceil_m','plint_i','plint_m','otkos','fas_i','fas_m','fsd_emu','fsd_doj','fsd_trv','fsd_mar','fsd_trm']],
+ ["Jihozlar va yakuniy ishlar","santexnika, eshiklar, konditsioner, mebel, tozalash — oxirida",['fix','door_m','door_i','win','ac','entr','boil','light','kitch','clean']]];
+function weeks(c){const a=c.floor||0;let lo,hi;if(!c.kap){lo=2+a/30;hi=3+a/18}else{lo=6+a/12;hi=9+a/8;if(S.kind==='lyuks'){lo*=1.25;hi*=1.3}}if(S.obj==='hovli'){lo+=2;hi+=4}if(S.fas&&S.fas.on){lo+=1;hi+=3}return`${Math.round(lo)}–${Math.round(hi)} hafta`}
+function shopList(c){const s=c.sh,L=[],ceil=x=>Math.ceil(x-1e-9);const add=(n,q,u)=>{if(q>0)L.push([n,q,u])};
+ if(s.kap){add('Rotband (suvoq), 30 kg',ceil(s.suv*13/30),'qop');add("Styajka aralashmasi (peskobeton), 50 kg",ceil(s.scr*90/50),'qop')}
+ add('Shpaklyovka, 25 kg',ceil((s.shp*(s.kap?2.4:1.2)+s.cpaint*2.4)/25),'qop');
+ add('Gruntovka, 10 l',ceil((s.shp+s.suv+s.cpaint)*.15/10),'kanistr');
+ add("Emulsiya bo'yoq (2 qatlam), 10 l",ceil((s.paint+s.cpaint)*.25/10),'chelak');
+ add('Oboy, rulon 1,06 × 10 m',ceil(s.oboy*1.15/10.6),'rulon');if(s.oboy)add('Oboy kleyi',ceil(s.oboy/25),'paket');
+ add('Atachenta (Ottocento)',ceil(s.deco*.15),'litr');
+ add('PVX panel',ceil(s.pvx*1.1),'m²');
+ add('Kafel',ceil(s.tile*1.1),'m²');add('Kafel kleyi, 25 kg',ceil(s.tile*5/25),'qop');add('Zatirka (chok uchun), 2 kg',ceil(s.tile*.5/2),'paket');
+ if(s.kap)add('Gidroizolyatsiya mastikasi',ceil(s.gid*3),'kg');
+ add('Laminat (paketda ~2 m²)',ceil(s.lam*1.08/2),'paket');if(s.lam)add('Podlojka',ceil(s.lam*1.05),'m²');add('Linoleum',ceil(s.lino*1.05),'m²');
+ add('Plintus, 2,5 m',ceil(s.pl*1.05/2.5),'dona');add('Natyajnoy shift',ceil(s.ceil),'m²');add('Gipsokarton list, 2,5 × 1,2 m',ceil(s.gk*1.1/3),'dona');
+ if(s.kap){add('Rozetka / viklyuchatel',s.pts,'dona');add('Elektr simi (≈6 m nuqtaga)',ceil(s.pts*6/10)*10,'m')}
+ if(s.doors)add('Ichki eshik (komplekt)',s.doors,'dona');
+ for(const l of c.out)if(['ac','entr','boil','kot','warm','kitch'].includes(l.k))add(l.name,Math.ceil(l.q),l.unit);return L}
+function update(keep){const c=calc();last=c;
+ document.querySelectorAll('[data-cur]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cur===CUR));
+ $('#tot').innerHTML=CUR==='usd'?`$${fmt(Math.round(c.tot/RATE/10)*10)}`:`${fk(c.tot)} <small>so'm</small>`;$('#btot').textContent=moneyS(c.tot);
+ $('#per').textContent=c.floor?`${fq(c.floor)} m² · 1 m² ≈ ${money(c.tot/c.floor)}${CUR==='usd'?` · kurs ${fmt(RATE)} so'm`:''}`:"Xona qo'shing";
+ $('#ti').textContent=moneyS(c.i);$('#tm').textContent=moneyS(c.m);$('#dur').textContent=c.floor?weeks(c):'—';
+ $('#cmp').innerHTML=KIND.map(([k,n])=>{const t=k===S.kind?c.tot:calc(k).tot;return`<button data-k="kind" data-v="${k}" aria-pressed="${k===S.kind}"><span>${n}</span><b>${moneyS(t)}</b></button>`}).join('');
+ const by=STG.map(([n,d,ks])=>[n,d,c.out.filter(l=>ks.includes(l.k)).reduce((a,l)=>a+l.sum,0)]).filter(x=>x[2]>0),mx=Math.max(1,...by.map(x=>x[2]));
+ $('#stg').innerHTML=by.map(([n,d,v],i)=>`<div class="r"><span>${i+1}. ${n}</span><b>${moneyS(v)}</b><div class="t"><i style="width:${v/mx*100}%"></i></div><small>${d}</small></div>`).join('')+(c.z?`<div class="r"><span>Zaxira (10%)</span><b>${moneyS(c.z)}</b><small>kutilmagan xarajatlar uchun</small></div>`:'');
+ let h=`<tr><th>Nomi</th><th class="num">Miqdor</th><th class="num">So'm</th></tr>`,lg=null;
+ for(const l of c.out){if(l.g!==lg){lg=l.g;h+=`<tr class="g"><td colspan="3">${esc(l.g)}</td></tr>`}h+=`<tr><td>${esc(l.name)}</td><td class="num">${l.unit?fq(l.q)+' '+l.unit:''}</td><td class="num">${fmt(l.sum)}</td></tr>`}
+ $('#detT').innerHTML=h;
+ const sl=shopList(c);$('#shopT').innerHTML=sl.length?sl.map(([n,q,u])=>`<tr><td>${n}</td><td>${fmt(q)} ${u}</td></tr>`).join(''):`<tr><td>Xona qo'shing</td></tr>`;
+ const R=reg();$('#note').textContent=`Narxlar: OLX.uz e'lonlari (Toshkent, 2026-yil noyabr) asosida, ${R[1]} uchun moslangan. ${R[2]<1?`Ustalar ishi Toshkentdan ~${Math.round((1-R[2])*100)}% arzon olingan. `:''}${c.kap?'Ichki eshiklar, santexnika jihozlari, elektr va quvurlar kiritilgan. ':''}Mebel, konditsioner, chiroqlar kirmaydi. Maslahat: amalda xarajat ko'pincha smetadan 1,3–1,5 baravar oshadi — pulni shunga qarab rejalang.`;
+ const sf=$('#sumF'),se=$('#sumE'),ss=$('#sumS');if(sf)sf.textContent=S.fas.on?`${FAS.find(x=>x[0]===S.fas.m)[1]} · ${fq(fasArea())} m²`:"qo'shilmagan";
+ const ne=EXT.filter(([k])=>S.ext[k]&&S.ext[k].on).length;if(se)se.textContent=ne?ne+' ta tanlangan':'tanlanmagan';if(ss)ss.textContent=sl.length+' xil material';
+ renderFas();if(!keep){renderPrices();renderExt()}else{document.querySelectorAll('#ext [data-x]').forEach(row=>{const d=EXT.find(x=>x[0]===row.dataset.x);row.querySelector('[data-xq]').placeholder=fq(d[3]())})}save()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-cur]');if(!b)return;CUR=b.dataset.cur;try{localStorage.setItem('smeta-cur',CUR)}catch(x){}update(true)});
+$('#copyShop').addEventListener('click',async()=>{const t=["🛒 TA'MIR UCHUN MATERIALLAR",...shopList(last).map(([n,q,u])=>`• ${n} — ${fmt(q)} ${u}`)].join('\n');try{await navigator.clipboard.writeText(window.__cyr(t));$('#msg2').textContent="Nusxalandi — sotuvchiga yuboring."}catch(e){$('#msg2').textContent="Nusxalab bo'lmadi."}});
+
+/* ---------- export ---------- */
+const msg=t=>{$('#msg').textContent=t;clearTimeout(msg.t);msg.t=setTimeout(()=>$('#msg').textContent='',6000)};
+const OBJ=()=>`${reg()[1]} · ${S.obj==='hovli'?'Hovli uy':'Kvartira'} · ${KIND.find(k=>k[0]===S.kind)[1]} ta'mir`;
+function asText(){const c=last,by={};for(const l of c.out)by[l.g]=(by[l.g]||0)+l.sum;
+ return[`🏠 TA'MIR SMETASI`,OBJ(),`Maydon: ${fq(c.floor)} m²`,'',...Object.entries(by).map(([g,s])=>`▪ ${g}: ${fk(s)} so'm`),'',`Ustalar ishi: ${fk(c.i)} so'm`,`Materiallar: ${fk(c.m)} so'm`,`JAMI: ${fk(c.tot)} so'm (≈ $${fmt(Math.round(c.tot/RATE/10)*10)})`,`Muddat: ${weeks(c)}`,'',`📞 Aniq smeta uchun smetachi: +998 50 708 82 27 · Telegram: @Quvonchbek_0727`].join('\n')}
+$('#copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(window.__cyr(asText()));msg('Nusxalandi — Telegramga joylang.')}catch(e){msg("Nusxalab bo'lmadi.")}});
+const CY={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'yo',ж:'j',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'x',ц:'ts',ч:'ch',ш:'sh',щ:'sh',ъ:"'",ы:'i',ь:'',э:'e',ю:'yu',я:'ya',ў:"o'",қ:'q',ғ:"g'",ҳ:'h'};
+const lat=s=>String(s??'').replace(/[ʻʼ‘’`]/g,"'").replace(/²/g,'2').replace(/[а-яёўқғҳ]/gi,ch=>{const l=CY[ch.toLowerCase()]??'';return ch===ch.toLowerCase()?l:l.charAt(0).toUpperCase()+l.slice(1)}).replace(/[^\x00-\x7E]/g,'');
+
+function buildPdf(){const{jsPDF}=window.jspdf,d=new jsPDF({unit:'mm',format:'a4'}),c=last,blue=[31,79,209],nm=names();
+ d.setFont('helvetica','bold');d.setFontSize(18);d.text("TA'MIR SMETASI",14,18);d.setFont('helvetica','normal');d.setFontSize(10);
+ d.text(lat(OBJ()),14,25);d.text(`Maydon: ${fq(c.floor)} m2   |   Sana: ${new Date().toISOString().slice(0,10)}`,14,30);
+ d.autoTable({startY:35,head:[['Xona',"Bo'yi x eni, m",'Pol, m2','Devor, m2','Deraza','Eshik']],body:S.rooms.map(r=>{const g=geo(r);return[lat(nm[r.id]),`${fq(g.L)} x ${fq(g.W)}`,fq(g.pol),fq(g.wall),g.wn,g.dn]}),theme:'grid',styles:{fontSize:9,cellPadding:1.5},headStyles:{fillColor:blue},margin:{left:14,right:14}});
+ const body=[];let lg=null;for(const l of c.out){if(l.g!==lg){lg=l.g;body.push([{content:lat(l.g),colSpan:5,styles:{fillColor:[232,238,252],fontStyle:'bold'}}])}body.push([lat(l.name),l.unit?fq(l.q):'',lat(l.unit),l.unit?fmt(l.price):'',fmt(l.sum)])}
+ d.autoTable({startY:d.lastAutoTable.finalY+7,head:[['Ish / material','Miqdor','Birlik',"Narx, so'm","Summa, so'm"]],body,theme:'grid',styles:{fontSize:8.5,cellPadding:1.5},headStyles:{fillColor:blue},columnStyles:{1:{halign:'right'},3:{halign:'right'},4:{halign:'right'}},margin:{left:14,right:14}});
+ const fr=[['Ustalar ishi',fk(c.i)],['Materiallar',fk(c.m)],['Muddat',weeks(c)],['JAMI',fk(c.tot)+" so'm"]];let y=d.lastAutoTable.finalY+4;if(y>255){d.addPage();y=20}
+ d.autoTable({startY:y,body:fr,theme:'plain',styles:{fontSize:11,cellPadding:1.4},columnStyles:{1:{halign:'right',fontStyle:'bold'}},margin:{left:100,right:14},didParseCell:x=>{if(x.row.index===3){x.cell.styles.fontSize=13;x.cell.styles.textColor=[200,80,10]}}});
+ y=d.lastAutoTable.finalY+8;if(y>275){d.addPage();y=20}d.setFontSize(8);d.setTextColor(110);d.text(lat($('#note').textContent),14,y,{maxWidth:182});d.setFontSize(10);d.setTextColor(31,79,209);d.text('Aniq smeta tuzdirish uchun smetachi: +998 50 708 82 27  |  Telegram: @Quvonchbek_0727',14,y+12);
+ return d.output('blob')}
+(async()=>{try{const dl={save:async({filename,data})=>{const u=URL.createObjectURL(data),a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}};if(!dl||!window.jspdf)return;const b=$('#pdf');b.hidden=false;
+ b.addEventListener('click',async()=>{try{await dl.save({filename:'tamir-smetasi.pdf',data:buildPdf()});msg('PDF saqlandi.')}catch(e){msg(e&&e.code==='declined'?'Bekor qilindi.':"PDF yaratib bo'lmadi.")}})}catch(e){}
+ if($('#pdf').hidden)$('#copy').classList.add('solo')})();
+
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-copyph]');if(!b)return;try{await navigator.clipboard.writeText('+998 50 708 82 27');const o=b.textContent;b.textContent=window.__cyr('Nusxalandi ✓');setTimeout(()=>b.textContent=o,2000)}catch(x){}});
+/* ---------- lotin → kirill ---------- */
+const CM={a:'а',b:'б',c:'с',d:'д',e:'е',f:'ф',g:'г',h:'ҳ',i:'и',j:'ж',k:'к',l:'л',m:'м',n:'н',o:'о',p:'п',q:'қ',r:'р',s:'с',t:'т',u:'у',v:'в',w:'в',x:'х',y:'й',z:'з'};
+const isAp=c=>c!==undefined&&"'ʻʼ‘’`".includes(c);
+function wCyr(w){if(/^[A-Z0-9]{2,}$/.test(w))return w;if(/^obyekt/i.test(w)){const r='объект'+wCyr(w.slice(6)).replace(/^$/,'');return w[0]==='O'?'О'+r.slice(1):r}const lw=w.toLowerCase();let o='';
+ for(let i=0;i<w.length;){const c=lw[i],n=lw[i+1];let r,a=1;
+  if(c==='o'&&isAp(n)){r='ў';a=2}else if(c==='g'&&isAp(n)){r='ғ';a=2}
+  else if(c==='s'&&n==='h'){r='ш';a=2}else if(c==='c'&&n==='h'){r='ч';a=2}
+  else if(c==='y'&&n==='o'&&!isAp(lw[i+2])){r='ё';a=2}else if(c==='y'&&n==='u'){r='ю';a=2}else if(c==='y'&&n==='a'){r='я';a=2}else if(c==='y'&&n==='e'){r='е';a=2}
+  else if(c==='e'){const pv=lw[i-1];r=(i===0||(pv&&'aeiou'.includes(pv)))?'э':'е'}
+  else if(isAp(c)){r=i===0||i===w.length-1?w[i]:'ъ'}
+  else r=CM[c]||w[i];
+  o+=w[i]!==lw[i]?r.toUpperCase():r;i+=a}
+ return o}
+const toCyr=t=>String(t).replace(/@?[A-Za-z][A-Za-z'ʻʼ‘’`]*/g,w=>w[0]==='@'?w:wCyr(w));
+let ABC='lat';try{ABC=localStorage.getItem('smeta-abc')||'lat'}catch(e){}
+const ORIG=[];let busyX=false;
+const skip=n=>{const p=n.parentElement;return!p||p.closest('script,style,textarea')};
+function convNode(root,keep){if(root.nodeType===3){if(!skip(root)&&/[A-Za-z]/.test(root.data)){const v=toCyr(root.data);if(v!==root.data){if(keep)ORIG.push([root,root.data]);root.data=v}}return}
+ if(root.nodeType!==1||root.closest('script,style'))return;
+ const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let t;const list=[];while(t=tw.nextNode())list.push(t);for(const x of list)convNode(x,keep);
+ for(const el of[root,...root.querySelectorAll('[placeholder],[aria-label],[title]')])for(const at of['placeholder','aria-label','title']){const v=el.getAttribute&&el.getAttribute(at);if(v&&/[A-Za-z]/.test(v)){const c=toCyr(v);if(c!==v){if(keep)ORIG.push([el,v,at]);el.setAttribute(at,c)}}}}
+new MutationObserver(ms=>{if(ABC!=='cyr'||busyX)return;busyX=true;for(const m of ms){if(m.type==='characterData')convNode(m.target);else for(const n of m.addedNodes)convNode(n);if(m.type==='attributes')convNode(m.target)}busyX=false})
+ .observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title']});
+function setAbc(v){ABC=v;try{localStorage.setItem('smeta-abc',v)}catch(e){}document.querySelectorAll('[data-abc]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.abc===v));
+ document.documentElement.lang=v==='cyr'?'uz-Cyrl':'uz';
+ if(v==='cyr'){busyX=true;convNode(document.body,true);document.title=toCyr("Ta'mir smetasi — uy ta'miri kalkulyatori");busyX=false}
+ else{busyX=true;for(const[n,o,at]of ORIG.splice(0)){if(at)n.setAttribute(at,o);else n.data=o}document.title="Ta'mir smetasi — uy ta'miri kalkulyatori | Smetachi Quvonchbek";busyX=false;renderTop();renderRooms();update()}}
+document.querySelector('.abc').addEventListener('click',e=>{const b=e.target.closest('[data-abc]');if(b&&b.dataset.abc!==ABC)setAbc(b.dataset.abc)});
+window.__cyr=t=>ABC==='cyr'?toCyr(t):t;
+
+renderTop();renderRooms();update();setAbc(ABC);
+}
+{const d=document.getElementById('vdlg'),v=document.getElementById('vv');
+document.querySelectorAll('[data-src]').forEach(b=>b.addEventListener('click',()=>{if(v.getAttribute('src')!==b.dataset.src){v.src=b.dataset.src;v.poster=b.dataset.poster}d.showModal();v.currentTime=0;v.play().catch(()=>{})}));
+const c=()=>{v.pause();d.close()};document.getElementById('vclose').addEventListener('click',c);
+d.addEventListener('click',e=>{if(e.target===d)c()});d.addEventListener('close',()=>v.pause())}
+</script>
+</body>
+</html>

@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://toxtamurodovquvonchbek08-creator.github.io/smeta/sitemap.xml
+Sitemap: https://smetachi.github.io/sitemap.xml

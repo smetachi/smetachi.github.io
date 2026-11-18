@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ta'mir smetasi — uy ta'miri kalkulyatori | Smetachi Quvonchbek</title>
-<meta name="description" content="Kvartira va hovli uy ta'miri narxini bepul hisoblang: 14 viloyat, OLX narxlari, material tanlash, deraza-eshik, fasad. Aniq smeta uchun smetachi: +998 50 708 82 27.">
+<meta name="description" content="Kvartira va hovli uy ta'miri narxini bepul hisoblang: 14 viloyat, OLX narxlari, material tanlash, deraza-eshik, fasad, tom (shifer, profnastil, stropila soni). Aniq smeta uchun smetachi: +998 50 708 82 27.">
 <meta name="keywords" content="ta'mir smetasi, remont narxi, uy ta'miri kalkulyator, smeta, smetachi, kvartira remont, ремонт смета">
 <meta property="og:title" content="Ta'mir smetasi — uy ta'miri narxini bepul hisoblang">
 <meta property="og:description" content="Xona o'lchamlarini kiriting — smeta, do'kon ro'yxati va muddat bir zumda tayyor.">
@@ -86,6 +86,12 @@ select.big{width:100%;min-height:52px;border:2px solid var(--line);border-radius
 .fopts button b{display:block;font-size:15px}.fopts button small{display:block;color:var(--mut);font-size:13px}
 .fopts button[aria-pressed=true]{border-color:var(--blue);background:var(--blue2)}
 .fold{padding:0}
+.rbom{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--bg,#f6f8fc)}
+.radv{margin-top:8px}.radv summary{cursor:pointer;color:var(--blue);font-size:14px;font-weight:600;padding:4px 0}
+.rbom .more{margin-top:8px;border:0;background:none;color:var(--blue);font:inherit;font-weight:700;padding:4px 0;cursor:pointer}
+.rbom h3{margin:0 0 4px;font-size:16px}.rbom .geo{color:var(--mut);font-size:13px;margin-bottom:8px}
+.rbom table{width:100%;border-collapse:collapse;font-size:14px}.rbom td{padding:5px 0;border-top:1px solid var(--line);vertical-align:top}
+.rbom td:last-child{text-align:right;white-space:nowrap;font-weight:700;padding-left:10px}.rbom small{display:block;color:var(--mut);font-size:12px;font-weight:400}
 .fold>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:clamp(16px,2.6vw,22px) clamp(18px,3vw,26px);min-height:auto}
 .fold>summary::-webkit-details-marker{display:none}
 .fold>summary h2{margin:0}
@@ -278,7 +284,6 @@ tr.g td{background:var(--blue2);font-weight:600}
   </div>
   <p class="hint">Deraza o'lchami — o'rtacha bitta derazaniki. Eshiklar standart (0,8 × 2 m).</p>
   <div class="yard" id="yard">
-   <label>Tom maydoni, m² (kerak bo'lmasa 0)<input data-y="roof" inputmode="decimal"></label>
    <label>Hovliga plitka, m² (kerak bo'lmasa 0)<input data-y="plit" inputmode="decimal"></label>
   </div>
  </section>
@@ -302,8 +307,43 @@ tr.g td{background:var(--blue2);font-weight:600}
   </div>
  </details>
 
+ <details class="card fold" id="roofC">
+  <summary><h2><i>4</i>Tom</h2><span class="fsum" id="sumR"></span></summary>
+  <label class="ck1"><input type="checkbox" id="rOn"><span><b>Tomni ham hisoblayman</b><small>yangi tom yopish yoki eskisini almashtirish</small></span></label>
+  <div id="rBody">
+   <div class="q">1. Tom qanday shaklda?</div>
+   <div class="fopts" id="rSh"></div>
+   <div class="q">2. Uy o'lchami <small style="font-weight:400;color:var(--mut)">(bilmasangiz, bo'sh qoldiring)</small></div>
+   <div class="gen" style="border:0;padding-top:0;margin-top:4px">
+    <label>Uy uzunligi, m<input id="rL" inputmode="decimal"></label>
+    <label>Uy eni, m<input id="rW" inputmode="decimal"></label>
+   </div>
+   <details class="radv"><summary>Aniqroq sozlash (nishab, tom maydoni, tarnov)</summary>
+    <div class="gen" style="border:0;padding-top:0;margin-top:8px">
+     <label>Nishab, °<input id="rG" inputmode="decimal"></label>
+     <label>Tom maydoni, m²<input id="rA" inputmode="decimal"></label>
+     <label>Tarnov uzunligi, m<input id="rV" inputmode="decimal"></label>
+    </div>
+   </details>
+   <div class="q">3. Nima bilan yopiladi?</div>
+   <div class="fopts" id="rM"></div>
+   <div class="q">4. Yana nima qilinadi?</div>
+   <div class="exl" style="margin-top:6px">
+    <label class="ck1" id="rPaintL"><input type="checkbox" id="rPaint"><span><b>Shiferni bo'yash</b><small>chiroyli va uzoq chidaydi · <span id="rPaintP"></span></small></span></label>
+    <label class="ck1" id="rOnlyL"><input type="checkbox" id="rOnly"><span><b>Shifer eski qoladi — faqat bo'yayman</b><small>yangi tom yopilmaydi, faqat bo'yash hisoblanadi</small></span></label>
+    <label class="ck1"><input type="checkbox" id="rDem"><span><b>Eski tomni buzish</b><small>eskisini olib tashlash · <span id="rDemP"></span></small></span></label>
+    <label class="ck1" id="rStrL"><input type="checkbox" id="rStr"><span><b>Yangi yog'och qism</b><small>stropila va taxtalar — yangi uy yoki eskisi chirigan bo'lsa · <span id="rStrP"></span></small></span></label>
+    <label class="ck1"><input type="checkbox" id="rMem"><span><b>Chakka o'tmasligi uchun plyonka</b><small>gidroizolyatsiya membranasi · <span id="rMemP"></span></small></span></label>
+    <label class="ck1"><input type="checkbox" id="rIzo"><span><b>Tomni isitish</b><small>paxta (mineral vata) — qishda issiq · <span id="rIzoP"></span></small></span></label>
+    <label class="ck1"><input type="checkbox" id="rVod"><span><b>Suv tarnovlari</b><small>yomg'ir suvi uchun nov va quvurlar · <span id="rVodP"></span></small></span></label>
+   </div>
+   <div class="rbom" id="rBom"></div>
+
+  </div>
+ </details>
+
  <details class="card fold" id="extC">
-  <summary><h2><i>4</i>Qo'shimcha ishlar</h2><span class="fsum" id="sumE"></span></summary>
+  <summary><h2><i>5</i>Qo'shimcha ishlar</h2><span class="fsum" id="sumE"></span></summary>
   <p class="hint" style="margin:-6px 0 12px">Keraklisini belgilang — narxga qo'shiladi. Miqdor o'zi hisoblanadi, xohlasangiz o'zgartiring.</p>
   <div class="exl" id="ext"></div>
  </details>
@@ -328,7 +368,7 @@ tr.g td{background:var(--blue2);font-weight:600}
  </section>
 
  <details class="card fold" id="shop">
-  <summary><h2><i>5</i>Do'kon uchun ro'yxat</h2><span class="fsum" id="sumS"></span></summary>
+  <summary><h2><i>6</i>Do'kon uchun ro'yxat</h2><span class="fsum" id="sumS"></span></summary>
   <p class="hint" style="margin:-6px 0 10px">Qancha material olish kerakligi (zaxira bilan). Sotuvchi bilan aniqlashtiring.</p>
   <table id="shopT"></table>
   <button class="addb" id="copyShop" style="border-style:solid">Ro'yxatni nusxalash</button>
@@ -430,7 +470,18 @@ const P={
  deliv:["Materiallarni yetkazish va ko'tarish","xizmat","i",[800e3,1e6,1.5e6]],
  fas_i:["Fasad suvog'i va pardozi (ish)","m²","i",[70e3,85e3,110e3]],
  fas_m:["Fasad materiali (suvoq, setka, bo'yoq)","m²","m",[45e3,75e3,140e3]],
- roof:["Tom yopish (material va ish bilan)","m²","m",[170e3,260e3,420e3]],
+ roof_pn:["Tom: profnastil (ish va material, konyok, samorez bilan)","m²","m",[60e3,85e3,115e3]],
+ roof_mc:["Tom: metallocherepitsa (ish va material)","m²","m",[100e3,125e3,155e3]],
+ roof_on:["Tom: ondulin / evroshifer (ish va material)","m²","m",[95e3,115e3,140e3]],
+ roof_sh:["Tom: shifer (ish va material)","m²","m",[55e3,65e3,80e3]],
+ roof_gb:["Tom: yumshoq cherepitsa, OSB asos bilan (ish va material)","m²","m",[165e3,195e3,240e3]],
+ roof_rl:["Tekis tom: rulonli bikrost, 2 qatlam (ish va material)","m²","m",[60e3,80e3,110e3]],
+ roof_str:["Tom yog'och karkasi: stropila va obreshyotka (ish va material)","m²","m",[170e3,220e3,290e3]],
+ roof_mem:["Tom ostiga gidroizolyatsiya membranasi (ish va material)","m²","m",[15e3,20e3,28e3]],
+ roof_izo:["Tomni isitish: mineral paxta 100 mm + paroizolyatsiya","m²","m",[55e3,70e3,90e3]],
+ roof_dem:["Eski tomni buzish va olib chiqish","m²","i",[20e3,25e3,35e3]],
+ roof_paint:["Shifer tomni bo'yash, gruntovka + 2 qatlam (ish va material)","m²","m",[20e3,28e3,40e3]],
+ roof_vod:["Suv tarnovi va quvurlari (ish va material)","m","m",[70e3,95e3,130e3]],
  plit:["Hovliga plitka (asosi bilan)","m²","m",[140e3,200e3,300e3]],
  zabor:["Devor / zabor, 2 m (material va ish bilan)","m","m",[450e3,700e3,1.1e6]]};
 
@@ -459,14 +510,56 @@ const EXT=[
  ['design',"Dizayn loyiha","umumiy maydon bo'yicha",()=>Math.round(S.rooms.reduce((a,r)=>a+geo(r).pol,0)*10)/10],
  ['clean',"Ta'mirdan keyingi tozalash","umumiy maydon bo'yicha",()=>Math.round(S.rooms.reduce((a,r)=>a+geo(r).pol,0)*10)/10]];
 const FAS=[['emu',"Fasad emulsiya","eng arzon"],['doj',"Dojdik / koroed","6$ atrofida"],['trv',"Suyuq travertin","6–8$"],['mar',"Marmarino / leonardo / mineralka","9–12$"],['trm',"Termopanel","isitadi ham"]];
+const RSH=[['tek',"Tekis tom","nishabsiz",1],['bir',"Bir nishabli","oddiy, arzon",1.1],['ikki',"Ikki nishabli","eng ko'p uchraydi",1.2],['tort',"To'rt nishabli","chiroyli, qimmatroq",1.28]];
+const RM=[['pn',"Profnastil","arzon, tez"],['mc',"Metallocherepitsa","cherepitsaga o'xshaydi"],['on',"Ondulin (evroshifer)","shovqinsiz"],['sh',"Shifer","eng arzon"],['gb',"Yumshoq cherepitsa","chiroyli, OSB ustiga"],['rl',"Rulonli bikrost","tekis tom uchun"]];
+const rmList=()=>S.roof.sh==='tek'?['rl','pn']:['pn','mc','on','sh','gb'];
+const ANG={tek:3,bir:15,ikki:30,tort:25};
+const roofAuto=()=>{const R=S.roof,fl=S.rooms.reduce((a,r)=>a+geo(r).pol,0),F=Math.max(9,fl*1.15),sh=R.sh||'ikki';
+ let L=num(R.L),W=num(R.W);if(!L&&!W){W=Math.sqrt(F/1.3);L=F/W}else if(!L)L=F/W;else if(!W)W=F/L;
+ L=Math.round(L*10)/10;W=Math.round(W*10)/10;const g=num(R.g)||ANG[sh],c=Math.cos(g*Math.PI/180),o=.5;
+ const Ls=sh==='tek'?0:sh==='bir'?(W+2*o)/c:(W/2+o)/c,Lr=L+2*o;
+ const a=sh==='tek'?(L+.6)*(W+.6):sh==='bir'?Lr*Ls:sh==='ikki'?2*Lr*Ls:(L+2*o)*(W+2*o)/c;
+ const v={tek:0,bir:Lr,ikki:2*Lr,tort:2*(L+2*o)+2*(W+2*o)}[sh];
+ return{L,W,g,Ls:Math.round(Ls*100)/100,Lr,a:Math.round(a),v:Math.round(v),slopes:{tek:1,bir:1,ikki:2,tort:4}[sh]}};
+const roofArea=()=>num(S.roof.a)||roofAuto().a;
+const roofOn=()=>S.obj==='hovli'&&S.roof.on;
+const rmCur=()=>rmList().includes(S.roof.m)?S.roof.m:rmList()[0];
+const onlyPaint=()=>S.roof.only&&rmCur()==='sh';
+function roofBOM(){const R=S.roof,G=roofAuto(),a=roofArea(),m=rmCur(),sh=R.sh,L=[],C=x=>Math.ceil(x-1e-9),r1=x=>Math.round(x*10)/10,add=(n,q,u,h)=>{if(q>0)L.push([n,q,u,h||''])};
+ const tort=sh==='tort',sl=sh==='ikki'?2:1,Lr=G.Lr,Ls=G.Ls;
+ if(onlyPaint()){add("Shifer uchun bo'yoq (2 qatlam)",C(a*.3),'kg','akril yoki rezinali tom bo\'yog\'i');add('Gruntovka',C(a*.1),'litr');return L}
+ const ridge=sh==='ikki'?Lr:tort?Lr+2*Math.hypot(G.W/2,G.W/2)*1.1:0;
+ if(m==='sh'){const sh1=tort?C(a/1.55*1.12):C(Lr/.97)*C(Ls/1.6)*sl;add('Shifer listi 1,75 × 1,13 m (8 to\'lqin)',sh1,'list','');
+  if(ridge)add('Shifer konyogi (tepa qismi)',C(ridge/.85),'dona');add('Shifer mixi (rezina shaybali)',sh1*4,'dona')}
+ if(m==='pn'||m==='mc'){const nm=m==='pn'?'Profnastil listi':'Metallocherepitsa listi',across=C(Lr/1.1);
+  if(tort)add(nm,C(a*1.15),'m²','to\'rt nishabli tomda kesish ko\'p bo\'ladi');else add(`${nm}, uzunligi ${fq(r1(Ls+.05))} m`,across*sl,'list',`jami ${C(a*1.05)} m²`);
+  if(ridge)add('Konyok (metall, 2 m)',C(ridge/1.9),'dona');add('Samorez (tom uchun, rezinali)',C(a*(m==='pn'?7:8)),'dona')}
+ if(m==='on'){const n=tort?C(a/1.5*1.12):C(Lr/.83)*C(Ls/1.8)*sl;add('Ondulin listi 2 × 0,95 m',n,'list');if(ridge)add('Ondulin konyogi',C(ridge/.85),'dona');add('Ondulin mixi',n*20,'dona')}
+ if(m==='gb'){add('Yumshoq cherepitsa',C(a*1.05/3),'pachka','1 pachka ≈ 3 m²');add('OSB plita 9 mm, 2,5 × 1,25 m',C(a*1.08/3.125),'list');add('Podkladka gilami',C(a*1.1/15),'rulon','15 m² lik');
+  if(ridge)add('Konyok-karniz cherepitsasi',C((ridge+G.v)/12),'pachka');add('Yershli mix',C(a*.08),'kg')}
+ if(m==='rl'){add('Bikrost / izol (2 qatlam)',C(a*2*1.15/10),'rulon','10 m² lik');add('Bitum praymer',C(a*.3),'litr')}
+ if(R.str&&sh!=='tek'){const sp=.8,n=C(Lr/sp)+1,big=Ls>4.5,sec=big?'50×200':'50×150',st=sh==='bir'?n:tort?2*n+4:2*n,v0=(big?.05*.2:.05*.15);
+  let vol=st*Ls*v0;add(`Stropila (tom qovurg'asi) ${sec}`,st,'dona',`${fq(r1(Ls+.1))} m dan${Ls>6?', 2 bo\'lakdan ulanadi':''}`);
+  const ml=sh==='bir'||sh==='ikki'?2*G.L:2*(G.L+G.W);add('Devor ustiga brus (mauerlat) 100×150',C(ml/6),'dona','6 m dan');vol+=C(ml/6)*6*.015;
+  if(sh==='ikki'){add('Tom tepasiga brus (konyok) 100×150',C(Lr/6),'dona','6 m dan');vol+=C(Lr/6)*6*.015}
+  if(m!=='gb'){const step={sh:.5,pn:.5,mc:.35,on:.6}[m]||.5,rows=C(Ls/step)+1,run=tort?a/step:rows*Lr*sl,lath=m==='sh'?'brus 50×50':'taxta 25×100';
+   add(`Ko'ndalang taxta — obreshyotka (${lath})`,C(run*1.05/6),'dona','6 m dan');vol+=C(run*1.05/6)*6*(m==='sh'?.0025:.0025)}
+  add("Jami yog'och",r1(vol*1.05),'m³','yog\'och bozorida shunday so\'raladi');add('Mix 100–150 mm',C(a*.15),'kg');add('Antiseptik (yog\'ochga)',C(a*.2),'litr')}
+ if(R.mem)add('Gidroizolyatsiya membranasi',C(a*1.1/75),'rulon','75 m² lik');
+ if(R.izo){add('Mineral paxta 100 mm',C(a*1.05/5),'paket','paketda ≈ 5 m²');add('Paroizolyatsiya plyonkasi',C(a*1.1/75),'rulon','75 m² lik')}
+ if(R.paint&&m==='sh'){add("Shifer uchun bo'yoq (2 qatlam)",C(a*.3),'kg');add('Gruntovka',C(a*.1),'litr')}
+ if(R.vod){const v=num(R.v)||G.v;if(v){add('Tarnov (nov)',C(v),'m');add('Tarnov ilgagi (kronshteyn)',C(v/.6),'dona');add('Suv quvuri, 3 m',Math.max(1,C(v/10)),'dona','har 10 m tarnovga bittadan')}}
+ return L}
 const fasAuto=()=>{const fl=S.rooms.reduce((a,r)=>a+geo(r).pol,0);return{p:Math.round(4*Math.sqrt(fl)*1.15),h:S.obj==='hovli'?3.3:3}};
 function fasArea(){const A=fasAuto(),f=S.fas,win=S.rooms.reduce((a,r)=>a+geo(r).win,0);return Math.max(0,Math.round(((num(f.p)||A.p)*(num(f.h)||A.h)-win)*10)/10)}
 const KIND=[["yengil","Yengil","bo'yoq, pol, shift"],["toliq","To'liq","noldan, o'rtacha"],["lyuks","Lyuks","noldan, qimmat"]];
 const kindOf=()=>({yengil:['kos',1],toliq:['kap',1],lyuks:['kap',2]})[S.kind]||['kap',1];
 const mk=(t)=>({id:uid(),t,L:T[t].L,W:T[t].W,wn:['meh','yot','bol','osh','bal'].includes(t)?1:0,dn:1});
-const fresh=()=>({fas:{on:false,p:'',h:'',m:'trv',suv:false,izo:false},ext:{},reg:'tsh',obj:'kv',kind:'toliq',H:'',ww:1.5,wh:1.5,rooms:['meh','yot','osh','ham','hoj','kor'].map(mk),yard:{roof:'',plit:''},ov:{}});
+const R0=()=>({on:false,sh:'ikki',m:'pn',L:'',W:'',g:'',a:'',v:'',dem:false,str:false,mem:true,izo:false,vod:true,paint:false,only:false});
+const fresh=()=>({roof:R0(),fas:{on:false,p:'',h:'',m:'trv',suv:false,izo:false},ext:{},reg:'tsh',obj:'kv',kind:'toliq',H:'',ww:1.5,wh:1.5,rooms:['meh','yot','osh','ham','hoj','kor'].map(mk),yard:{roof:'',plit:''},ov:{}});
 let S;try{S=JSON.parse(localStorage.getItem('smeta-v3'))}catch(e){}
 if(!S||!S.rooms)S=fresh();if(!S.ext)S.ext={};if(!S.fas)S.fas={on:false,p:'',h:'',m:'trv',suv:false,izo:false};
+if(!S.roof){S.roof=R0();if(S.yard&&num(S.yard.roof)>0){S.roof.on=true;S.roof.a=S.yard.roof}}if(S.yard)delete S.yard.roof;for(const[k,v]of Object.entries(R0()))if(S.roof[k]===undefined)S.roof[k]=v;
 const save=()=>{try{localStorage.setItem('smeta-v3',JSON.stringify(S))}catch(e){}};
 const lvl=()=>kindOf()[1];
 const pr=k=>S.ov[k]!=null?S.ov[k]:Math.round(P[k][3][lvl()]*(P[k][2]==='i'?reg()[2]:reg()[3])/1000)*1000;
@@ -510,7 +603,16 @@ function calc_(){const out=[],[type]=kindOf(),kap=type==='kap',lv=lvl(),nm_=name
   add(F,k,a,`Fasad: ${nm.toLowerCase()} (ish)`,pp*.45);out[out.length-1].kind='i';add(F,k,a,`Fasad: ${nm.toLowerCase()} (material)`,pp*.55)}
  const X="Qo'shimcha";for(const[k,n,,auto]of EXT){const e=S.ext[k];if(!e||!e.on)continue;const q=num(e.q)||auto();if(k==='heat'){add(X,'kot',1);add(X,'heat',q)}else add(X,k,q)}
  add(G,'musor',kap?Math.max(1,Math.ceil(floor/25)):1);add(G,'deliv',1);
- if(S.obj==='hovli'){const Y='Hovli va tashqi';add(Y,'roof',num(S.yard.roof));add(Y,'plit',num(S.yard.plit))}
+ if(roofOn()){const Rg='Tom',R=S.roof,a=roofArea(),m=rmCur(),k='roof_'+m,pp=pr(k),nm=RM.find(x=>x[0]===m)[1];
+  if(R.paint&&m==='sh'||onlyPaint()){const q=pr('roof_paint');add(Rg,'roof_paint',a,"Shiferni bo'yash (ish)",q*.45);out[out.length-1].kind='i';add(Rg,'roof_paint',a,"Shifer bo'yog'i va gruntovka",q*.55)}
+  if(!onlyPaint()){
+  if(R.dem)add(Rg,'roof_dem',a);
+  if(R.str&&R.sh!=='tek'){const q=pr('roof_str');add(Rg,'roof_str',a,"Yog'och karkas: stropila, obreshyotka (ish)",q*.35);out[out.length-1].kind='i';add(Rg,'roof_str',a,"Yog'och karkas: taxta, brus, mix, antiseptik",q*.65)}
+  if(R.izo){const q=pr('roof_izo');add(Rg,'roof_izo',a,"Tomni isitish (ish)",q*.3);out[out.length-1].kind='i';add(Rg,'roof_izo',a,"Mineral paxta 100 mm, paroizolyatsiya",q*.7)}
+  if(R.mem)add(Rg,'roof_mem',a);
+  add(Rg,k,a,`Tom yopish: ${nm.toLowerCase()} (ish)`,pp*.4);out[out.length-1].kind='i';add(Rg,k,a,`Tom yopish: ${nm.toLowerCase()} (material)`,pp*.6);
+  if(R.vod)add(Rg,'roof_vod',num(R.v)||roofAuto().v)}}
+ if(S.obj==='hovli'){const Y='Hovli va tashqi';add(Y,'plit',num(S.yard.plit))}
  for(const l of out)l.sum=l.q*l.price;
  let i=0,m=0;for(const l of out)l.kind==='i'?i+=l.sum:m+=l.sum;const sub=i+m,z=sub*.1;
  sh.kap=kap;sh.doors=kap?doors:0;
@@ -544,6 +646,25 @@ function renderExt(){$('#ext').innerHTML=EXT.map(([k,n,h,auto])=>{const e=S.ext[
  return`<div class="ex${e.on?' on':''}" data-x="${k}"><label><input type="checkbox" data-xe${e.on?' checked':''}><span><b>${n}</b><small>${h?h+' · ':''}${fmt(pr(k))} so'm / ${u}${P0?` + kotyol ${mln(P0)}`:''}</small></span></label><div class="qq"><input data-xq inputmode="decimal" value="${esc(e.q??'')}" placeholder="${fq(auto())}" aria-label="${n} miqdori"><span>${u}</span></div></div>`}).join('')}
 $('#ext').addEventListener('change',e=>{const row=e.target.closest('[data-x]');if(!row||!e.target.matches('[data-xe]'))return;const k=row.dataset.x;S.ext[k]={...(S.ext[k]||{}),on:e.target.checked};row.classList.toggle('on',e.target.checked);update(true)});
 $('#ext').addEventListener('input',e=>{const row=e.target.closest('[data-x]');if(!row||!e.target.matches('[data-xq]'))return;const k=row.dataset.x;S.ext[k]={...(S.ext[k]||{}),q:e.target.value,on:true};row.classList.add('on');row.querySelector('[data-xe]').checked=true;update(true)});
+function renderRoof(){const R=S.roof,A=roofAuto(),hv=S.obj==='hovli';$('#roofC').hidden=!hv;if(!hv)return;
+ $('#rOn').checked=!!R.on;$('#rBody').hidden=!R.on;
+ $('#rSh').innerHTML=RSH.map(([k,n,h])=>`<button data-rs="${k}" aria-pressed="${R.sh===k}"><b>${n}</b><small>${h}</small></button>`).join('');
+ R.m=rmCur();
+ $('#rM').innerHTML=rmList().map(k=>{const x=RM.find(y=>y[0]===k);return`<button data-rm="${k}" aria-pressed="${R.m===k}"><b>${x[1]}</b><small>${fmt(pr('roof_'+k))} so'm/m² · ${x[2]}</small></button>`}).join('');
+ $('#rL').placeholder=fq(A.L);$('#rW').placeholder=fq(A.W);$('#rG').placeholder=A.g;$('#rA').placeholder=A.a;$('#rV').placeholder=A.v;
+ for(const[id,k]of[['rL','L'],['rW','W'],['rG','g'],['rA','a'],['rV','v']])if(document.activeElement!==$('#'+id))$('#'+id).value=R[k]??'';
+ for(const[id,k]of[['rDem','dem'],['rStr','str'],['rMem','mem'],['rIzo','izo'],['rVod','vod'],['rPaint','paint'],['rOnly','only']])$('#'+id).checked=!!R[k];
+ const sh=R.m==='sh',op=onlyPaint();$('#rPaintL').hidden=!sh;$('#rOnlyL').hidden=!sh;
+ for(const id of['rDem','rStr','rMem','rIzo','rVod'])$('#'+id).closest('label').hidden=op||(id==='rStr'&&R.sh==='tek');
+ $('#rDemP').textContent=fmt(pr('roof_dem'))+" so'm/m²";$('#rStrP').textContent=fmt(pr('roof_str'))+" so'm/m²";$('#rMemP').textContent=fmt(pr('roof_mem'))+" so'm/m²";$('#rIzoP').textContent=fmt(pr('roof_izo'))+" so'm/m²";$('#rVodP').textContent=fmt(pr('roof_vod'))+" so'm/m";$('#rPaintP').textContent=fmt(pr('roof_paint'))+" so'm/m²";
+ renderBom()}
+let bomAll=false;
+function renderBom(){const A=roofAuto(),B=roofBOM(),a=roofArea(),N=6,show=bomAll?B:B.slice(0,N);
+ $('#rBom').innerHTML=`<h3>Tomga nima va qancha kerak</h3><div class="geo">Tom maydoni: ${fq(a)} m²</div><table>${show.map(([n,q,u,h])=>`<tr><td>${n}${h?`<small>${h}</small>`:''}</td><td>${fq(q)} ${u}</td></tr>`).join('')}</table>${B.length>N?`<button class="more" type="button" data-bom>${bomAll?'Qisqartirish ▲':`Yana ${B.length-N} ta ▼`}</button>`:''}`}
+document.addEventListener('click',e=>{if(!e.target.closest('[data-bom]'))return;bomAll=!bomAll;renderBom()});
+$('#roofC').addEventListener('change',e=>{const m={rOn:'on',rDem:'dem',rStr:'str',rMem:'mem',rIzo:'izo',rVod:'vod',rPaint:'paint',rOnly:'only'}[e.target.id];if(!m)return;S.roof[m]=e.target.checked;if(m==='only'&&e.target.checked)S.roof.paint=true;renderRoof();update(true)});
+$('#roofC').addEventListener('input',e=>{const m={rL:'L',rW:'W',rG:'g',rA:'a',rV:'v'}[e.target.id];if(!m)return;S.roof[m]=e.target.value;const A=roofAuto();$('#rL').placeholder=fq(A.L);$('#rW').placeholder=fq(A.W);$('#rA').placeholder=A.a;$('#rV').placeholder=A.v;renderBom();update(true)});
+$('#roofC').addEventListener('click',e=>{const s=e.target.closest('[data-rs]'),m=e.target.closest('[data-rm]');if(s){S.roof.sh=s.dataset.rs;S.roof.a='';S.roof.v='';S.roof.g=''}else if(m)S.roof.m=m.dataset.rm;else return;renderRoof();update(true)});
 function renderFas(){const f=S.fas,A=fasAuto();$('#fOn').checked=!!f.on;$('#fBody').hidden=!f.on;$('#fP').placeholder=A.p;$('#fH').placeholder=fq(A.h);
  if(document.activeElement!==$('#fP'))$('#fP').value=f.p;if(document.activeElement!==$('#fH'))$('#fH').value=f.h;$('#fA').textContent=fq(fasArea())+' m²';
  $('#fM').innerHTML=FAS.map(([k,n,h])=>`<button data-fm="${k}" aria-pressed="${f.m===k}"><b>${n}</b><small>${fmt(pr('fsd_'+k))} so'm/m² · ${h}</small></button>`).join('');
@@ -551,15 +672,15 @@ function renderFas(){const f=S.fas,A=fasAuto();$('#fOn').checked=!!f.on;$('#fBod
 $('#fasC').addEventListener('change',e=>{const id=e.target.id,f=S.fas;if(!['fOn','fSuv','fIzo'].includes(id))return;if(id==='fOn')f.on=e.target.checked;if(id==='fSuv')f.suv=e.target.checked;if(id==='fIzo')f.izo=e.target.checked;renderFas();update(true)});
 $('#fasC').addEventListener('input',e=>{const id=e.target.id;if(id==='fP')S.fas.p=e.target.value;else if(id==='fH')S.fas.h=e.target.value;else return;$('#fA').textContent=fq(fasArea())+' m²';update(true)});
 $('#fasC').addEventListener('click',e=>{const b=e.target.closest('[data-fm]');if(!b)return;S.fas.m=b.dataset.fm;renderFas();update(true)});
-function renderPrices(){$('#priceT').innerHTML=`<tr><th>Ish / material</th><th>Birlik</th><th class="num">So'm</th></tr>`+Object.entries(P).filter(([k])=>!['zabor','fas_i','fas_m'].includes(k)&&(S.obj==='hovli'||!['roof','plit'].includes(k))).map(([k,v])=>`<tr><td>${v[0]}</td><td>${v[1]}</td><td class="num"><input data-p="${k}" inputmode="numeric" value="${Math.round(pr(k))}" class="${S.ov[k]!=null?'ch':''}" aria-label="${esc(v[0])}"></td></tr>`).join('')}
+function renderPrices(){$('#priceT').innerHTML=`<tr><th>Ish / material</th><th>Birlik</th><th class="num">So'm</th></tr>`+Object.entries(P).filter(([k])=>!['zabor','fas_i','fas_m'].includes(k)&&(S.obj==='hovli'||!(k==='plit'||k.startsWith('roof_')))).map(([k,v])=>`<tr><td>${v[0]}</td><td>${v[1]}</td><td class="num"><input data-p="${k}" inputmode="numeric" value="${Math.round(pr(k))}" class="${S.ov[k]!=null?'ch':''}" aria-label="${esc(v[0])}"></td></tr>`).join('')}
 $('#priceT').addEventListener('input',e=>{const k=e.target.dataset.p;if(!k)return;const v=num(e.target.value);if(v){S.ov[k]=v;e.target.classList.add('ch')}else delete S.ov[k];update(true)});
 $('#resetP').addEventListener('click',()=>{S.ov={};update()});
 
 let last;
-const STG=[["Qora ishlar","buzish, suvoq, styajka, elektr, santexnika — boshida",['dem','styaj_i','styaj_m','suvoq_i','suvoq_m','gidro','el_i','el_m','san_i','san_m','musor','deliv','roof','plit','warm','kot','heat','design','fsd_suv','fsd_izo']],
+const STG=[["Qora ishlar","buzish, suvoq, styajka, elektr, santexnika — boshida",['dem','styaj_i','styaj_m','suvoq_i','suvoq_m','gidro','el_i','el_m','san_i','san_m','musor','deliv','roof_dem','roof_str','roof_izo','roof_mem','roof_pn','roof_mc','roof_on','roof_sh','roof_gb','roof_rl','roof_vod','roof_paint','plit','warm','kot','heat','design','fsd_suv','fsd_izo']],
  ["Pardoz ishlari","kafel, shpaklyovka, bo'yoq, pol, shift — o'rtada",['shp2_i','shp1_i','shp_m','paint_i','paint_m','oboy_i','oboy_m','tile_fi','tile_wi','tile_m','lam_i','lam_m','ceil_i','ceil_m','plint_i','plint_m','otkos','fas_i','fas_m','fsd_emu','fsd_doj','fsd_trv','fsd_mar','fsd_trm']],
  ["Jihozlar va yakuniy ishlar","santexnika, eshiklar, konditsioner, mebel, tozalash — oxirida",['fix','door_m','door_i','win','ac','entr','boil','light','kitch','clean']]];
-function weeks(c){const a=c.floor||0;let lo,hi;if(!c.kap){lo=2+a/30;hi=3+a/18}else{lo=6+a/12;hi=9+a/8;if(S.kind==='lyuks'){lo*=1.25;hi*=1.3}}if(S.obj==='hovli'){lo+=2;hi+=4}if(S.fas&&S.fas.on){lo+=1;hi+=3}return`${Math.round(lo)}–${Math.round(hi)} hafta`}
+function weeks(c){const a=c.floor||0;let lo,hi;if(!c.kap){lo=2+a/30;hi=3+a/18}else{lo=6+a/12;hi=9+a/8;if(S.kind==='lyuks'){lo*=1.25;hi*=1.3}}if(S.obj==='hovli'){lo+=2;hi+=4}if(S.fas&&S.fas.on){lo+=1;hi+=3}if(roofOn()){lo+=1;hi+=2}return`${Math.round(lo)}–${Math.round(hi)} hafta`}
 function shopList(c){const s=c.sh,L=[],ceil=x=>Math.ceil(x-1e-9);const add=(n,q,u)=>{if(q>0)L.push([n,q,u])};
  if(s.kap){add('Rotband (suvoq), 30 kg',ceil(s.suv*13/30),'qop');add("Styajka aralashmasi (peskobeton), 50 kg",ceil(s.scr*90/50),'qop')}
  add('Shpaklyovka, 25 kg',ceil((s.shp*(s.kap?2.4:1.2)+s.cpaint*2.4)/25),'qop');
@@ -574,7 +695,9 @@ function shopList(c){const s=c.sh,L=[],ceil=x=>Math.ceil(x-1e-9);const add=(n,q,
  add('Plintus, 2,5 m',ceil(s.pl*1.05/2.5),'dona');add('Natyajnoy shift',ceil(s.ceil),'m²');add('Gipsokarton list, 2,5 × 1,2 m',ceil(s.gk*1.1/3),'dona');
  if(s.kap){add('Rozetka / viklyuchatel',s.pts,'dona');add('Elektr simi (≈6 m nuqtaga)',ceil(s.pts*6/10)*10,'m')}
  if(s.doors)add('Ichki eshik (komplekt)',s.doors,'dona');
- for(const l of c.out)if(['ac','entr','boil','kot','warm','kitch'].includes(l.k))add(l.name,Math.ceil(l.q),l.unit);return L}
+ for(const l of c.out)if(['ac','entr','boil','kot','warm','kitch'].includes(l.k))add(l.name,Math.ceil(l.q),l.unit);
+ if(roofOn())for(const[n,q,u]of roofBOM())if(u!=='m³'||!/Jami/.test(n))add(n,q,u);else add("Yog'och (stropila, obreshyotka, brus) — jami",Math.ceil(q),u);
+ return L}
 function update(keep){const c=calc();last=c;
  document.querySelectorAll('[data-cur]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cur===CUR));
  $('#tot').innerHTML=CUR==='usd'?`$${fmt(Math.round(c.tot/RATE/10)*10)}`:`${fk(c.tot)} <small>so'm</small>`;$('#btot').textContent=moneyS(c.tot);
@@ -588,9 +711,9 @@ function update(keep){const c=calc();last=c;
  $('#detT').innerHTML=h;
  const sl=shopList(c);$('#shopT').innerHTML=sl.length?sl.map(([n,q,u])=>`<tr><td>${n}</td><td>${fmt(q)} ${u}</td></tr>`).join(''):`<tr><td>Xona qo'shing</td></tr>`;
  const R=reg();$('#note').textContent=`Narxlar: OLX.uz e'lonlari (Toshkent, 2026-yil noyabr) asosida, ${R[1]} uchun moslangan. ${R[2]<1?`Ustalar ishi Toshkentdan ~${Math.round((1-R[2])*100)}% arzon olingan. `:''}${c.kap?'Ichki eshiklar, santexnika jihozlari, elektr va quvurlar kiritilgan. ':''}Mebel, konditsioner, chiroqlar kirmaydi. Maslahat: amalda xarajat ko'pincha smetadan 1,3–1,5 baravar oshadi — pulni shunga qarab rejalang.`;
- const sf=$('#sumF'),se=$('#sumE'),ss=$('#sumS');if(sf)sf.textContent=S.fas.on?`${FAS.find(x=>x[0]===S.fas.m)[1]} · ${fq(fasArea())} m²`:"qo'shilmagan";
+ const sf=$('#sumF'),se=$('#sumE'),ss=$('#sumS');const sr=$('#sumR');if(sr)sr.textContent=roofOn()?(onlyPaint()?`Shiferni bo'yash · ${fq(roofArea())} m²`:`${RM.find(x=>x[0]===rmCur())[1]} · ${fq(roofArea())} m²`):"qo'shilmagan";if(sf)sf.textContent=S.fas.on?`${FAS.find(x=>x[0]===S.fas.m)[1]} · ${fq(fasArea())} m²`:"qo'shilmagan";
  const ne=EXT.filter(([k])=>S.ext[k]&&S.ext[k].on).length;if(se)se.textContent=ne?ne+' ta tanlangan':'tanlanmagan';if(ss)ss.textContent=sl.length+' xil material';
- renderFas();if(!keep){renderPrices();renderExt()}else{document.querySelectorAll('#ext [data-x]').forEach(row=>{const d=EXT.find(x=>x[0]===row.dataset.x);row.querySelector('[data-xq]').placeholder=fq(d[3]())})}save()}
+ renderFas();renderRoof();if(!keep){renderPrices();renderExt()}else{document.querySelectorAll('#ext [data-x]').forEach(row=>{const d=EXT.find(x=>x[0]===row.dataset.x);row.querySelector('[data-xq]').placeholder=fq(d[3]())})}save()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cur]');if(!b)return;CUR=b.dataset.cur;try{localStorage.setItem('smeta-cur',CUR)}catch(x){}update(true)});
 $('#copyShop').addEventListener('click',async()=>{const t=["🛒 TA'MIR UCHUN MATERIALLAR",...shopList(last).map(([n,q,u])=>`• ${n} — ${fmt(q)} ${u}`)].join('\n');try{await navigator.clipboard.writeText(window.__cyr(t));$('#msg2').textContent="Nusxalandi — sotuvchiga yuboring."}catch(e){$('#msg2').textContent="Nusxalab bo'lmadi."}});
 

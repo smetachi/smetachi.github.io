@@ -86,6 +86,38 @@ select.big{width:100%;min-height:52px;border:2px solid var(--line);border-radius
 .fopts button b{display:block;font-size:15px}.fopts button small{display:block;color:var(--mut);font-size:13px}
 .fopts button[aria-pressed=true]{border-color:var(--blue);background:var(--blue2)}
 .fold{padding:0}
+.hd{display:none!important}
+#rooms{gap:8px}
+#rooms .rw{display:block!important;padding:0!important;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+#rooms .rw.open{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue) inset}
+.rhead{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;padding:10px 12px;text-align:left;font:inherit;color:var(--ink);cursor:pointer;min-height:62px}
+.ri{font-size:22px;width:42px;height:42px;border-radius:12px;background:var(--blue2);display:grid;place-items:center;flex:none}
+.rtx{flex:1;min-width:0}.rn{display:block;font-size:16.5px;font-weight:700}.rs{display:block;color:var(--mut);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chev{width:9px;height:9px;border-right:2.5px solid var(--mut);border-bottom:2.5px solid var(--mut);transform:rotate(45deg);flex:none;margin:-4px 6px 0 0;transition:transform .2s}
+.rw.open .chev{transform:rotate(-135deg);margin-top:4px}
+.rbody{padding:12px;display:grid;gap:10px;border-top:1px solid var(--line)}
+.rgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.rmat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+#rooms .rw label{display:grid!important;gap:4px;font-size:12.5px;color:var(--mut);padding:0!important;margin:0!important;text-align:left}
+#rooms .rw label>span{display:block!important}
+#rooms .rw select,#rooms .rw input{min-height:46px;font-size:16px}
+#rooms .rmat select{font-size:14.5px;padding:4px 6px}
+.rdel{justify-self:start;border:0;background:none;color:#c92a2a;font:inherit;font-size:14px;font-weight:600;padding:4px 0;cursor:pointer}
+.rtot{margin-top:10px;font-size:14px;color:var(--mut);text-align:right;font-weight:600}
+.sub{border-top:1px solid var(--line)}
+.sub>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:13px 2px;min-height:auto}
+.sub>summary::-webkit-details-marker{display:none}
+.sub>summary .st{font-weight:700;font-size:16.5px;color:var(--ink)}
+.sub>summary .fsum{margin-left:auto;font-size:13.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+.sub>summary .st{white-space:nowrap;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.sub>summary .fsum{flex:none}
+.sub>summary .fsum{margin-left:0}
+.res .subs .note{margin-top:10px}
+.sub>summary::after{content:"";width:9px;height:9px;border-right:2.5px solid var(--mut);border-bottom:2.5px solid var(--mut);transform:rotate(45deg);flex:none;margin:-4px 4px 0 0;transition:transform .2s}
+.sub[open]>summary::after{transform:rotate(-135deg);margin-top:4px}
+.sub[open]{padding-bottom:14px}
+.res .rh{margin-bottom:6px}.res .subs{margin-top:16px}
+.res .btns{margin-top:14px}
 .rbom{margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--bg,#f6f8fc)}
 .radv{margin-top:8px}.radv summary{cursor:pointer;color:var(--blue);font-size:14px;font-weight:600;padding:4px 0}
 .rbom .more{margin-top:8px;border:0;background:none;color:var(--blue);font:inherit;font-weight:700;padding:4px 0;cursor:pointer}
@@ -274,41 +306,28 @@ tr.g td{background:var(--blue2);font-weight:600}
 
  <section class="card">
   <h2><i>2</i>Xonalar</h2>
+  <p class="hint" style="margin:-4px 0 10px">Xonani bosing — o'lcham va materialni o'zgartirasiz.</p>
   <div class="hd"><span>Xona</span><span>Bo'yi, m</span><span>Eni, m</span><span>Deraza</span><span>Eshik</span><span></span></div>
   <div class="rows" id="rooms"></div>
+  <div class="rtot" id="rtot"></div>
   <button class="addb" id="add">+ Xona qo'shish</button>
-  <div class="gen">
+  <details class="sub" style="margin-top:14px"><summary><span class="st">📐 Shift va deraza o'lchami</span><span class="fsum" id="sumG"></span></summary>
+  <div class="gen" style="border:0;margin-top:0;padding-top:0">
    <label>Shift balandligi, m<input id="H" inputmode="decimal"></label>
    <label>Deraza eni, m<input id="ww" inputmode="decimal"></label>
    <label>Deraza bo'yi, m<input id="wh" inputmode="decimal"></label>
   </div>
   <p class="hint">Deraza o'lchami — o'rtacha bitta derazaniki. Eshiklar standart (0,8 × 2 m).</p>
-  <div class="yard" id="yard">
-   <label>Hovliga plitka, m² (kerak bo'lmasa 0)<input data-y="plit" inputmode="decimal"></label>
-  </div>
+  </details>
  </section>
 
- <details class="card fold" id="fasC">
-  <summary><h2><i>3</i>Tashqi fasad</h2><span class="fsum" id="sumF"></span></summary>
-  <label class="ck1"><input type="checkbox" id="fOn"><span><b>Fasadni ham qilaman</b><small>uyning tashqi devorlari</small></span></label>
-  <div id="fBody">
-   <div class="gen" style="border:0;padding-top:0;margin-top:12px">
-    <label>Uy atrofi (perimetr), m<input id="fP" inputmode="decimal"></label>
-    <label>Fasad balandligi, m<input id="fH" inputmode="decimal"></label>
-    <label>Fasad maydoni<output id="fA" class="outv"></output></label>
-   </div>
-   <div class="q">Fasad materiali</div>
-   <div class="fopts" id="fM"></div>
-   <div class="exl" style="margin-top:10px">
-    <label class="ck1"><input type="checkbox" id="fSuv"><span><b>Avval suvoq qilish kerak</b><small>g'isht yoki blok ochiq bo'lsa · <span id="fSuvP"></span></small></span></label>
-    <label class="ck1"><input type="checkbox" id="fIzo"><span><b>Penoplast bilan isitish</b><small>qishda issiq, gaz tejaladi · <span id="fIzoP"></span></small></span></label>
-   </div>
-   <p class="hint">Derazalar maydoni o'zi ayiriladi. Perimetr bilmasangiz, bo'sh qoldiring — xonalardan taxmin qilinadi.</p>
-  </div>
- </details>
 
- <details class="card fold" id="roofC">
-  <summary><h2><i>4</i>Tom</h2><span class="fsum" id="sumR"></span></summary>
+
+ <section class="card grp" id="outC">
+  <h2><i>3</i>Uy tashqarisi</h2>
+  <p class="hint" style="margin:-4px 0 6px">Kerak bo'lsa oching, kerak bo'lmasa — o'tkazib yuboring.</p>
+ <details class="sub" id="roofC">
+  <summary><span class="st">🏠 Tom</span><span class="fsum" id="sumR"></span></summary>
   <label class="ck1"><input type="checkbox" id="rOn"><span><b>Tomni ham hisoblayman</b><small>yangi tom yopish yoki eskisini almashtirish</small></span></label>
   <div id="rBody">
    <div class="q">1. Tom qanday shaklda?</div>
@@ -341,39 +360,66 @@ tr.g td{background:var(--blue2);font-weight:600}
 
   </div>
  </details>
+ <details class="sub" id="fasC">
+  <summary><span class="st">🧱 Tashqi fasad</span><span class="fsum" id="sumF"></span></summary>
+  <label class="ck1"><input type="checkbox" id="fOn"><span><b>Fasadni ham qilaman</b><small>uyning tashqi devorlari</small></span></label>
+  <div id="fBody">
+   <div class="gen" style="border:0;padding-top:0;margin-top:12px">
+    <label>Uy atrofi (perimetr), m<input id="fP" inputmode="decimal"></label>
+    <label>Fasad balandligi, m<input id="fH" inputmode="decimal"></label>
+    <label>Fasad maydoni<output id="fA" class="outv"></output></label>
+   </div>
+   <div class="q">Fasad materiali</div>
+   <div class="fopts" id="fM"></div>
+   <div class="exl" style="margin-top:10px">
+    <label class="ck1"><input type="checkbox" id="fSuv"><span><b>Avval suvoq qilish kerak</b><small>g'isht yoki blok ochiq bo'lsa · <span id="fSuvP"></span></small></span></label>
+    <label class="ck1"><input type="checkbox" id="fIzo"><span><b>Penoplast bilan isitish</b><small>qishda issiq, gaz tejaladi · <span id="fIzoP"></span></small></span></label>
+   </div>
+   <p class="hint">Derazalar maydoni o'zi ayiriladi. Perimetr bilmasangiz, bo'sh qoldiring — xonalardan taxmin qilinadi.</p>
+  </div>
+ </details>
+ <details class="sub" id="yardC">
+  <summary><span class="st">🌳 Hovli hududi</span><span class="fsum" id="sumY"></span></summary>
+  <div class="yard" id="yard">
+   <label>Hovliga plitka, m² (kerak bo'lmasa 0)<input data-y="plit" inputmode="decimal"></label>
+  </div>
+ </details>
+ </section>
 
  <details class="card fold" id="extC">
-  <summary><h2><i>5</i>Qo'shimcha ishlar</h2><span class="fsum" id="sumE"></span></summary>
+  <summary><h2><i>4</i>Qo'shimcha ishlar</h2><span class="fsum" id="sumE"></span></summary>
   <p class="hint" style="margin:-6px 0 12px">Keraklisini belgilang — narxga qo'shiladi. Miqdor o'zi hisoblanadi, xohlasangiz o'zgartiring.</p>
   <div class="exl" id="ext"></div>
  </details>
 
  <section class="card res" id="res">
+  <h2 class="rh"><i>5</i>Natija</h2>
   <div class="rhd"><div class="l">Taxminiy narx</div><div class="cur" role="group" aria-label="Valyuta"><button data-cur="som">so'm</button><button data-cur="usd">$</button></div></div>
   <div class="total" id="tot">0</div>
   <div class="l" id="per"></div>
   <div class="facts"><div><span>Ustalar ishi</span><b id="ti"></b></div><div><span>Materiallar</span><b id="tm"></b></div><div><span>Muddat</span><b id="dur"></b></div></div>
-  <details class="more"><summary>Solishtirish va to'lov bosqichlari</summary>
-  <div class="q">Boshqa ta'mir turlari bilan solishtiring</div>
-  <div class="cmp" id="cmp"></div>
-  <div class="q">Pul qachon kerak bo'ladi</div>
-  <div class="stg" id="stg"></div>
-  </details>
   <div class="btns"><button class="pri" id="pdf" hidden>PDF yuklab olish</button><button id="copy">Telegram uchun nusxalash</button></div>
   <div class="msg" id="msg" role="status"></div>
-  <div class="cta2"><span>Aniq smeta kerakmi? <b>Smetachiga murojaat qiling</b></span><span class="cta2-b"><a href="tel:+998507088227">Qo'ng'iroq</a><a class="tg" href="https://t.me/Quvonchbek_0727">Telegram</a></span></div>
-  <details><summary>Nimalar hisoblandi?</summary><div style="overflow-x:auto"><table id="detT"></table></div></details>
-  <details class="pt"><summary>Usta narxlarini o'zgartirish</summary><div style="overflow-x:auto"><table id="priceT"></table></div><button class="addb" id="resetP" style="border-style:solid;min-height:44px">Standart narxlarga qaytarish</button></details>
-  <p class="note" id="note"></p>
- </section>
-
- <details class="card fold" id="shop">
-  <summary><h2><i>6</i>Do'kon uchun ro'yxat</h2><span class="fsum" id="sumS"></span></summary>
+  <div class="subs">
+  <details class="sub"><summary><span class="st">📋 Batafsil smeta</span></summary><div style="overflow-x:auto"><table id="detT"></table></div>  <p class="note" id="note"></p>
+</details>
+  <details class="sub" id="shop"><summary><span class="st">🛒 Do'kon uchun ro'yxat</span><span class="fsum" id="sumS"></span></summary>
   <p class="hint" style="margin:-6px 0 10px">Qancha material olish kerakligi (zaxira bilan). Sotuvchi bilan aniqlashtiring.</p>
   <table id="shopT"></table>
   <button class="addb" id="copyShop" style="border-style:solid">Ro'yxatni nusxalash</button>
   <div class="msg" id="msg2" role="status"></div>
  </details>
+  <details class="sub"><summary><span class="st">📅 To'lov bosqichlari</span></summary>
+  <div class="q">Boshqa ta'mir turlari bilan solishtiring</div>
+  <div class="cmp" id="cmp"></div>
+  <div class="q">Pul qachon kerak bo'ladi</div>
+  <div class="stg" id="stg"></div>
+  </details>
+  <details class="sub pt"><summary><span class="st">⚙️ Narxlarni o'zgartirish</span></summary><div style="overflow-x:auto"><table id="priceT"></table></div><button class="addb" id="resetP" style="border-style:solid;min-height:44px">Standart narxlarga qaytarish</button></details>
+  </div>
+  <div class="cta2"><span>Aniq smeta kerakmi? <b>Smetachiga murojaat qiling</b></span><span class="cta2-b"><a href="tel:+998507088227">Qo'ng'iroq</a><a class="tg" href="https://t.me/Quvonchbek_0727">Telegram</a></span></div>
+ </section>
+
 </main>
 <section class="pro2">
  <div class="p2-top">
@@ -623,24 +669,30 @@ function calc_(){const out=[],[type]=kindOf(),kap=type==='kap',lv=lvl(),nm_=name
 function seg(id,list,key){$('#'+id).innerHTML=list.map(([v,b,s])=>`<button data-k="${key}" data-v="${v}" aria-pressed="${S[key]===v}">${b}${s?`<small>${s}</small>`:''}</button>`).join('')}
 function renderTop(){$('#reg').innerHTML=REG.map(r=>`<option value="${r[0]}"${S.reg===r[0]?' selected':''}>${r[1]}</option>`).join('');
  seg('s-obj',[["kv","Kvartira"],["hovli","Hovli uy"]],'obj');seg('s-kind',KIND,'kind');
- $('#yard').hidden=S.obj!=='hovli';$('#H').placeholder=fq(S.obj==='hovli'?3:2.8);$('#H').value=S.H;$('#ww').value=S.ww;$('#wh').value=S.wh;
+ $('#yardC').hidden=S.obj!=='hovli';$('#H').placeholder=fq(S.obj==='hovli'?3:2.8);$('#H').value=S.H;$('#ww').value=S.ww;$('#wh').value=S.wh;
  document.querySelectorAll('[data-y]').forEach(el=>el.value=S.yard[el.dataset.y]??'')}
 document.addEventListener('click',e=>{const b=e.target.closest('.seg [data-k], .cmp [data-k]');if(!b)return;S[b.dataset.k]=b.dataset.v;renderTop();renderRooms();update()});
 $('#reg').addEventListener('change',e=>{S.reg=e.target.value;update()});
 for(const k of['H','ww','wh'])$('#'+k).addEventListener('input',e=>{S[k]=e.target.value;update()});
 $('#yard').addEventListener('input',e=>{const k=e.target.dataset.y;if(k){S.yard[k]=e.target.value;update()}});
 const f=(r,k,l)=>`<label><span>${l}</span><input data-f="${k}" inputmode="decimal" value="${esc(r[k])}" aria-label="${l}"></label>`;
-function renderRooms(){$('#rooms').innerHTML=S.rooms.map(r=>`<div class="rw" data-id="${r.id}"><select data-f="t" aria-label="Xona turi">${Object.entries(T).map(([k,v])=>`<option value="${k}"${r.t===k?' selected':''}>${v.n}</option>`).join('')}</select>${f(r,'L',"Bo'yi, m")}${f(r,'W','Eni, m')}${f(r,'wn','Deraza')}${f(r,'dn','Eshik')}<button class="x" data-del aria-label="O'chirish">✕</button>${matRow(r)}</div>`).join('')}
-const OPENM=new Set();const nm_=(L,v)=>L.find(x=>x[0]===v)[1];
-const msumT=r=>{const M=mats(r);return`${nm_(FL,M.fl)} · ${nm_(WA,M.wa)} · ${nm_(CE,M.ce)}`};
-function matRow(r){const M=mats(r),sel=(k,l,list)=>`<label><span>${l}</span><select data-f="${k}" aria-label="${l}">${list.map(([v,n])=>`<option value="${v}"${M[k]===v?' selected':''}>${n}</option>`).join('')}</select></label>`;
- return`<button class="msum" data-msum aria-expanded="${OPENM.has(r.id)}"><span class="mt">${msumT(r)}</span><span class="me">Materiallar ${OPENM.has(r.id)?'▴':'▾'}</span></button><div class="mat"${OPENM.has(r.id)?'':' hidden'}>${sel('fl','Pol',FL)}${sel('wa','Devor',WA)}${sel('ce','Shift',CE)}</div>`}
+const RI={meh:'🛋️',yot:'🛏️',bol:'🧸',osh:'🍳',ham:'🛁',hoj:'🚽',kor:'🚪',bal:'🌤️'};
+const OPENR=new Set();const nm_=(L,v)=>L.find(x=>x[0]===v)[1];
+const rsT=r=>{const g=geo(r),M=mats(r);return`${fq(num(r.L))} × ${fq(num(r.W))} m · ${fq(Math.round(g.pol*10)/10)} m² · ${nm_(FL,M.fl)}, ${nm_(WA,M.wa).toLowerCase()}`};
+function rtot(){const n=S.rooms.length,a=S.rooms.reduce((x,r)=>x+geo(r).pol,0);const el=$('#rtot');if(el)el.textContent=n?`${n} ta xona · jami ${fq(Math.round(a*10)/10)} m²`:"Xona qo'shing"}
+function renderRooms(){$('#rooms').innerHTML=S.rooms.map(r=>{const M=mats(r),o=OPENR.has(r.id),sel=(k,l,list)=>`<label><span>${l}</span><select data-f="${k}" aria-label="${l}">${list.map(([v,n])=>`<option value="${v}"${M[k]===v?' selected':''}>${n}</option>`).join('')}</select></label>`;
+ return`<div class="rw${o?' open':''}" data-id="${r.id}"><button type="button" class="rhead" data-open aria-expanded="${o}"><span class="ri">${RI[r.t]||'🏠'}</span><span class="rtx"><b class="rn">${T[r.t].n}</b><small class="rs">${rsT(r)}</small></span><span class="chev"></span></button>
+ <div class="rbody"${o?'':' hidden'}><label class="rtype"><span>Xona turi</span><select data-f="t" aria-label="Xona turi">${Object.entries(T).map(([k,v])=>`<option value="${k}"${r.t===k?' selected':''}>${v.n}</option>`).join('')}</select></label>
+ <div class="rgrid">${f(r,'L',"Bo'yi, m")}${f(r,'W','Eni, m')}${f(r,'wn','Deraza')}${f(r,'dn','Eshik')}</div>
+ <div class="rmat">${sel('fl','Pol',FL)}${sel('wa','Devor',WA)}${sel('ce','Shift',CE)}</div>
+ <button type="button" class="rdel" data-del>✕ Xonani o'chirish</button></div></div>`}).join('');rtot()}
 const RE=$('#rooms');
-RE.addEventListener('input',e=>{const t=e.target,row=t.closest('.rw');if(!row||t.tagName==='SELECT')return;S.rooms.find(r=>r.id===row.dataset.id)[t.dataset.f]=t.value;update()});
-RE.addEventListener('change',e=>{const t=e.target;if(t.tagName!=='SELECT')return;const r=S.rooms.find(x=>x.id===t.closest('.rw').dataset.id);const k=t.dataset.f;r[k]=t.value;if(k==='t'){delete r.fl;delete r.wa;delete r.ce;renderRooms()}else{const m=t.closest('.rw').querySelector('.mt');if(m)m.textContent=msumT(r)}update()});
-RE.addEventListener('click',e=>{const ms=e.target.closest('[data-msum]');if(ms){const id=ms.closest('.rw').dataset.id,o=!OPENM.has(id);o?OPENM.add(id):OPENM.delete(id);ms.setAttribute('aria-expanded',o);ms.nextElementSibling.hidden=!o;ms.querySelector('.me').textContent=window.__cyr('Materiallar ')+(o?'▴':'▾');return}
- if(!e.target.closest('[data-del]'))return;const id=e.target.closest('.rw').dataset.id;S.rooms=S.rooms.filter(r=>r.id!==id);renderRooms();update()});
-$('#add').addEventListener('click',()=>{const r=mk('yot');S.rooms.push(r);renderRooms();update();const el=RE.querySelector(`[data-id="${r.id}"] select`);el?.focus()});
+const rOf=el=>S.rooms.find(r=>r.id===el.closest('.rw').dataset.id);
+RE.addEventListener('input',e=>{const t=e.target,row=t.closest('.rw');if(!row||t.tagName==='SELECT')return;const r=rOf(t);r[t.dataset.f]=t.value;row.querySelector('.rs').textContent=rsT(r);rtot();update()});
+RE.addEventListener('change',e=>{const t=e.target;if(t.tagName!=='SELECT')return;const r=rOf(t),k=t.dataset.f;r[k]=t.value;if(k==='t'){delete r.fl;delete r.wa;delete r.ce;renderRooms()}else{t.closest('.rw').querySelector('.rs').textContent=rsT(r)}update()});
+RE.addEventListener('click',e=>{const h=e.target.closest('[data-open]');if(h){const row=h.closest('.rw'),id=row.dataset.id,o=!OPENR.has(id);o?OPENR.add(id):OPENR.delete(id);h.setAttribute('aria-expanded',o);row.classList.toggle('open',o);row.querySelector('.rbody').hidden=!o;return}
+ if(!e.target.closest('[data-del]'))return;const id=e.target.closest('.rw').dataset.id;S.rooms=S.rooms.filter(r=>r.id!==id);OPENR.delete(id);renderRooms();update()});
+$('#add').addEventListener('click',()=>{const r=mk('yot');S.rooms.push(r);OPENR.add(r.id);renderRooms();update();const el=RE.querySelector(`[data-id="${r.id}"] select`);el?.focus()});
 
 function renderExt(){$('#ext').innerHTML=EXT.map(([k,n,h,auto])=>{const e=S.ext[k]||{},P0=k==='heat'?pr('kot'):0,u=k==='heat'?'xona':P[k][1];
  return`<div class="ex${e.on?' on':''}" data-x="${k}"><label><input type="checkbox" data-xe${e.on?' checked':''}><span><b>${n}</b><small>${h?h+' · ':''}${fmt(pr(k))} so'm / ${u}${P0?` + kotyol ${mln(P0)}`:''}</small></span></label><div class="qq"><input data-xq inputmode="decimal" value="${esc(e.q??'')}" placeholder="${fq(auto())}" aria-label="${n} miqdori"><span>${u}</span></div></div>`}).join('')}
@@ -711,7 +763,7 @@ function update(keep){const c=calc();last=c;
  $('#detT').innerHTML=h;
  const sl=shopList(c);$('#shopT').innerHTML=sl.length?sl.map(([n,q,u])=>`<tr><td>${n}</td><td>${fmt(q)} ${u}</td></tr>`).join(''):`<tr><td>Xona qo'shing</td></tr>`;
  const R=reg();$('#note').textContent=`Narxlar: OLX.uz e'lonlari (Toshkent, 2026-yil noyabr) asosida, ${R[1]} uchun moslangan. ${R[2]<1?`Ustalar ishi Toshkentdan ~${Math.round((1-R[2])*100)}% arzon olingan. `:''}${c.kap?'Ichki eshiklar, santexnika jihozlari, elektr va quvurlar kiritilgan. ':''}Mebel, konditsioner, chiroqlar kirmaydi. Maslahat: amalda xarajat ko'pincha smetadan 1,3–1,5 baravar oshadi — pulni shunga qarab rejalang.`;
- const sf=$('#sumF'),se=$('#sumE'),ss=$('#sumS');const sr=$('#sumR');if(sr)sr.textContent=roofOn()?(onlyPaint()?`Shiferni bo'yash · ${fq(roofArea())} m²`:`${RM.find(x=>x[0]===rmCur())[1]} · ${fq(roofArea())} m²`):"qo'shilmagan";if(sf)sf.textContent=S.fas.on?`${FAS.find(x=>x[0]===S.fas.m)[1]} · ${fq(fasArea())} m²`:"qo'shilmagan";
+ const sf=$('#sumF'),se=$('#sumE'),ss=$('#sumS');{const sy=$('#sumY');if(sy)sy.textContent=num(S.yard.plit)>0?`plitka · ${fq(num(S.yard.plit))} m²`:"qo'shilmagan";const sg=$('#sumG');if(sg)sg.textContent=`${fq(num(S.H)||(S.obj==='hovli'?3:2.8))} m · ${fq(num(S.ww)||1.5)}×${fq(num(S.wh)||1.5)} m`}const sr=$('#sumR');if(sr)sr.textContent=roofOn()?(onlyPaint()?`Shiferni bo'yash · ${fq(roofArea())} m²`:`${RM.find(x=>x[0]===rmCur())[1]} · ${fq(roofArea())} m²`):"qo'shilmagan";if(sf)sf.textContent=S.fas.on?`${FAS.find(x=>x[0]===S.fas.m)[1]} · ${fq(fasArea())} m²`:"qo'shilmagan";
  const ne=EXT.filter(([k])=>S.ext[k]&&S.ext[k].on).length;if(se)se.textContent=ne?ne+' ta tanlangan':'tanlanmagan';if(ss)ss.textContent=sl.length+' xil material';
  renderFas();renderRoof();if(!keep){renderPrices();renderExt()}else{document.querySelectorAll('#ext [data-x]').forEach(row=>{const d=EXT.find(x=>x[0]===row.dataset.x);row.querySelector('[data-xq]').placeholder=fq(d[3]())})}save()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cur]');if(!b)return;CUR=b.dataset.cur;try{localStorage.setItem('smeta-cur',CUR)}catch(x){}update(true)});

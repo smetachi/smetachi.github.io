@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ta'mir smetasi — uy ta'miri kalkulyatori | Smetachi Quvonchbek</title>
-<meta name="description" content="Kvartira va hovli uy ta'miri narxini bepul hisoblang: 14 viloyat, OLX narxlari, material tanlash, deraza-eshik, fasad, tom (shifer, profnastil, stropila soni). Aniq smeta uchun smetachi: +998 50 708 82 27.">
+<meta name="description" content="Kvartira va hovli uy ta'miri narxini bepul hisoblang: 14 viloyat, OLX narxlari, elektrika va santexnika, tom (shifer, profnastil, stropila soni), fasad, uy rejasi. O'zbek va rus tilida. Aniq smeta uchun smetachi: +998 50 708 82 27.">
 <meta name="keywords" content="ta'mir smetasi, remont narxi, uy ta'miri kalkulyator, smeta, smetachi, kvartira remont, ремонт смета">
 <meta property="og:title" content="Ta'mir smetasi — uy ta'miri narxini bepul hisoblang">
 <meta property="og:description" content="Xona o'lchamlarini kiriting — smeta, do'kon ro'yxati va muddat bir zumda tayyor.">
@@ -13,6 +13,9 @@
 <meta property="og:url" content="https://smetachi.github.io/">
 <link rel="canonical" href="https://smetachi.github.io/">
 <meta name="theme-color" content="#1f4fd1">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f4fd1'/%3E%3Cpath d='M14 34 32 18l18 16v16H14z' fill='%23fff'/%3E%3Crect x='28' y='38' width='8' height='12' fill='%23f26b1d'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -30,9 +33,7 @@ input,select,button{font:inherit;color:inherit}button{cursor:pointer}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .top{background:var(--blue);color:#fff;padding:clamp(22px,4vw,36px) 16px 64px;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:24px 24px}
 .abc{max-width:720px;margin:-6px auto 12px;display:flex;justify-content:flex-end;gap:0}
-.abc button{border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;min-height:36px;padding:0 14px;font-weight:600;font-size:14px}
-.abc button:first-child{border-radius:999px 0 0 999px}.abc button:last-child{border-radius:0 999px 999px 0;border-left:0}
-.abc button[aria-pressed=true]{background:#fff;color:var(--blue)}
+.flg{width:20px;height:14px;border-radius:3px;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
 .hwrap{max-width:720px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:16px;align-items:center}
 .pill{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 12px;font-size:13px;margin-bottom:10px}
 .top h1{font-size:clamp(28px,4.6vw,40px);line-height:1.08;margin:0 0 8px;text-wrap:balance}
@@ -86,6 +87,40 @@ select.big{width:100%;min-height:52px;border:2px solid var(--line);border-radius
 .fopts button b{display:block;font-size:15px}.fopts button small{display:block;color:var(--mut);font-size:13px}
 .fopts button[aria-pressed=true]{border-color:var(--blue);background:var(--blue2)}
 .fold{padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.chips button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 12px;font:inherit;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ipt{margin-top:10px;display:grid;gap:0}
+.ips{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
+.ips .dot{width:28px;height:28px;border-radius:50%;background:var(--blue2);color:var(--blue);display:grid;place-items:center;font-weight:800;font-size:14px}
+.ips .dot.ok{background:#2f9e44;color:#fff}
+.ips b{display:block}.ips small{display:block;color:var(--mut);font-size:13px}
+.ips .wh{font-weight:800;text-align:right;white-space:nowrap}
+.ipsum{margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--blue2);font-weight:600}
+.pjc{padding:0!important}
+.pjc>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer}
+.pjc>summary::-webkit-details-marker{display:none}
+.pji{font-size:22px;width:42px;height:42px;border-radius:12px;background:var(--blue2);display:grid;place-items:center;flex:none}
+.pjt{flex:1;min-width:0}.pjt small{display:block;color:var(--mut);font-size:12.5px}.pjt b{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pjm{color:var(--blue);font-weight:700;font-size:14px;white-space:nowrap}
+.pjm::after{content:" ▾"}.pjc[open] .pjm::after{content:" ▴"}
+.pjc[open]{padding-bottom:14px!important}.pjb{padding:0 16px}.pjb .addb{width:100%;margin-top:8px}
+.pjl{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:12px}
+.pjr{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:8px 8px 8px 12px}
+.pjr.pcur{border-color:var(--blue);background:var(--blue2)}
+.pjr .pn{flex:1;min-width:0;cursor:pointer;text-align:left;border:0;background:none;font:inherit;color:var(--ink);padding:4px 0}
+.pjr .pn b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pjr .pn small{display:block;color:var(--mut);font-size:12.5px}
+.pjr .pin{flex:1;min-width:0;min-height:42px;border:1px solid var(--blue);border-radius:10px;padding:0 10px;font:inherit;font-size:16px}
+.pjr .ib.del{width:auto;padding:0 10px;background:#c92a2a;color:#fff;border-color:#c92a2a;font-size:13px;font-weight:700}
+.pjr .ib{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:16px;flex:none}
+.eg{display:grid;gap:6px;margin-top:10px}
+.eg[hidden]{display:none}
+.er{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:8px 10px 8px 14px;background:var(--card)}
+.er .et{flex:1;min-width:0}.er .et b{display:block;font-size:15.5px}.er .et small{display:block;color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stp{display:flex;align-items:center;gap:2px;flex:none}
+.stp button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--blue2);color:var(--blue);font-size:22px;font-weight:700;line-height:1;cursor:pointer}
+.stp output{min-width:34px;text-align:center;font-weight:800;font-size:17px}
+.er.man output{color:var(--blue)}
 .hd{display:none!important}
 #rooms{gap:8px}
 #rooms .rw{display:block!important;padding:0!important;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
@@ -251,13 +286,67 @@ tr.g td{background:var(--blue2);font-weight:600}
 .hvid i{flex:0 0 34px;height:34px;border-radius:50%;background:#ff6a1a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7v10l8-5z' fill='%231a0d04'/%3E%3C/svg%3E") center/22px no-repeat}
 .hvid small{display:block;font-weight:500;font-size:12px;opacity:.85}
 .hvid:hover{background:rgba(255,255,255,.22)}.hvid:focus-visible{outline:3px solid #fff;outline-offset:2px}
+
+.lng.abc{margin:0;display:block;max-width:none;border:0;padding:0}
+.tbar{max-width:720px;margin:-4px auto 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;letter-spacing:.2px}
+.brand svg{width:28px;height:28px;border-radius:8px}
+.lng{position:relative}
+.lng>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:0 12px 0 10px;min-height:38px;font-weight:700;font-size:14px;background:rgba(255,255,255,.12)}
+.lng>summary::-webkit-details-marker{display:none}
+.lng>summary::after{content:"";width:7px;height:7px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);margin:-3px 0 0 4px;transition:transform .2s}
+.lng[open]>summary::after{transform:rotate(-135deg);margin-top:3px}
+#lngCur{display:flex;align-items:center;gap:7px}
+.lngm{position:absolute;right:0;top:calc(100% + 8px);z-index:50;background:#fff;color:var(--ink);border-radius:16px;box-shadow:0 14px 40px rgba(10,30,90,.28);padding:8px;min-width:220px;animation:lngIn .16s ease-out}
+@keyframes lngIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.lngh{font-size:12.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;padding:6px 10px 8px}
+.lngm button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;border-radius:11px;padding:10px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-height:auto}
+.lngm button:hover{background:var(--blue2)}
+.lngm button span{display:flex;flex-direction:column;flex:1}
+.lngm button b{font-size:15.5px}.lngm button small{font-size:12.5px;color:var(--mut)}
+.lngm button[aria-pressed=true]{background:var(--blue2)}
+.lngm button[aria-pressed=true]::after{content:"✓";color:var(--blue);font-weight:800;font-size:17px}
+.lngm .flg{width:26px;height:18px}
+/* accordion */
+.acc{margin-bottom:10px}
+.acc>summary h2{flex:1;min-width:0;display:flex;align-items:center}
+.acc .at{display:flex;flex-direction:column;min-width:0}
+.acc .at .fsum{display:block;font-size:13px;font-weight:500;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;margin:3px 0 0;letter-spacing:0}
+.acc[open] .at .fsum{display:none}
+.acc[open]>summary{padding-bottom:10px}
+.acc>p.hint{margin-left:clamp(18px,3vw,26px)!important;margin-right:clamp(18px,3vw,26px)!important}
+.acc:not([open]):hover{border-color:#c9d5f2}
+@media (max-width:600px){.top p{display:none}.top h1{margin-bottom:12px}}
+
+.plan{background:#fbfcff;border:1px solid var(--line);border-radius:14px;padding:10px;overflow:hidden}
+.plan svg{display:block;width:100%;height:auto;max-height:70vh;user-select:none;-webkit-user-select:none}
+.plan .pn{font-weight:700;fill:#1b2333}.plan .pd{fill:#5b6578}
+.plan text{pointer-events:none}
+.plan .pl{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12.5px;color:var(--mut)}
+.plan .pl i{display:inline-block;width:18px;height:4px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.pbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.pb{border:1px solid var(--line);background:#fff;color:var(--blue);font:inherit;font-weight:700;font-size:14px;border-radius:999px;padding:0 14px;min-height:38px;cursor:pointer}
+.pb[aria-pressed=true]{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pedh{display:none;margin:0 0 8px!important;color:var(--blue)!important;font-weight:600}
+.pedit .pedh{display:block}
+.pedit .plan{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue2)}
+.pedit .plan svg{touch-action:none}
+.pedit .plan g[data-rid]{cursor:grab}
+.plan g.drag{opacity:.85;cursor:grabbing}
+.plan g.drag rect{stroke:#1f4fd1}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 <header class="top">
- <div class="abc" role="group" aria-label="Yozuv"><button data-abc="lat">Lotin</button><button data-abc="cyr">Кирилл</button></div>
+ <div class="tbar"><span class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#fff"/><path d="M13 33 32 16l19 17v17H13z" fill="#1f4fd1"/><rect x="28" y="38" width="8" height="12" fill="#f26b1d"/></svg>Ta'mir smetasi</span>
+ <details class="lng abc" id="lng"><summary aria-label="Til / Язык"><span id="lngCur"><svg class="flg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#1eb53a"/><rect width="30" height="13.2" fill="#fff"/><rect width="30" height="6.4" fill="#0099b5"/><rect y="6.4" width="30" height=".7" fill="#ce1126"/><rect y="12.5" width="30" height=".7" fill="#ce1126"/><circle cx="5" cy="3.2" r="2.3" fill="#fff"/><circle cx="5.9" cy="3.2" r="2.1" fill="#0099b5"/><g fill="#fff"><circle cx="9.3" cy="1.6" r=".45"/><circle cx="10.6" cy="1.6" r=".45"/><circle cx="11.9" cy="1.6" r=".45"/><circle cx="10.6" cy="3" r=".45"/><circle cx="11.9" cy="3" r=".45"/><circle cx="11.9" cy="4.4" r=".45"/></g></svg><span>Lotin</span></span></summary>
+  <div class="lngm" role="menu"><div class="lngh" id="lngH">Tilni tanlang</div>
+   <button data-abc="lat" role="menuitemradio"><svg class="flg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#1eb53a"/><rect width="30" height="13.2" fill="#fff"/><rect width="30" height="6.4" fill="#0099b5"/><rect y="6.4" width="30" height=".7" fill="#ce1126"/><rect y="12.5" width="30" height=".7" fill="#ce1126"/><circle cx="5" cy="3.2" r="2.3" fill="#fff"/><circle cx="5.9" cy="3.2" r="2.1" fill="#0099b5"/><g fill="#fff"><circle cx="9.3" cy="1.6" r=".45"/><circle cx="10.6" cy="1.6" r=".45"/><circle cx="11.9" cy="1.6" r=".45"/><circle cx="10.6" cy="3" r=".45"/><circle cx="11.9" cy="3" r=".45"/><circle cx="11.9" cy="4.4" r=".45"/></g></svg><span><b>O'zbekcha</b><small>Lotin</small></span></button>
+   <button data-abc="cyr" role="menuitemradio"><svg class="flg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#1eb53a"/><rect width="30" height="13.2" fill="#fff"/><rect width="30" height="6.4" fill="#0099b5"/><rect y="6.4" width="30" height=".7" fill="#ce1126"/><rect y="12.5" width="30" height=".7" fill="#ce1126"/><circle cx="5" cy="3.2" r="2.3" fill="#fff"/><circle cx="5.9" cy="3.2" r="2.1" fill="#0099b5"/><g fill="#fff"><circle cx="9.3" cy="1.6" r=".45"/><circle cx="10.6" cy="1.6" r=".45"/><circle cx="11.9" cy="1.6" r=".45"/><circle cx="10.6" cy="3" r=".45"/><circle cx="11.9" cy="3" r=".45"/><circle cx="11.9" cy="4.4" r=".45"/></g></svg><span><b>Ўзбекча</b><small>Кирилл</small></span></button>
+   <button data-abc="ru" role="menuitemradio"><svg class="flg" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#d52b1e"/><rect width="30" height="13.3" fill="#0039a6"/><rect width="30" height="6.7" fill="#fff"/></svg><span><b>Русский</b><small>Rus tili</small></span></button>
+  </div></details></div>
  <div class="hwrap">
   <div class="htxt">
    <span class="pill">Yetti o'lchab, bir kes — hisobini biz qilamiz</span>
@@ -294,24 +383,35 @@ tr.g td{background:var(--blue2);font-weight:600}
  </div>
 </header>
 <main>
- <section class="card">
-  <h2><i>1</i>Asosiy</h2>
+ <details class="card pjc" id="pjC">
+  <summary><span class="pji">📁</span><span class="pjt"><small>Loyiha</small><b id="pjName">Mening uyim</b></span><span class="pjm">Loyihalar</span></summary>
+  <div class="pjb"><div class="pjl" id="pjList"></div>
+  <button type="button" class="addb" id="pjNew">+ Yangi loyiha</button>
+  <p class="hint" style="margin:8px 2px 0">Har bir smeta alohida saqlanadi — bir nechta variantni solishtirishingiz mumkin.</p></div>
+ </details>
+
+ <details class="card fold acc" id="a1"><summary><h2><i>1</i><span class="at">Asosiy<span class="fsum" id="sum1"></span></span></h2></summary>
   <div class="q">Viloyat</div>
   <select class="big" id="reg"></select>
   <div class="q">Uy</div>
   <div class="seg" id="s-obj"></div>
   <div class="q">Ta'mir</div>
   <div class="seg" id="s-kind"></div>
- </section>
+ </details>
 
- <section class="card">
-  <h2><i>2</i>Xonalar</h2>
+ <details class="card fold acc" id="a2" open><summary><h2><i>2</i><span class="at">Xonalar<span class="fsum" id="sum2"></span></span></h2></summary>
   <p class="hint" style="margin:-4px 0 10px">Xonani bosing — o'lcham va materialni o'zgartirasiz.</p>
   <div class="hd"><span>Xona</span><span>Bo'yi, m</span><span>Eni, m</span><span>Deraza</span><span>Eshik</span><span></span></div>
   <div class="rows" id="rooms"></div>
   <div class="rtot" id="rtot"></div>
   <button class="addb" id="add">+ Xona qo'shish</button>
-  <details class="sub" style="margin-top:14px"><summary><span class="st">📐 Shift va deraza o'lchami</span><span class="fsum" id="sumG"></span></summary>
+  <details class="sub" id="planC" style="margin-top:14px"><summary><span class="st">🗺 Uy rejasi</span><span class="fsum" id="sumPl"></span></summary>
+   <div class="pbar"><button type="button" class="pb" id="plEdit">✏️ O'zgartirish</button><button type="button" class="pb" id="plAuto">↺ Avtomatik joylashtirish</button></div>
+   <p class="hint pedh" id="plHint">Xonani barmoq bilan surib joylashtiring. Ikki marta bossangiz — buriladi.</p>
+   <div class="plan" id="plan"></div>
+   <p class="hint" style="margin:8px 0 0">Taxminiy joylashuv — xonalar o'lchami bo'yicha chizildi. Haqiqiy reja boshqacha bo'lishi mumkin.</p>
+  </details>
+  <details class="sub"><summary><span class="st">📐 Shift va deraza o'lchami</span><span class="fsum" id="sumG"></span></summary>
   <div class="gen" style="border:0;margin-top:0;padding-top:0">
    <label>Shift balandligi, m<input id="H" inputmode="decimal"></label>
    <label>Deraza eni, m<input id="ww" inputmode="decimal"></label>
@@ -319,12 +419,25 @@ tr.g td{background:var(--blue2);font-weight:600}
   </div>
   <p class="hint">Deraza o'lchami — o'rtacha bitta derazaniki. Eshiklar standart (0,8 × 2 m).</p>
   </details>
- </section>
+ </details>
 
 
 
- <section class="card grp" id="outC">
-  <h2><i>3</i>Uy tashqarisi</h2>
+ <details class="card fold acc" id="engC"><summary><h2><i>3</i><span class="at">Elektrika va santexnika<span class="fsum" id="sum3"></span></span></h2></summary>
+  <p class="hint" style="margin:-4px 0 6px">Soni xonalardan o'zi hisoblanadi. −/+ bilan o'zgartiring.</p>
+  <details class="sub" id="elC"><summary><span class="st">⚡ Elektrika</span><span class="fsum" id="sumEl"></span></summary>
+   <label class="ck1"><input type="checkbox" id="elOn"><span><b>Elektrikani yangidan tortamiz</b><small>yangi sim, rozetka, viklyuchatel, shchit</small></span></label>
+   <div class="eg" id="elG"></div>
+  </details>
+  <details class="sub" id="snC"><summary><span class="st">🚿 Santexnika</span><span class="fsum" id="sumSn"></span></summary>
+   <label class="ck1"><input type="checkbox" id="snOn"><span><b>Santexnikani yangilaymiz</b><small>quvurlar, kanalizatsiya va jihozlar</small></span></label>
+   <div class="eg" id="snG"></div>
+  </details>
+  <div class="rbom" id="engBom"></div>
+  <button type="button" class="more" id="engReset" style="border:0;background:none;color:var(--blue);font:inherit;font-weight:700;padding:10px 0 0;cursor:pointer">↺ Sonlarni avtomatik qilish</button>
+ </details>
+
+ <details class="card fold acc" id="outC"><summary><h2><i>4</i><span class="at">Uy tashqarisi<span class="fsum" id="sum4"></span></span></h2></summary>
   <p class="hint" style="margin:-4px 0 6px">Kerak bo'lsa oching, kerak bo'lmasa — o'tkazib yuboring.</p>
  <details class="sub" id="roofC">
   <summary><span class="st">🏠 Tom</span><span class="fsum" id="sumR"></span></summary>
@@ -384,16 +497,16 @@ tr.g td{background:var(--blue2);font-weight:600}
    <label>Hovliga plitka, m² (kerak bo'lmasa 0)<input data-y="plit" inputmode="decimal"></label>
   </div>
  </details>
- </section>
+ </details>
 
- <details class="card fold" id="extC">
-  <summary><h2><i>4</i>Qo'shimcha ishlar</h2><span class="fsum" id="sumE"></span></summary>
+ <details class="card fold acc" id="extC">
+  <summary><h2><i>5</i><span class="at">Qo'shimcha ishlar<span class="fsum" id="sumE"></span></span></h2></summary>
   <p class="hint" style="margin:-6px 0 12px">Keraklisini belgilang — narxga qo'shiladi. Miqdor o'zi hisoblanadi, xohlasangiz o'zgartiring.</p>
   <div class="exl" id="ext"></div>
  </details>
 
  <section class="card res" id="res">
-  <h2 class="rh"><i>5</i>Natija</h2>
+  <h2 class="rh"><i>6</i>Natija</h2>
   <div class="rhd"><div class="l">Taxminiy narx</div><div class="cur" role="group" aria-label="Valyuta"><button data-cur="som">so'm</button><button data-cur="usd">$</button></div></div>
   <div class="total" id="tot">0</div>
   <div class="l" id="per"></div>
@@ -414,6 +527,15 @@ tr.g td{background:var(--blue2);font-weight:600}
   <div class="cmp" id="cmp"></div>
   <div class="q">Pul qachon kerak bo'ladi</div>
   <div class="stg" id="stg"></div>
+  </details>
+  <details class="sub" id="ipC"><summary><span class="st">💳 Bo'lib to'lash rejasi</span><span class="fsum" id="sumIP"></span></summary>
+   <p class="hint" style="margin:0 0 8px">Pulni oyma-oy yig'ib ta'mir qilsangiz — qaysi ish qachon boshlanishini ko'rsatadi.</p>
+   <div class="gen" style="border:0;margin:0;padding:0;grid-template-columns:1fr 1fr">
+    <label>Hozir bor pul<input id="ip0" inputmode="numeric" placeholder="0 so'm"></label>
+    <label>Oyiga ajratasiz<input id="ipM" inputmode="numeric" placeholder="so'm"></label>
+   </div>
+   <div class="chips" id="ipChips"></div>
+   <div id="ipOut"></div>
   </details>
   <details class="sub pt"><summary><span class="st">⚙️ Narxlarni o'zgartirish</span></summary><div style="overflow-x:auto"><table id="priceT"></table></div><button class="addb" id="resetP" style="border-style:solid;min-height:44px">Standart narxlarga qaytarish</button></details>
   </div>
@@ -513,6 +635,34 @@ const P={
  fsd_suv:["Fasad suvog'i: sement, setka (ish va material)","m²","m",[70e3,80e3,95e3]],
  fsd_izo:["Fasadni penoplast bilan isitish (ish va material)","m²","m",[55e3,60e3,75e3]],
  musor:["Qurilish chiqindisini olib chiqish","reys","i",[400e3,500e3,600e3]],
+ e_pt_i:["Rozetka / viklyuchatel nuqtasi: shtroba, sim tortish, o'rnatish","nuqta","i",[60e3,70e3,90e3]],
+ e_roz_m:["Rozetka (podrozetnik bilan)","dona","m",[12e3,18e3,48e3]],
+ e_vik_m:["Viklyuchatel (podrozetnik bilan)","dona","m",[12e3,18e3,48e3]],
+ e_chir_i:["Chiroq nuqtasi: sim tortish, chiqarish","nuqta","i",[50e3,60e3,80e3]],
+ e_lin_i:["Alohida liniya (konditsioner, plita): tortish va ulash","liniya","i",[150e3,180e3,250e3]],
+ e_sh_i:["Elektr shchitini yig'ish va ulash","komplekt","i",[300e3,400e3,600e3]],
+ e_sh_m:["Shchit, avtomatlar, UZO","komplekt","m",[700e3,1.2e6,2.5e6]],
+ e_k25:["Kabel VVGng 3×2,5 (rozetkalar)","m","m",[7e3,11.8e3,15e3]],
+ e_k15:["Kabel VVGng 3×1,5 (chiroq, viklyuchatel)","m","m",[5e3,8e3,11e3]],
+ e_k4:["Kabel VVGng 3×4 (alohida liniyalar)","m","m",[12e3,20e3,26e3]],
+ e_gof:["Gofra, klemmalar, mayda materiallar","m","m",[2e3,3e3,4e3]],
+ s_uni_i:["Unitaz o'rnatish","dona","i",[200e3,250e3,400e3]],
+ s_uni_m:["Unitaz","dona","m",[350e3,950e3,2.3e6]],
+ s_rak_i:["Rakovina va smesitel o'rnatish","dona","i",[150e3,200e3,250e3]],
+ s_rak_m:["Rakovina va smesitel","dona","m",[500e3,1e6,2.5e6]],
+ s_van_i:["Vanna o'rnatish","dona","i",[300e3,400e3,500e3]],
+ s_van_m:["Vanna va smesitel","dona","m",[1.8e6,3e6,6e6]],
+ s_dush_i:["Dush kabina o'rnatish","dona","i",[350e3,450e3,600e3]],
+ s_dush_m:["Dush kabina va smesitel","dona","m",[800e3,1.2e6,2.9e6]],
+ s_moy_i:["Oshxona moykasi o'rnatish","dona","i",[150e3,200e3,250e3]],
+ s_moy_m:["Oshxona moykasi va smesitel","dona","m",[450e3,900e3,2e6]],
+ s_kir_i:["Kir yuvish mashinasini ulash","dona","i",[100e3,150e3,200e3]],
+ s_kir_m:["Kran, sifon, shlanglar (kir mashina uchun)","dona","m",[80e3,120e3,200e3]],
+ s_pol_i:["Sochiq quritgich o'rnatish","dona","i",[150e3,200e3,250e3]],
+ s_pol_m:["Sochiq quritgich (polotentsesushitel)","dona","m",[350e3,700e3,1.5e6]],
+ s_pip_i:["Suv quvuri tortish (issiq/sovuq)","nuqta","i",[150e3,180e3,250e3]],
+ s_pip_m:["PPR quvur va fitinglar","nuqta","m",[90e3,120e3,180e3]],
+ s_kan_m:["Kanalizatsiya quvuri va fitinglar","m","m",[25e3,35e3,50e3]],
  deliv:["Materiallarni yetkazish va ko'tarish","xizmat","i",[800e3,1e6,1.5e6]],
  fas_i:["Fasad suvog'i va pardozi (ish)","m²","i",[70e3,85e3,110e3]],
  fas_m:["Fasad materiali (suvoq, setka, bo'yoq)","m²","m",[45e3,75e3,140e3]],
@@ -544,6 +694,27 @@ function mats(r){const wet=r.t==='ham'||r.t==='hoj',dfl=wet||r.t==='osh'||r.t===
  return{fl:r.fl||dfl,wa:r.wa||(wet?'kafel':'emul'),ce:r.ce||'natyaj'}}
 /* qo'shimcha ishlar: key, nom, izoh, miqdor funksiyasi */
 const LIV=r=>['meh','yot','bol'].includes(r.t);
+const ELI=[['roz','Rozetka','dona'],['vik','Viklyuchatel','dona'],['chir','Chiroq nuqtasi','nuqta'],['lin','Alohida liniya','liniya'],['sh','Elektr shchiti','komplekt']];
+const SNI=[['uni','Unitaz'],['rak','Rakovina'],['van','Vanna'],['dush','Dush kabina'],['moy','Oshxona moykasi'],['kir','Kir mashina ulash'],['pol','Sochiq quritgich']];
+const EH={roz:'',vik:'',chir:'lyustra, spot',lin:'konditsioner, plita',sh:'avtomat, UZO'};
+const engOn=k=>{const v=S.eng[k];return v==null?kindOf()[0]==='kap':!!v};
+function engAuto(){const R=S.rooms,cnt=t=>R.filter(r=>r.t===t).length,a={};
+ a.roz=R.reduce((x,r)=>x+({meh:Math.max(4,Math.ceil(geo(r).pol/4)),yot:Math.max(3,Math.ceil(geo(r).pol/5)),bol:3,osh:6,ham:2,hoj:0,kor:1,bal:1}[r.t]||1),0);
+ a.vik=R.reduce((x,r)=>x+(r.t==='kor'?2:1),0);
+ a.chir=R.reduce((x,r)=>x+(['ham','hoj','bal'].includes(r.t)?1:Math.max(1,Math.ceil(geo(r).pol/10))),0);
+ a.lin=R.filter(LIV).length+(cnt('osh')?1:0);a.sh=R.length?1:0;
+ const ham=cnt('ham'),hoj=cnt('hoj');
+ a.uni=hoj||(ham?1:0);a.rak=ham;a.van=ham;a.dush=0;a.moy=cnt('osh');a.kir=ham?1:0;a.pol=S.kind==='lyuks'?ham:0;return a}
+const engQ=k=>{const v=S.eng.c[k];return v==null||v===''?engAuto()[k]:Math.max(0,Math.round(num(v)))};
+function engBOM(){const q=engQ,L=[],C=x=>Math.ceil(x-1e-9),add=(n,v,u)=>{if(v>0)L.push([n,v,u])};
+ if(engOn('el')){const k25=q('roz')*7,k15=(q('vik')*6+q('chir')*5),k4=q('lin')*15;
+  add('Kabel VVGng 3×2,5',C(k25),'m');add('Kabel VVGng 3×1,5',C(k15),'m');add('Kabel VVGng 3×4',C(k4),'m');add('Gofra truba',C((k25+k15+k4)*.9),'m');
+  add('Podrozetnik',q('roz')+q('vik'),'dona');add('Rozetka',q('roz'),'dona');add('Viklyuchatel',q('vik'),'dona');if(q('sh'))add('Shchit + avtomatlar + UZO',1,'komplekt')}
+ if(engOn('san')){const pts=engPts();add('PPR quvur 20 mm',C(pts*4.5),'m');add('PPR fitinglar (burchak, troynik, mufta)',C(pts*4),'dona');add('Sharli kran',pts,'dona');
+  const k50=(q('rak')+q('van')+q('dush')+q('moy')+q('kir'))*2.5,k110=q('uni')*2;add('Kanalizatsiya quvuri 50 mm',C(k50),'m');add('Kanalizatsiya quvuri 110 mm',C(k110),'m');
+  for(const[k,n]of SNI)if(k!=='kir')add(n,q(k),'dona')}
+ return L}
+const engPts=()=>{const q=engQ;return q('uni')+2*(q('rak')+q('van')+q('dush')+q('moy'))+q('kir')+2*q('pol')};
 const EXT=[
  ['ac',"Konditsioner","yashash xonalari soniga qarab",()=>S.rooms.filter(LIV).length],
  ['warm',"Elektr issiq pol","kafel pol ostiga",()=>Math.round(S.rooms.filter(r=>mats(r).fl==='kafel').reduce((a,r)=>a+geo(r).pol,0)*10)/10],
@@ -602,11 +773,16 @@ const KIND=[["yengil","Yengil","bo'yoq, pol, shift"],["toliq","To'liq","noldan, 
 const kindOf=()=>({yengil:['kos',1],toliq:['kap',1],lyuks:['kap',2]})[S.kind]||['kap',1];
 const mk=(t)=>({id:uid(),t,L:T[t].L,W:T[t].W,wn:['meh','yot','bol','osh','bal'].includes(t)?1:0,dn:1});
 const R0=()=>({on:false,sh:'ikki',m:'pn',L:'',W:'',g:'',a:'',v:'',dem:false,str:false,mem:true,izo:false,vod:true,paint:false,only:false});
-const fresh=()=>({roof:R0(),fas:{on:false,p:'',h:'',m:'trv',suv:false,izo:false},ext:{},reg:'tsh',obj:'kv',kind:'toliq',H:'',ww:1.5,wh:1.5,rooms:['meh','yot','osh','ham','hoj','kor'].map(mk),yard:{roof:'',plit:''},ov:{}});
+const E0=()=>({el:null,san:null,c:{}});
+const fresh=()=>({eng:E0(),roof:R0(),fas:{on:false,p:'',h:'',m:'trv',suv:false,izo:false},ext:{},reg:'tsh',obj:'kv',kind:'toliq',H:'',ww:1.5,wh:1.5,rooms:['meh','yot','osh','ham','hoj','kor'].map(mk),yard:{roof:'',plit:''},ov:{}});
 let S;try{S=JSON.parse(localStorage.getItem('smeta-v3'))}catch(e){}
-if(!S||!S.rooms)S=fresh();if(!S.ext)S.ext={};if(!S.fas)S.fas={on:false,p:'',h:'',m:'trv',suv:false,izo:false};
-if(!S.roof){S.roof=R0();if(S.yard&&num(S.yard.roof)>0){S.roof.on=true;S.roof.a=S.yard.roof}}if(S.yard)delete S.yard.roof;for(const[k,v]of Object.entries(R0()))if(S.roof[k]===undefined)S.roof[k]=v;
-const save=()=>{try{localStorage.setItem('smeta-v3',JSON.stringify(S))}catch(e){}};
+function migrate(){if(!S||!S.rooms)S=fresh();if(!S.ext)S.ext={};if(!S.fas)S.fas={on:false,p:'',h:'',m:'trv',suv:false,izo:false};if(!S.eng)S.eng=E0();if(!S.eng.c)S.eng.c={};if(!S.plan)S.plan={};
+if(!S.roof){S.roof=R0();if(S.yard&&num(S.yard.roof)>0){S.roof.on=true;S.roof.a=S.yard.roof}}if(S.yard)delete S.yard.roof;for(const[k,v]of Object.entries(R0()))if(S.roof[k]===undefined)S.roof[k]=v;}
+migrate();
+let PJ;try{PJ=JSON.parse(localStorage.getItem('smeta-pj'))}catch(e){}
+if(!PJ||!PJ.list||!PJ.list.length){PJ={cur:'p1',list:[{id:'p1',name:'Mening uyim',t:Date.now()}]}}
+const savePJ=()=>{try{localStorage.setItem('smeta-pj',JSON.stringify(PJ))}catch(e){}};
+const save=()=>{try{const j=JSON.stringify(S);localStorage.setItem('smeta-v3',j);localStorage.setItem('smeta-p-'+PJ.cur,j);const p=PJ.list.find(x=>x.id===PJ.cur);if(p){p.t=Date.now();p.tot=last?last.tot:p.tot}savePJ()}catch(e){}};
 const lvl=()=>kindOf()[1];
 const pr=k=>S.ov[k]!=null?S.ov[k]:Math.round(P[k][3][lvl()]*(P[k][2]==='i'?reg()[2]:reg()[3])/1000)*1000;
 const Hd=()=>num(S.H)||(S.obj==='hovli'?3:2.8);
@@ -638,9 +814,14 @@ function calc_(){const out=[],[type]=kindOf(),kap=type==='kap',lv=lvl(),nm_=name
   else{sh.ceil+=g.pol;add(nm,'ceil_i',g.pol);add(nm,'ceil_m',g.pol)}
   if(M.fl!=='kafel'){const pl=Math.max(0,g.per-g.dn*g.dw);sh.pl+=pl;add(nm,'plint_i',pl);add(nm,'plint_m',pl*1.05)}
   if(kap)add(nm,'otkos',g.otk);
-  if(kap){const n=PTS[r.t](g.pol);sh.pts+=n;add(nm,'el_i',n);add(nm,'el_m',n)}
-  if(kap&&(wet||kit)){const f=r.t==='ham'?1:r.t==='hoj'?.5:.35;add(nm,'san_i',1,null,pr('san_i')*f);add(nm,'san_m',1,null,pr('san_m')*f)}
-  if(kap&&(wet||kit)){const f=r.t==='ham'?1:r.t==='hoj'?.45:.2;add(nm,'fix',1,r.t==='osh'?'Oshxona moykasi va smesitel':r.t==='hoj'?'Unitaz va rakovina (smesitel bilan)':null,pr('fix')*f)}}
+}
+ if(engOn('el')){const E='Elektrika',q=engQ,k25=q('roz')*7,k15=q('vik')*6+q('chir')*5,k4=q('lin')*15;
+  add(E,'e_pt_i',q('roz')+q('vik'));add(E,'e_roz_m',q('roz'));add(E,'e_vik_m',q('vik'));add(E,'e_chir_i',q('chir'));add(E,'e_lin_i',q('lin'));
+  if(q('sh')){add(E,'e_sh_i',q('sh'));add(E,'e_sh_m',q('sh'))}
+  add(E,'e_k25',k25);add(E,'e_k15',k15);add(E,'e_k4',k4);add(E,'e_gof',Math.ceil((k25+k15+k4)*.9));sh.pts+=q('roz')+q('vik')}
+ if(engOn('san')){const Sg='Santexnika',q=engQ,pts=engPts();
+  add(Sg,'s_pip_i',pts);add(Sg,'s_pip_m',pts);add(Sg,'s_kan_m',(q('rak')+q('van')+q('dush')+q('moy')+q('kir'))*2.5+q('uni')*2);
+  for(const[k]of SNI){add(Sg,'s_'+k+'_i',q(k));add(Sg,'s_'+k+'_m',q(k))}}
  const G='Umumiy';
  if(kap&&doors){add(G,'door_m',doors);add(G,'door_i',doors)}
  if(S.fas.on){const F='Fasad',a=fasArea(),k='fsd_'+S.fas.m,pp=pr(k),nm=FAS.find(x=>x[0]===S.fas.m)[1];
@@ -667,6 +848,39 @@ function calc_(){const out=[],[type]=kindOf(),kap=type==='kap',lv=lvl(),nm_=name
 
 /* ---------- UI ---------- */
 function seg(id,list,key){$('#'+id).innerHTML=list.map(([v,b,s])=>`<button data-k="${key}" data-v="${v}" aria-pressed="${S[key]===v}">${b}${s?`<small>${s}</small>`:''}</button>`).join('')}
+function withS(T,f){const o=S;S=T;try{return f()}finally{S=o}}
+function pjTot(p){if(p.id===PJ.cur)return last?last.tot:0;try{const T=JSON.parse(localStorage.getItem('smeta-p-'+p.id));if(!T)return p.tot||0;return withS(T,()=>{migrate();return calc().tot})}catch(e){return p.tot||0}}
+function renderPJ(){const cur=PJ.list.find(x=>x.id===PJ.cur);$('#pjName').textContent=cur?cur.name:'';
+ $('#pjList').innerHTML=PJ.list.map(p=>`<div class="pjr${p.id===PJ.cur?' pcur':''}" data-pj="${p.id}">${pjEdit===p.id?`<input class="pin" data-pin value="${esc(p.name)}" aria-label="Loyiha nomi">`:`<button type="button" class="pn" data-po><b>${esc(p.name)}</b><small>${p.id===PJ.cur?'ochiq · ':''}${moneyS(pjTot(p))}</small></button>`}<button type="button" class="ib" data-pr title="Nomini o'zgartirish" aria-label="Nomini o'zgartirish">✏️</button><button type="button" class="ib" data-pc title="Nusxa olish" aria-label="Nusxa olish">⧉</button><button type="button" class="ib${pjDel===p.id?' del':''}" data-pd title="O'chirish" aria-label="O'chirish">${pjDel===p.id?"O'chirilsinmi?":'🗑'}</button></div>`).join('');
+ const inp=$('#pjList [data-pin]');if(inp){inp.focus();inp.select()}}
+function pjSaveName(inp){const id=inp.closest('[data-pj]').dataset.pj,p=PJ.list.find(x=>x.id===id),v=inp.value.trim();if(p&&v)p.name=v;pjEdit=null;savePJ();renderPJ();$('#pjName').textContent=(PJ.list.find(x=>x.id===PJ.cur)||{}).name||''}
+$('#pjList').addEventListener('keydown',e=>{if(e.target.matches('[data-pin]')&&e.key==='Enter'){e.preventDefault();pjSaveName(e.target)}});
+$('#pjList').addEventListener('focusout',e=>{if(e.target.matches('[data-pin]'))pjSaveName(e.target)});
+function pjOpen(id){save();let T=null;try{T=JSON.parse(localStorage.getItem('smeta-p-'+id))}catch(e){}S=T||fresh();migrate();PJ.cur=id;savePJ();save();renderTop();renderRooms();update();renderPJ()}
+const pjId=()=>'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+let pjEdit=null,pjDel=null;
+$('#pjNew').addEventListener('click',()=>{save();const id=pjId();PJ.list.push({id,name:`Loyiha ${PJ.list.length+1}`,t:Date.now()});try{localStorage.removeItem('smeta-p-'+id)}catch(e){}pjEdit=id;pjOpen(id)});
+$('#pjList').addEventListener('click',e=>{const row=e.target.closest('[data-pj]');if(!row)return;const id=row.dataset.pj,p=PJ.list.find(x=>x.id===id);
+ if(e.target.closest('[data-po]')){if(id!==PJ.cur)pjOpen(id);return}
+ if(e.target.closest('[data-pr]')){pjEdit=id;pjDel=null;renderPJ();return}
+ if(e.target.closest('[data-pc]')){save();const nid=pjId();const src=localStorage.getItem('smeta-p-'+id)||JSON.stringify(S);try{localStorage.setItem('smeta-p-'+nid,src)}catch(e){}PJ.list.push({id:nid,name:p.name+' (nusxa)',t:Date.now(),tot:p.tot});savePJ();renderPJ();return}
+ if(e.target.closest('[data-pd]')){if(PJ.list.length<2)return;if(pjDel!==id){pjDel=id;renderPJ();return}pjDel=null;PJ.list=PJ.list.filter(x=>x.id!==id);try{localStorage.removeItem('smeta-p-'+id)}catch(e){}if(id===PJ.cur)pjOpen(PJ.list[0].id);else{savePJ();renderPJ()}}});
+$('#pjC').addEventListener('toggle',()=>{if($('#pjC').open)renderPJ()});
+const MON=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentyabr','oktyabr','noyabr','dekabr'];
+const monTxt=k=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()+k);return`${d.getFullYear()}-yil ${MON[d.getMonth()]}`};
+function renderIP(c,by){if(!S.ip)S.ip={s:'',m:''};const p0=num(String(S.ip.s).replace(/\s/g,'')),pm=num(String(S.ip.m).replace(/\s/g,''));
+ const ch=[3e6,5e6,10e6,15e6];if(!$('#ipChips').children.length)$('#ipChips').innerHTML=ch.map(v=>`<button type="button" data-ipm="${v}">${v/1e6} mln / oy</button>`).join('');$('#ipChips').querySelectorAll('[data-ipm]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.ipm)===pm));
+ for(const[id,k]of[['ip0','s'],['ipM','m']])if(document.activeElement!==$('#'+id))$('#'+id).value=S.ip[k]?fmt(num(String(S.ip[k]).replace(/\s/g,''))):'';
+ const st=[...by.map(([n,,v])=>[n,v])];if(c.z)st.push(['Zaxira (10%)',c.z]);
+ if(!c.tot){$('#ipOut').innerHTML='';$('#sumIP').textContent='';return}
+ if(!pm){$('#ipOut').innerHTML=p0>=c.tot?`<div class="ipsum">✅ Pulingiz yetadi — hammasini hozir boshlash mumkin.</div>`:`<p class="hint" style="margin:8px 2px 0">Oyiga qancha ajrata olishingizni yozing yoki tanlang.</p>`;$('#sumIP').textContent='';return}
+ let cum=0,rows='',last=0;for(const[i,[n,v]]of st.entries()){cum+=v;const k=Math.max(0,Math.ceil((cum-p0)/pm-1e-9));last=k;
+  rows+=`<div class="ips"><span class="dot${k===0?' ok':''}">${i+1}</span><span><b>${n}</b><small>${moneyS(v)}</small></span><span class="wh">${k===0?'hozir':monTxt(k)}</span></div>`}
+ $('#ipOut').innerHTML=`<div class="ipt">${rows}</div><div class="ipsum">Jami ${moneyS(c.tot)} · pul ${last?`<b>${last} oyda</b> yig'iladi`:'yetadi'} · oxirgi bosqich: <b>${last?monTxt(last):'hozir'}</b></div>`;
+ $('#sumIP').textContent=last?`${last} oy`:'hozir'}
+$('#ipC').addEventListener('input',e=>{const m={ip0:'s',ipM:'m'}[e.target.id];if(!m)return;if(!S.ip)S.ip={s:'',m:''};S.ip[m]=e.target.value.replace(/[^0-9]/g,'');update(true)});
+$('#ipC').addEventListener('change',e=>{if(['ip0','ipM'].includes(e.target.id))update(true)});
+$('#ipC').addEventListener('click',e=>{const b=e.target.closest('[data-ipm]');if(!b)return;if(!S.ip)S.ip={s:'',m:''};S.ip.m=b.dataset.ipm;update(true)});
 function renderTop(){$('#reg').innerHTML=REG.map(r=>`<option value="${r[0]}"${S.reg===r[0]?' selected':''}>${r[1]}</option>`).join('');
  seg('s-obj',[["kv","Kvartira"],["hovli","Hovli uy"]],'obj');seg('s-kind',KIND,'kind');
  $('#yardC').hidden=S.obj!=='hovli';$('#H').placeholder=fq(S.obj==='hovli'?3:2.8);$('#H').value=S.H;$('#ww').value=S.ww;$('#wh').value=S.wh;
@@ -698,6 +912,21 @@ function renderExt(){$('#ext').innerHTML=EXT.map(([k,n,h,auto])=>{const e=S.ext[
  return`<div class="ex${e.on?' on':''}" data-x="${k}"><label><input type="checkbox" data-xe${e.on?' checked':''}><span><b>${n}</b><small>${h?h+' · ':''}${fmt(pr(k))} so'm / ${u}${P0?` + kotyol ${mln(P0)}`:''}</small></span></label><div class="qq"><input data-xq inputmode="decimal" value="${esc(e.q??'')}" placeholder="${fq(auto())}" aria-label="${n} miqdori"><span>${u}</span></div></div>`}).join('')}
 $('#ext').addEventListener('change',e=>{const row=e.target.closest('[data-x]');if(!row||!e.target.matches('[data-xe]'))return;const k=row.dataset.x;S.ext[k]={...(S.ext[k]||{}),on:e.target.checked};row.classList.toggle('on',e.target.checked);update(true)});
 $('#ext').addEventListener('input',e=>{const row=e.target.closest('[data-x]');if(!row||!e.target.matches('[data-xq]'))return;const k=row.dataset.x;S.ext[k]={...(S.ext[k]||{}),q:e.target.value,on:true};row.classList.add('on');row.querySelector('[data-xe]').checked=true;update(true)});
+let engAll=false;
+function renderEng(){const A=engAuto(),q=engQ;
+ const row=(k,n,u,h)=>`<div class="er${S.eng.c[k]!=null&&S.eng.c[k]!==''?' man':''}" data-ek="${k}"><span class="et"><b>${n}</b><small>${h?h+' · ':''}${fmt(pr(k==='sh'?'e_sh_m':k==='roz'?'e_roz_m':k==='vik'?'e_vik_m':k==='chir'?'e_chir_i':k==='lin'?'e_lin_i':'s_'+k+'_m'))} so'm${k==='roz'||k==='vik'?' + ish':''}</small></span><span class="stp"><button type="button" data-d="-1" aria-label="kamaytirish">−</button><output>${q(k)}</output><button type="button" data-d="1" aria-label="ko'paytirish">+</button></span></div>`;
+ $('#elOn').checked=engOn('el');$('#snOn').checked=engOn('san');
+ $('#elG').hidden=!engOn('el');$('#snG').hidden=!engOn('san');
+ $('#elG').innerHTML=ELI.map(([k,n,u])=>row(k,n,u,EH[k])).join('');
+ $('#snG').innerHTML=SNI.map(([k,n])=>row(k,n,'dona','')).join('')+`<p class="hint" style="margin:6px 2px 0">Suv isitgich (boyler) — "Qo'shimcha ishlar"da.</p>`;
+ const B=engBOM();$('#engBom').hidden=!B.length;
+ const N=6,sh=engAll?B:B.slice(0,N);$('#engBom').innerHTML=`<h3>Kerakli materiallar</h3><table>${sh.map(([n,v,u])=>`<tr><td>${n}</td><td>${fq(v)} ${u}</td></tr>`).join('')}</table>${B.length>N?`<button class="more" type="button" data-eall>${engAll?'Qisqartirish ▲':`Yana ${B.length-N} ta ▼`}</button>`:''}`;
+ $('#sumEl').textContent=engOn('el')?`${q('roz')} rozetka · ${q('chir')} chiroq`:"yo'q";
+ $('#sumSn').textContent=engOn('san')?`${q('uni')+q('rak')+q('van')+q('dush')+q('moy')} jihoz`:"yo'q"}
+$('#engC').addEventListener('change',e=>{const m={elOn:'el',snOn:'san'}[e.target.id];if(!m)return;S.eng[m]=e.target.checked;renderEng();update(true)});
+$('#engC').addEventListener('click',e=>{const b=e.target.closest('[data-d]');if(b){const k=b.closest('[data-ek]').dataset.ek;S.eng.c[k]=Math.max(0,engQ(k)+Number(b.dataset.d));renderEng();update(true);return}
+ if(e.target.closest('[data-eall]')){engAll=!engAll;renderEng();return}
+ if(e.target.closest('#engReset')){S.eng.c={};renderEng();update(true)}});
 function renderRoof(){const R=S.roof,A=roofAuto(),hv=S.obj==='hovli';$('#roofC').hidden=!hv;if(!hv)return;
  $('#rOn').checked=!!R.on;$('#rBody').hidden=!R.on;
  $('#rSh').innerHTML=RSH.map(([k,n,h])=>`<button data-rs="${k}" aria-pressed="${R.sh===k}"><b>${n}</b><small>${h}</small></button>`).join('');
@@ -729,10 +958,10 @@ $('#priceT').addEventListener('input',e=>{const k=e.target.dataset.p;if(!k)retur
 $('#resetP').addEventListener('click',()=>{S.ov={};update()});
 
 let last;
-const STG=[["Qora ishlar","buzish, suvoq, styajka, elektr, santexnika — boshida",['dem','styaj_i','styaj_m','suvoq_i','suvoq_m','gidro','el_i','el_m','san_i','san_m','musor','deliv','roof_dem','roof_str','roof_izo','roof_mem','roof_pn','roof_mc','roof_on','roof_sh','roof_gb','roof_rl','roof_vod','roof_paint','plit','warm','kot','heat','design','fsd_suv','fsd_izo']],
+const STG=[["Qora ishlar","buzish, suvoq, styajka, elektr, santexnika — boshida",['dem','styaj_i','styaj_m','suvoq_i','suvoq_m','gidro','el_i','el_m','san_i','san_m','e_pt_i','e_chir_i','e_lin_i','e_sh_i','e_sh_m','e_k25','e_k15','e_k4','e_gof','s_pip_i','s_pip_m','s_kan_m','musor','deliv','roof_dem','roof_str','roof_izo','roof_mem','roof_pn','roof_mc','roof_on','roof_sh','roof_gb','roof_rl','roof_vod','roof_paint','plit','warm','kot','heat','design','fsd_suv','fsd_izo']],
  ["Pardoz ishlari","kafel, shpaklyovka, bo'yoq, pol, shift — o'rtada",['shp2_i','shp1_i','shp_m','paint_i','paint_m','oboy_i','oboy_m','tile_fi','tile_wi','tile_m','lam_i','lam_m','ceil_i','ceil_m','plint_i','plint_m','otkos','fas_i','fas_m','fsd_emu','fsd_doj','fsd_trv','fsd_mar','fsd_trm']],
- ["Jihozlar va yakuniy ishlar","santexnika, eshiklar, konditsioner, mebel, tozalash — oxirida",['fix','door_m','door_i','win','ac','entr','boil','light','kitch','clean']]];
-function weeks(c){const a=c.floor||0;let lo,hi;if(!c.kap){lo=2+a/30;hi=3+a/18}else{lo=6+a/12;hi=9+a/8;if(S.kind==='lyuks'){lo*=1.25;hi*=1.3}}if(S.obj==='hovli'){lo+=2;hi+=4}if(S.fas&&S.fas.on){lo+=1;hi+=3}if(roofOn()){lo+=1;hi+=2}return`${Math.round(lo)}–${Math.round(hi)} hafta`}
+ ["Jihozlar va yakuniy ishlar","santexnika, eshiklar, konditsioner, mebel, tozalash — oxirida",['e_roz_m','e_vik_m','s_uni_i','s_uni_m','s_rak_i','s_rak_m','s_van_i','s_van_m','s_dush_i','s_dush_m','s_moy_i','s_moy_m','s_kir_i','s_kir_m','s_pol_i','s_pol_m','fix','door_m','door_i','win','ac','entr','boil','light','kitch','clean']]];
+function weeks(c){const a=c.floor||0;let lo,hi;if(!c.kap){lo=2+a/30;hi=3+a/18}else{lo=6+a/12;hi=9+a/8;if(S.kind==='lyuks'){lo*=1.25;hi*=1.3}}if(S.obj==='hovli'){lo+=2;hi+=4}if(S.fas&&S.fas.on){lo+=1;hi+=3}if(roofOn()){lo+=1;hi+=2}if(!c.kap&&(engOn('el')||engOn('san'))){lo+=1;hi+=2}return`${Math.round(lo)}–${Math.round(hi)} hafta`}
 function shopList(c){const s=c.sh,L=[],ceil=x=>Math.ceil(x-1e-9);const add=(n,q,u)=>{if(q>0)L.push([n,q,u])};
  if(s.kap){add('Rotband (suvoq), 30 kg',ceil(s.suv*13/30),'qop');add("Styajka aralashmasi (peskobeton), 50 kg",ceil(s.scr*90/50),'qop')}
  add('Shpaklyovka, 25 kg',ceil((s.shp*(s.kap?2.4:1.2)+s.cpaint*2.4)/25),'qop');
@@ -748,6 +977,7 @@ function shopList(c){const s=c.sh,L=[],ceil=x=>Math.ceil(x-1e-9);const add=(n,q,
  if(s.kap){add('Rozetka / viklyuchatel',s.pts,'dona');add('Elektr simi (≈6 m nuqtaga)',ceil(s.pts*6/10)*10,'m')}
  if(s.doors)add('Ichki eshik (komplekt)',s.doors,'dona');
  for(const l of c.out)if(['ac','entr','boil','kot','warm','kitch'].includes(l.k))add(l.name,Math.ceil(l.q),l.unit);
+ for(const[n,q,u]of engBOM())add(n,q,u);
  if(roofOn())for(const[n,q,u]of roofBOM())if(u!=='m³'||!/Jami/.test(n))add(n,q,u);else add("Yog'och (stropila, obreshyotka, brus) — jami",Math.ceil(q),u);
  return L}
 function update(keep){const c=calc();last=c;
@@ -757,7 +987,7 @@ function update(keep){const c=calc();last=c;
  $('#ti').textContent=moneyS(c.i);$('#tm').textContent=moneyS(c.m);$('#dur').textContent=c.floor?weeks(c):'—';
  $('#cmp').innerHTML=KIND.map(([k,n])=>{const t=k===S.kind?c.tot:calc(k).tot;return`<button data-k="kind" data-v="${k}" aria-pressed="${k===S.kind}"><span>${n}</span><b>${moneyS(t)}</b></button>`}).join('');
  const by=STG.map(([n,d,ks])=>[n,d,c.out.filter(l=>ks.includes(l.k)).reduce((a,l)=>a+l.sum,0)]).filter(x=>x[2]>0),mx=Math.max(1,...by.map(x=>x[2]));
- $('#stg').innerHTML=by.map(([n,d,v],i)=>`<div class="r"><span>${i+1}. ${n}</span><b>${moneyS(v)}</b><div class="t"><i style="width:${v/mx*100}%"></i></div><small>${d}</small></div>`).join('')+(c.z?`<div class="r"><span>Zaxira (10%)</span><b>${moneyS(c.z)}</b><small>kutilmagan xarajatlar uchun</small></div>`:'');
+ renderIP(c,by);$('#stg').innerHTML=by.map(([n,d,v],i)=>`<div class="r"><span>${i+1}. ${n}</span><b>${moneyS(v)}</b><div class="t"><i style="width:${v/mx*100}%"></i></div><small>${d}</small></div>`).join('')+(c.z?`<div class="r"><span>Zaxira (10%)</span><b>${moneyS(c.z)}</b><small>kutilmagan xarajatlar uchun</small></div>`:'');
  let h=`<tr><th>Nomi</th><th class="num">Miqdor</th><th class="num">So'm</th></tr>`,lg=null;
  for(const l of c.out){if(l.g!==lg){lg=l.g;h+=`<tr class="g"><td colspan="3">${esc(l.g)}</td></tr>`}h+=`<tr><td>${esc(l.name)}</td><td class="num">${l.unit?fq(l.q)+' '+l.unit:''}</td><td class="num">${fmt(l.sum)}</td></tr>`}
  $('#detT').innerHTML=h;
@@ -765,7 +995,7 @@ function update(keep){const c=calc();last=c;
  const R=reg();$('#note').textContent=`Narxlar: OLX.uz e'lonlari (Toshkent, 2026-yil noyabr) asosida, ${R[1]} uchun moslangan. ${R[2]<1?`Ustalar ishi Toshkentdan ~${Math.round((1-R[2])*100)}% arzon olingan. `:''}${c.kap?'Ichki eshiklar, santexnika jihozlari, elektr va quvurlar kiritilgan. ':''}Mebel, konditsioner, chiroqlar kirmaydi. Maslahat: amalda xarajat ko'pincha smetadan 1,3–1,5 baravar oshadi — pulni shunga qarab rejalang.`;
  const sf=$('#sumF'),se=$('#sumE'),ss=$('#sumS');{const sy=$('#sumY');if(sy)sy.textContent=num(S.yard.plit)>0?`plitka · ${fq(num(S.yard.plit))} m²`:"qo'shilmagan";const sg=$('#sumG');if(sg)sg.textContent=`${fq(num(S.H)||(S.obj==='hovli'?3:2.8))} m · ${fq(num(S.ww)||1.5)}×${fq(num(S.wh)||1.5)} m`}const sr=$('#sumR');if(sr)sr.textContent=roofOn()?(onlyPaint()?`Shiferni bo'yash · ${fq(roofArea())} m²`:`${RM.find(x=>x[0]===rmCur())[1]} · ${fq(roofArea())} m²`):"qo'shilmagan";if(sf)sf.textContent=S.fas.on?`${FAS.find(x=>x[0]===S.fas.m)[1]} · ${fq(fasArea())} m²`:"qo'shilmagan";
  const ne=EXT.filter(([k])=>S.ext[k]&&S.ext[k].on).length;if(se)se.textContent=ne?ne+' ta tanlangan':'tanlanmagan';if(ss)ss.textContent=sl.length+' xil material';
- renderFas();renderRoof();if(!keep){renderPrices();renderExt()}else{document.querySelectorAll('#ext [data-x]').forEach(row=>{const d=EXT.find(x=>x[0]===row.dataset.x);row.querySelector('[data-xq]').placeholder=fq(d[3]())})}save()}
+ renderFas();renderRoof();renderEng();{const c0=PJ.list.find(x=>x.id===PJ.cur);if(c0)$('#pjName').textContent=c0.name}if(!keep){renderPrices();renderExt()}else{document.querySelectorAll('#ext [data-x]').forEach(row=>{const d=EXT.find(x=>x[0]===row.dataset.x);row.querySelector('[data-xq]').placeholder=fq(d[3]())})}save()}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cur]');if(!b)return;CUR=b.dataset.cur;try{localStorage.setItem('smeta-cur',CUR)}catch(x){}update(true)});
 $('#copyShop').addEventListener('click',async()=>{const t=["🛒 TA'MIR UCHUN MATERIALLAR",...shopList(last).map(([n,q,u])=>`• ${n} — ${fmt(q)} ${u}`)].join('\n');try{await navigator.clipboard.writeText(window.__cyr(t));$('#msg2').textContent="Nusxalandi — sotuvchiga yuboring."}catch(e){$('#msg2').textContent="Nusxalab bo'lmadi."}});
 
@@ -808,21 +1038,118 @@ function wCyr(w){if(/^[A-Z0-9]{2,}$/.test(w))return w;if(/^obyekt/i.test(w)){con
  return o}
 const toCyr=t=>String(t).replace(/@?[A-Za-z][A-Za-z'ʻʼ‘’`]*/g,w=>w[0]==='@'?w:wCyr(w));
 let ABC='lat';try{ABC=localStorage.getItem('smeta-abc')||'lat'}catch(e){}
+const RU={"# chelak": "# ведро", "# dona": "# шт", "# hudud": "# регион", "# jihoz": "# приборов", "# kanistr": "# канистр", "# kg": "# кг", "# komplekt": "# компл.", "# liniya": "# линии", "# list": "# лист.", "# litr": "# л", "# m": "# м", "# m dan": "по # м", "# m dan, # bo'lakdan ulanadi": "по # м, сращивается из # частей", "# m · #×# m": "# м · #×# м", "# mln / oy": "# млн / мес", "# mln so'm": "# млн сум", "# m²": "# м²", "# m² lik": "по # м²", "# m² · # m² ≈ # so'm": "# м² · # м² ≈ # сум", "# m² · # m² ≈ $# · kurs # so'm": "# м² · # м² ≈ $# · курс # сум", "# m³": "# м³", "# nuqta": "# точ.", "# oy": "# мес.", "# oyda": "за # мес.", "# pachka": "# упак.", "# pachka ≈ # m²": "# упак. ≈ # м²", "# paket": "# упак.", "# qop": "# меш.", "# reys": "# рейс", "# rozetka · # chiroq": "# розеток · # светильн.", "# rulon": "# рул.", "# so'm": "# сум", "# so'm + ish": "# сум + работа", "# so'm / dona": "# сум / шт", "# so'm / komplekt": "# сум / компл.", "# so'm/m": "# сум/м", "# so'm/m²": "# сум/м²", "# so'm/m² · #$ atrofida": "# сум/м² · около #$", "# so'm/m² · #–#$": "# сум/м² · #–#$", "# so'm/m² · arzon, tez": "# сум/м² · дёшево, быстро", "# so'm/m² · cherepitsaga o'xshaydi": "# сум/м² · похожа на черепицу", "# so'm/m² · chiroyli, OSB ustiga": "# сум/м² · красиво, на OSB", "# so'm/m² · eng arzon": "# сум/м² · самый дешёвый", "# so'm/m² · isitadi ham": "# сум/м² · ещё и утепляет", "# so'm/m² · shovqinsiz": "# сум/м² · бесшумно", "# so'm/m² · tekis tom uchun": "# сум/м² · для плоской крыши", "# soniyalik video": "видео # сек", "# ta tanlangan": "выбрано: #", "# ta xona · jami # m²": "комнат: # · всего # м²", "# xil material": "# материалов", "# xizmat": "# услуга", "# xona": "# комн.", "# yil tajriba": "# года опыта", "#$ atrofida": "около #$", "#–# hafta": "#–# недель", "$# ming": "$# тыс.", "#. Jihozlar va yakuniy ishlar": "#. Оборудование и финиш", "#. Nima bilan yopiladi?": "#. Чем покрыть?", "#. Pardoz ishlari": "#. Отделочные работы", "#. Qora ishlar": "#. Черновые работы", "#. Tom qanday shaklda?": "#. Какой формы крыша?", "#. Uy o'lchami": "#. Размер дома", "#. Yana nima qilinadi?": "#. Что ещё сделать?", "(bilmasangiz, bo'sh qoldiring)": "(если не знаете — оставьте пустым)", "+ Xona qo'shish": "+ Добавить комнату", "+ Yangi loyiha": "+ Новый проект", "Alohida liniya": "Отдельная линия", "Alohida liniya (konditsioner, plita): tortish va ulash": "Отдельная линия (кондиционер, плита): прокладка и подключение", "Andijon viloyati": "Андижанская обл.", "Aniq smeta kerakmi?": "Нужна точная смета?", "Aniqroq sozlash (nishab, tom maydoni, tarnov)": "Точнее (уклон, площадь, водосток)", "Antiseptik (yog'ochga)": "Антисептик (для дерева)", "Asosiy": "Основное", "Atachenta": "Отточенто", "Atachenta (Ottocento)": "Отточенто (Ottocento)", "Atachenta (Ottocento) surtish": "Нанесение Отточенто", "Atachenta (Ottocento) va grunt": "Отточенто и грунт", "Avval suvoq qilish kerak": "Сначала нужна штукатурка", "Balkon": "Балкон", "Batafsil ↓": "Подробнее ↓", "Bikrost / izol (# qatlam)": "Бикрост / изол (# слоя)", "Bir nishabli": "Односкатная", "Birlik": "Ед.", "Bitum praymer": "Битумный праймер", "Bo'yi, m": "Длина, м", "Bolalar xonasi": "Детская", "Boshqa ta'mir turlari bilan solishtiring": "Сравните с другими видами ремонта", "Buxoro viloyati": "Бухарская обл.", "Chakka o'tmasligi uchun plyonka": "Плёнка от протечек", "Chiroq nuqtasi": "Точка освещения", "Chiroq nuqtasi: sim tortish, chiqarish": "Точка освещения: прокладка провода, вывод", "Chiroqlar": "Светильники", "Chiroqlar (lyustra, spot) va o'rnatish": "Светильники (люстры, споты) и установка", "Chiroqlar miqdori": "Количество светильников", "Deraza": "Окна", "Deraza bo'yi, m": "Высота окна, м", "Deraza eni, m": "Ширина окна, м", "Deraza o'lchami — o'rtacha bitta derazaniki. Eshiklar standart (# × # m).": "Размер окна — средний для одного окна. Двери стандартные (# × # м).", "Deraza otkoslari (material bilan)": "Откосы окон (с материалом)", "Derazalar maydoni o'zi ayiriladi. Perimetr bilmasangiz, bo'sh qoldiring — xonalardan taxmin qilinadi.": "Площадь окон вычитается сама. Если не знаете периметр — оставьте пустым, он оценится по комнатам.", "Derazalarni plastikka almashtirish": "Замена окон на пластиковые", "Derazalarni plastikka almashtirish miqdori": "Количество замены окон", "Devor": "Стены", "Devor / zabor, # m (material va ish bilan)": "Стена / забор, # м (материал и работа)", "Devor kafeli (kley bilan)": "Настенная плитка (с клеем)", "Devor suvog'i (rotband)": "Штукатурка стен (ротбанд)", "Devor ustiga brus (mauerlat) #×#": "Брус на стену (мауэрлат) #×#", "Devorga PVX panel o'rnatish": "Монтаж ПВХ-панелей на стены", "Devorga kafel terish": "Укладка плитки на стены", "Devorni bo'yash (# qatlam)": "Покраска стен (# слоя)", "Devorni emulsiya bilan bo'yash": "Покраска стен эмульсией", "Dizayn loyiha": "Дизайн-проект", "Dizayn loyiha miqdori": "Объём дизайн-проекта", "Dojdik / koroed": "Дождик / короед", "Dojdik / koroed · # m²": "Дождик / короед · # м²", "Dush kabina": "Душевая кабина", "Dush kabina o'rnatish": "Установка душевой кабины", "Dush kabina va smesitel": "Душевая кабина и смеситель", "Elektr issiq pol": "Электрический тёплый пол", "Elektr issiq pol (o'rnatish bilan)": "Электрический тёплый пол (с монтажом)", "Elektr issiq pol miqdori": "Площадь тёплого пола", "Elektr nuqtasi montaji (sim, quti)": "Монтаж электроточки (провод, коробка)", "Elektr shchiti": "Электрощит", "Elektr shchitini yig'ish va ulash": "Сборка и подключение электрощита", "Elektr simi (≈# m nuqtaga)": "Электропровод (≈# м на точку)", "Elektrika": "Электрика", "Elektrika va santexnika": "Электрика и сантехника", "Elektrikani yangidan tortamiz": "Меняем электропроводку полностью", "Emulsiya": "Эмульсия", "Emulsiya bo'yoq": "Эмульсионная краска", "Emulsiya bo'yoq (# qatlam), # l": "Эмульсионная краска (# слоя), # л", "Eni, m": "Ширина, м", "Eshik": "Двери", "Eshik o'rnatish": "Установка двери", "Eski qoplamalarni buzish": "Демонтаж старых покрытий", "Eski tomni buzish": "Демонтаж старой крыши", "Eski tomni buzish va olib chiqish": "Демонтаж и вывоз старой кровли", "Farg'ona viloyati": "Ферганская обл.", "Fartuk kafeli (kley bilan)": "Плитка фартука (с клеем)", "Fasad": "Фасад", "Fasad balandligi, m": "Высота фасада, м", "Fasad emulsiya": "Фасадная эмульсия", "Fasad emulsiya · # m²": "Фасадная эмульсия · # м²", "Fasad materiali": "Материал фасада", "Fasad materiali (suvoq, setka, bo'yoq)": "Материалы фасада (штукатурка, сетка, краска)", "Fasad maydoni": "Площадь фасада", "Fasad suvog'i (ish)": "Штукатурка фасада (работа)", "Fasad suvog'i va pardozi (ish)": "Штукатурка и отделка фасада (работа)", "Fasad suvog'i: sement, setka": "Штукатурка фасада: цемент, сетка", "Fasad suvog'i: sement, setka (ish va material)": "Штукатурка фасада: цемент, сетка (работа и материал)", "Fasad: dojdik / koroed (ish va material)": "Фасад: дождик / короед (работа и материал)", "Fasad: dojdik / koroed (ish)": "Фасад: дождик / короед (работа)", "Fasad: dojdik / koroed (material)": "Фасад: дождик / короед (материал)", "Fasad: fasad emulsiya (ish)": "Фасад: фасадная эмульсия (работа)", "Fasad: fasad emulsiya (material)": "Фасад: фасадная эмульсия (материал)", "Fasad: marmarino / leonardo / mineralka (ish va material)": "Фасад: мармарино / леонардо / минералка (работа и материал)", "Fasad: marmarino / leonardo / mineralka (ish)": "Фасад: мармарино / леонардо / минералка (работа)", "Fasad: marmarino / leonardo / mineralka (material)": "Фасад: мармарино / леонардо / минералка (материал)", "Fasad: suvoq ustidan fasad emulsiya (ish va material)": "Фасад: эмульсия по штукатурке (работа и материал)", "Fasad: suyuq travertin (ish va material)": "Фасад: жидкий травертин (работа и материал)", "Fasad: suyuq travertin (ish)": "Фасад: жидкий травертин (работа)", "Fasad: suyuq travertin (material)": "Фасад: жидкий травертин (материал)", "Fasad: termopanel (ish va material)": "Фасад: термопанели (работа и материал)", "Fasad: termopanel (ish)": "Фасад: термопанели (работа)", "Fasad: termopanel (material)": "Фасад: термопанели (материал)", "Fasadni ham qilaman": "Делаю и фасад", "Fasadni penoplast bilan isitish (ish va material)": "Утепление фасада пенопластом (работа и материал)", "Gaz kotyoli (o'rnatish bilan)": "Газовый котёл (с установкой)", "Gidroizolyatsiya (material bilan)": "Гидроизоляция (с материалом)", "Gidroizolyatsiya mastikasi": "Гидроизоляционная мастика", "Gidroizolyatsiya membranasi": "Гидроизоляционная мембрана", "Gipsokarton": "Гипсокартон", "Gipsokarton list, # × # m": "Лист гипсокартона, # × # м", "Gipsokarton shift montaji va pardozi": "Монтаж и отделка потолка из ГКЛ", "Gipsokarton, profil, shpaklyovka": "Гипсокартон, профиль, шпаклёвка", "Gofra truba": "Гофротруба", "Gofra, klemmalar, mayda materiallar": "Гофра, клеммы, мелкие материалы", "Gruntovka": "Грунтовка", "Gruntovka, # l": "Грунтовка, # л", "Hammom": "Ванная", "Hammom #": "Ванная #", "Har bir g'isht — hisobda, har bir so'm — nazoratda": "Каждый кирпич — на счету, каждый сум — под контролем", "Har bir smeta alohida saqlanadi — bir nechta variantni solishtirishingiz mumkin.": "Каждая смета хранится отдельно — можно сравнить несколько вариантов.", "Hojatxona": "Туалет", "Hojatxona #": "Туалет #", "Hovli uy": "Частный дом", "Hovliga plitka (asosi bilan)": "Плитка во двор (с основанием)", "Hovliga plitka, m² (kerak bo'lmasa #)": "Плитка во двор, м² (если не нужно — #)", "Hozir bor pul": "Есть сейчас", "Ichki eshik (komplekt)": "Межкомнатная дверь (комплект)", "Ichki eshik (ramka, furnitura bilan)": "Межкомнатная дверь (с коробкой, фурнитурой)", "Ikki nishabli": "Двускатная", "Instagram": "Instagram", "Ish / material": "Работа / материал", "Isitish tizimi": "Система отопления", "Isitish tizimi miqdori": "Объём отопления", "Jami": "Итого", "Jami # mln so'm · pul": "Итого # млн сум · накопится", "Jami yog'och": "Всего древесины", "Jihozlar va yakuniy ishlar": "Оборудование и финиш", "Jizzax viloyati": "Джизакская обл.", "Kabel VVGng #×#": "Кабель ВВГнг #×#", "Kabel VVGng #×# (alohida liniyalar)": "Кабель ВВГнг #×# (отдельные линии)", "Kabel VVGng #×# (chiroq, viklyuchatel)": "Кабель ВВГнг #×# (свет, выключатели)", "Kabel VVGng #×# (rozetkalar)": "Кабель ВВГнг #×# (розетки)", "Kafel": "Плитка", "Kafel (kley va zatirka bilan)": "Плитка (с клеем и затиркой)", "Kafel kleyi, # kg": "Плиточный клей, # кг", "Kanalizatsiya quvuri # mm": "Канализационная труба # мм", "Kanalizatsiya quvuri va fitinglar": "Канализационные трубы и фитинги", "Kerak bo'lsa oching, kerak bo'lmasa — o'tkazib yuboring.": "Откройте, если нужно, иначе — пропустите.", "Kerakli materiallar": "Нужные материалы", "Keraklisini belgilang — narxga qo'shiladi. Miqdor o'zi hisoblanadi, xohlasangiz o'zgartiring.": "Отметьте нужное — добавится к цене. Количество считается само, можно изменить.", "Kir mashina ulash": "Подключение стиральной машины", "Kir yuvish mashinasini ulash": "Подключение стиральной машины", "Ko'ndalang taxta — obreshyotka (brus #×#)": "Обрешётка (брус #×#)", "Ko'ndalang taxta — obreshyotka (taxta #×#)": "Обрешётка (доска #×#)", "Konditsioner": "Кондиционер", "Konditsioner # (o'rnatish bilan)": "Кондиционер # (с установкой)", "Konditsioner miqdori": "Количество кондиционеров", "Konyok (metall, # m)": "Конёк (металл, # м)", "Konyok-karniz cherepitsasi": "Коньково-карнизная черепица", "Koridor": "Коридор", "Koridor #": "Коридор #", "Kran, sifon, shlanglar (kir mashina uchun)": "Кран, сифон, шланги (для стиральной машины)", "Kutilmagan xarajatlar (#%)": "Непредвиденные расходы (#%)", "Kvartira": "Квартира", "Kvartira va hovli": "Квартира и дом", "Laminat": "Ламинат", "Laminat (paketda ~# m²)": "Ламинат (в упаковке ~# м²)", "Laminat (podlojka bilan)": "Ламинат (с подложкой)", "Laminat yotqizish": "Укладка ламината", "Linoleum": "Линолеум", "Linoleum yotqizish": "Укладка линолеума", "Lotin": "Lotin", "Loyiha": "Проект", "Loyihalar": "Проекты", "Lyuks": "Люкс", "Marmarino / leonardo / mineralka": "Мармарино / леонардо / минералка", "Marmarino / leonardo / mineralka · # m²": "Мармарино / леонардо / минералка · # м²", "Materiallar": "Материалы", "Materiallarni yetkazish va ko'tarish": "Доставка и подъём материалов", "Mehmonxona": "Гостиная", "Mehmonxona #": "Гостиная #", "Men uni qog'ozda topaman — ish boshlanmasdan oldin.": "Я найду её на бумаге — до начала работ.", "Mening loyihalarim": "Мои проекты", "Mening uyim": "Мой дом", "Metall kirish eshigi": "Металлическая входная дверь", "Metall kirish eshigi (o'rnatish bilan)": "Металлическая входная дверь (с установкой)", "Metall kirish eshigi miqdori": "Количество входных дверей", "Metallocherepitsa": "Металлочерепица", "Metallocherepitsa listi": "Лист металлочерепицы", "Metallocherepitsa listi, uzunligi # m": "Лист металлочерепицы, длина # м", "Metallocherepitsa · # m²": "Металлочерепица · # м²", "Mineral paxta # mm": "Минвата # мм", "Mineral paxta # mm, paroizolyatsiya": "Минвата # мм, пароизоляция", "Miqdor": "Кол-во", "Mix #–# mm": "Гвозди #–# мм", "Muddat": "Срок", "Namangan viloyati": "Наманганская обл.", "Narxlar: OLX.uz e'lonlari (Toshkent, #-yil noyabr) asosida, Toshkent shahri uchun moslangan. Ichki eshiklar, santexnika jihozlari, elektr va quvurlar kiritilgan. Mebel, konditsioner, chiroqlar kirmaydi. Maslahat: amalda xarajat ko'pincha smetadan #–# baravar oshadi — pulni shunga qarab rejalang.": "Цены: по объявлениям OLX.uz (Ташкент, ноябрь # г.), адаптированы для г. Ташкента. Включены межкомнатные двери, сантехника, электрика и трубы. Мебель, кондиционеры, светильники не входят. Совет: на практике расходы часто превышают смету в #–# раза — планируйте бюджет с запасом.", "Narxlar: OLX.uz e'lonlari (Toshkent, #-yil noyabr) asosida, Toshkent shahri uchun moslangan. Mebel, konditsioner, chiroqlar kirmaydi. Maslahat: amalda xarajat ko'pincha smetadan #–# baravar oshadi — pulni shunga qarab rejalang.": "Цены: по объявлениям OLX.uz (Ташкент, ноябрь # г.), адаптированы для г. Ташкента. Мебель, кондиционеры, светильники не входят. Совет: на практике расходы часто превышают смету в #–# раза — планируйте бюджет с запасом.", "Natija": "Результат", "Natyajnoy": "Натяжной", "Natyajnoy shift": "Натяжной потолок", "Natyajnoy shift o'rnatish": "Монтаж натяжного потолка", "Natyajnoy shift polotnosi va profil": "Полотно и профиль натяжного потолка", "Navoiy viloyati": "Навоийская обл.", "Nishab, °": "Уклон, °", "Nomi": "Название", "Nomini o'zgartirish": "Переименовать", "Nusxa olish": "Копировать", "O'chirish": "Удалить", "OLX narxlari asosida": "По ценам OLX", "OSB plita # mm, # × # m": "Плита OSB # мм, # × # м", "Oboy": "Обои", "Oboy (kley bilan)": "Обои (с клеем)", "Oboy kleyi": "Клей для обоев", "Oboy yopishtirish": "Поклейка обоев", "Oboy, rulon # × # m": "Обои, рулон # × # м", "Ondulin (evroshifer)": "Ондулин (еврошифер)", "Ondulin (evroshifer) · # m²": "Ондулин (еврошифер) · # м²", "Ondulin konyogi": "Конёк ондулина", "Ondulin listi # × # m": "Лист ондулина # × # м", "Ondulin mixi": "Гвозди для ондулина", "Oshxona": "Кухня", "Oshxona #": "Кухня #", "Oshxona fartugiga kafel": "Плитка на кухонный фартук", "Oshxona mebeli va shkaflar": "Кухонная мебель и шкафы", "Oshxona mebeli va shkaflar miqdori": "Количество кухонной мебели", "Oshxona moykasi": "Кухонная мойка", "Oshxona moykasi o'rnatish": "Установка кухонной мойки", "Oshxona moykasi va smesitel": "Кухонная мойка и смеситель", "Oyiga ajratasiz": "В месяц", "Oyiga qancha ajrata olishingizni yozing yoki tanlang.": "Укажите или выберите, сколько можете откладывать в месяц.", "PDF smeta": "PDF-смета", "PDF yuklab olish": "Скачать PDF", "PPR fitinglar (burchak, troynik, mufta)": "Фитинги PPR (угол, тройник, муфта)", "PPR quvur # mm": "Труба PPR # мм", "PPR quvur va fitinglar": "Трубы PPR и фитинги", "PVX panel": "ПВХ-панели", "PVX panel o'rnatish": "Монтаж ПВХ-панелей", "PVX panel va profil": "ПВХ-панели и профиль", "Pardoz ishlari": "Отделочные работы", "Paroizolyatsiya plyonkasi": "Пароизоляционная плёнка", "Penoplast bilan isitish": "Утепление пенопластом", "Penoplast bilan isitish (ish)": "Утепление пенопластом (работа)", "Penoplast, kley, dyubel": "Пенопласт, клей, дюбели", "Plastik deraza (o'rnatish bilan)": "Пластиковое окно (с установкой)", "Plintus": "Плинтус", "Plintus o'rnatish": "Установка плинтуса", "Plintus, # m": "Плинтус, # м", "Podkladka gilami": "Подкладочный ковёр", "Podlojka": "Подложка", "Podrozetnik": "Подрозетник", "Pol": "Пол", "Pol kafeli (kley bilan)": "Напольная плитка (с клеем)", "Pol qoplamasini yotqizish": "Укладка напольного покрытия", "Pol styajkasi (tekislash)": "Стяжка пола (выравнивание)", "Polga kafel terish": "Укладка плитки на пол", "Profnastil": "Профнастил", "Profnastil listi": "Лист профнастила", "Profnastil listi, uzunligi # m": "Лист профнастила, длина # м", "Profnastil · # m²": "Профнастил · # м²", "Pul qachon kerak bo'ladi": "Когда понадобятся деньги", "Pulni oyma-oy yig'ib ta'mir qilsangiz — qaysi ish qachon boshlanishini ko'rsatadi.": "Если копите на ремонт помесячно — покажет, когда можно начать каждый этап.", "Qancha material olish kerakligi (zaxira bilan). Sotuvchi bilan aniqlashtiring.": "Сколько материала купить (с запасом). Уточните у продавца.", "Qanday ishlaydi?": "Как это работает?", "Qashqadaryo viloyati": "Кашкадарьинская обл.", "Qo'ng'iroq": "Позвонить", "Qo'ng'iroq qiling": "Позвоните", "Qo'shimcha": "Дополнительно", "Qo'shimcha ishlar": "Дополнительные работы", "Qora ishlar": "Черновые работы", "Qoraqalpog'iston Respublikasi": "Республика Каракалпакстан", "Qurilish chiqindisini olib chiqish": "Вывоз строительного мусора", "Qurilish tashkilotlari uchun": "Для строительных компаний", "Qurilishda xato pul bilan to'lanadi.": "В стройке за ошибки платят деньгами.", "Quvurlar va fitinglar": "Трубы и фитинги", "Radiator va isitish quvurlari": "Радиаторы и трубы отопления", "Rakovina": "Раковина", "Rakovina va smesitel": "Раковина и смеситель", "Rakovina va smesitel o'rnatish": "Установка раковины и смесителя", "Raqamni nusxalash": "Скопировать номер", "Ro'yxatni nusxalash": "Скопировать список", "Rotband (suvoq), # kg": "Ротбанд (штукатурка), # кг", "Rozetka": "Розетка", "Rozetka (podrozetnik bilan)": "Розетка (с подрозетником)", "Rozetka / viklyuchatel": "Розетка / выключатель", "Rozetka / viklyuchatel nuqtasi: shtroba, sim tortish, o'rnatish": "Точка розетки / выключателя: штроба, провод, установка", "Rozetka / viklyuchatel va sim": "Розетка / выключатель и провод", "Rulonli bikrost": "Рулонный бикрост", "Rulonli bikrost · # m²": "Рулонный бикрост · # м²", "Samarqand viloyati": "Самаркандская обл.", "Samorez (tom uchun, rezinali)": "Саморезы кровельные (с резинкой)", "Santexnika": "Сантехника", "Santexnika ishlari (quvur tortish, o'rnatish)": "Сантехнические работы (трубы, установка)", "Santexnika jihozlari (unitaz, rakovina, smesitel, vanna/dush)": "Сантехприборы (унитаз, раковина, смеситель, ванна/душ)", "Santexnikani yangilaymiz": "Меняем сантехнику", "Sharli kran": "Шаровой кран", "Shchit + avtomatlar + UZO": "Щит + автоматы + УЗО", "Shchit, avtomatlar, UZO": "Щит, автоматы, УЗО", "Shifer": "Шифер", "Shifer bo'yog'i va gruntovka": "Краска для шифера и грунтовка", "Shifer eski qoladi — faqat bo'yayman": "Старый шифер остаётся — только покраска", "Shifer konyogi (tepa qismi)": "Конёк шифера (верх)", "Shifer listi # × # m (# to'lqin)": "Лист шифера # × # м (# волн)", "Shifer mixi (rezina shaybali)": "Гвозди для шифера (с резиновой шайбой)", "Shifer tomni bo'yash, gruntovka + # qatlam (ish va material)": "Покраска шиферной крыши, грунт + # слоя (работа и материал)", "Shifer uchun bo'yoq (# qatlam)": "Краска для шифера (# слоя)", "Shifer · # m²": "Шифер · # м²", "Shiferni bo'yash": "Покраска шифера", "Shiferni bo'yash (ish)": "Покраска шифера (работа)", "Shiferni bo'yash · # m²": "Покраска шифера · # м²", "Shift": "Потолок", "Shift balandligi, m": "Высота потолка, м", "Shift uchun shpaklyovka va emulsiya": "Шпаклёвка и эмульсия для потолка", "Shiftga PVX panel o'rnatish": "Монтаж ПВХ-панелей на потолок", "Shiftni shpaklyovka qilib bo'yash": "Шпаклёвка и покраска потолка", "Shpaklyovka va gruntovka": "Шпаклёвка и грунтовка", "Shpaklyovka, # kg": "Шпаклёвка, # кг", "Shpaklyovka, # qatlam": "Шпаклёвка, # слоя", "Sirdaryo viloyati": "Сырдарьинская обл.", "Smeta xizmati mavjud": "Услуга сметчика", "Smetachiga murojaat qiling": "Обратитесь к сметчику", "So'm": "Сум", "Sochiq quritgich": "Полотенцесушитель", "Sochiq quritgich (polotentsesushitel)": "Полотенцесушитель", "Sochiq quritgich o'rnatish": "Установка полотенцесушителя", "Soni xonalardan o'zi hisoblanadi. −/+ bilan o'zgartiring.": "Количество считается по комнатам. Меняйте кнопками −/+.", "Standart narxlarga qaytarish": "Вернуть стандартные цены", "Stropila (tom qovurg'asi) #×#": "Стропила #×#", "Styajka aralashmasi": "Смесь для стяжки", "Styajka aralashmasi (peskobeton), # kg": "Смесь для стяжки (пескобетон), # кг", "Surxondaryo viloyati": "Сурхандарьинская обл.", "Suv isitgich (boyler)": "Водонагреватель (бойлер)", "Suv isitgich (boyler) miqdori": "Количество бойлеров", "Suv isitgich (boyler) va o'rnatish": "Водонагреватель (бойлер) и установка", "Suv isitgich (boyler) — \"Qo'shimcha ishlar\"da.": "Водонагреватель (бойлер) — в «Дополнительных работах».", "Suv quvuri tortish (issiq/sovuq)": "Прокладка водопровода (гор./хол.)", "Suv quvuri, # m": "Водопроводная труба, # м", "Suv tarnovi va quvurlari (ish va material)": "Водосток: желоба и трубы (работа и материал)", "Suv tarnovlari": "Водостоки", "Suvoq aralashmasi va mayaklar": "Штукатурная смесь и маяки", "Suyuq travertin": "Жидкий травертин", "Suyuq travertin · # m²": "Жидкий травертин · # м²", "Ta'mir": "Ремонт", "Ta'mirdan keyingi tozalash": "Уборка после ремонта", "Ta'mirdan keyingi tozalash miqdori": "Объём уборки", "Ta'mirlanayotgan uy: havozalar, bo'yoq valigi va o'lcham chizig'i": "Дом на ремонте: леса, валик и размерная линия", "Ta'mirni pul tugaganda emas, hisob tugaganda boshlang.": "Начинайте ремонт, когда закончен расчёт, а не деньги.", "Tarnov (nov)": "Желоб водостока", "Tarnov ilgagi (kronshteyn)": "Кронштейн желоба", "Tarnov uzunligi, m": "Длина водостока, м", "Taxminiy narx": "Ориентировочная цена", "Tekis tom": "Плоская крыша", "Tekis tom: rulonli bikrost, # qatlam (ish va material)": "Плоская крыша: рулонный бикрост, # слоя (работа и материал)", "Telegram": "Telegram", "Telegram uchun nusxalash": "Скопировать для Telegram", "Termopanel": "Термопанели", "Termopanel · # m²": "Термопанели · # м²", "To'liq": "Полный", "To'rt nishabli": "Четырёхскатная", "Tom": "Крыша", "Tom maydoni, m²": "Площадь крыши, м²", "Tom maydoni: # m²": "Площадь крыши: # м²", "Tom ostiga gidroizolyatsiya membranasi (ish va material)": "Гидроизоляционная мембрана под кровлю (работа и материал)", "Tom tepasiga brus (konyok) #×#": "Коньковый брус #×#", "Tom yog'och karkasi: stropila va obreshyotka (ish va material)": "Деревянный каркас крыши: стропила и обрешётка (работа и материал)", "Tom yopish: metallocherepitsa (ish)": "Кровля: металлочерепица (работа)", "Tom yopish: metallocherepitsa (material)": "Кровля: металлочерепица (материал)", "Tom yopish: ondulin (evroshifer) (ish)": "Кровля: ондулин (работа)", "Tom yopish: ondulin (evroshifer) (material)": "Кровля: ондулин (материал)", "Tom yopish: profnastil (ish)": "Кровля: профнастил (работа)", "Tom yopish: profnastil (material)": "Кровля: профнастил (материал)", "Tom yopish: rulonli bikrost (ish)": "Кровля: рулонный бикрост (работа)", "Tom yopish: rulonli bikrost (material)": "Кровля: рулонный бикрост (материал)", "Tom yopish: shifer (ish)": "Кровля: шифер (работа)", "Tom yopish: shifer (material)": "Кровля: шифер (материал)", "Tom yopish: yumshoq cherepitsa (ish)": "Кровля: мягкая черепица (работа)", "Tom yopish: yumshoq cherepitsa (material)": "Кровля: мягкая черепица (материал)", "Tom: metallocherepitsa (ish va material)": "Крыша: металлочерепица (работа и материал)", "Tom: ondulin / evroshifer (ish va material)": "Крыша: ондулин / еврошифер (работа и материал)", "Tom: profnastil (ish va material, konyok, samorez bilan)": "Крыша: профнастил (работа и материал, конёк, саморезы)", "Tom: shifer (ish va material)": "Крыша: шифер (работа и материал)", "Tom: yumshoq cherepitsa, OSB asos bilan (ish va material)": "Крыша: мягкая черепица на OSB (работа и материал)", "Tomga nima va qancha kerak": "Что и сколько нужно для крыши", "Tomni ham hisoblayman": "Считаю и крышу", "Tomni isitish": "Утепление крыши", "Tomni isitish (ish)": "Утепление крыши (работа)", "Tomni isitish: mineral paxta # mm + paroizolyatsiya": "Утепление крыши: минвата # мм + пароизоляция", "Toshkent shahri": "г. Ташкент", "Toshkent viloyati": "Ташкентская обл.", "Umumiy": "Общее", "Unitaz": "Унитаз", "Unitaz o'rnatish": "Установка унитаза", "Usta haqi, material va muddat — barchasi bir sahifada, bepul.": "Работа мастеров, материалы и сроки — всё на одной странице, бесплатно.", "Ustalar ishi": "Работа мастеров", "Uy": "Дом", "Uy atrofi (perimetr), m": "Периметр дома, м", "Uy egalari uchun": "Для владельцев жилья", "Uy eni, m": "Ширина дома, м", "Uy tashqarisi": "Снаружи дома", "Uy uzunligi, m": "Длина дома, м", "Valyuta": "Валюта", "Vanna": "Ванна", "Vanna o'rnatish": "Установка ванны", "Vanna va smesitel": "Ванна и смеситель", "Viklyuchatel": "Выключатель", "Viklyuchatel (podrozetnik bilan)": "Выключатель (с подрозетником)", "Viloyat": "Регион", "Xona": "Комната", "Xona o'lchamlarini kiriting, pol, devor va shiftga material tanlang — smeta, do'kon ro'yxati va muddat bir zumda tayyor.": "Введите размеры комнат, выберите материалы для пола, стен и потолка — смета, список покупок и сроки готовы мгновенно.", "Xona turi": "Тип комнаты", "Xonalar": "Комнаты", "Xonani bosing — o'lcham va materialni o'zgartirasiz.": "Нажмите на комнату — измените размеры и материалы.", "Xorazm viloyati": "Хорезмская обл.", "Yana # ta ▼": "Ещё # ▼", "Yangi yog'och qism": "Новый деревянный каркас", "Yengil": "Лёгкий", "Yershli mix": "Ершёные гвозди", "Yetti o'lchab, bir kes — hisobini biz qilamiz": "Семь раз отмерь — расчёт за нами", "Yog'och (stropila, obreshyotka, brus) — jami": "Древесина (стропила, обрешётка, брус) — всего", "Yog'och karkas: stropila, obreshyotka (ish)": "Деревянный каркас: стропила, обрешётка (работа)", "Yog'och karkas: taxta, brus, mix, antiseptik": "Деревянный каркас: доска, брус, гвозди, антисептик", "Yopish": "Закрыть", "Yotoqxona": "Спальня", "Yotoqxona #": "Спальня #", "Yozuv": "Письмо", "Yumshoq cherepitsa": "Мягкая черепица", "Yumshoq cherepitsa · # m²": "Мягкая черепица · # м²", "Zatirka (chok uchun), # kg": "Затирка (для швов), # кг", "Zaxira (#%)": "Резерв (#%)", "akril yoki rezinali tom bo'yog'i": "акриловая или резиновая краска для крыши", "aprel": "апрель", "arzon, tez": "дёшево, быстро", "avgust": "август", "avtomat, UZO · # so'm": "автоматы, УЗО · # сум", "bo'yoq, pol, shift": "покраска, пол, потолок", "buzish, suvoq, styajka, elektr, santexnika — boshida": "демонтаж, штукатурка, стяжка, электрика, сантехника — в начале", "cherepitsaga o'xshaydi": "похожа на черепицу", "chiroyli va uzoq chidaydi ·": "красиво и долговечно ·", "chiroyli, OSB ustiga": "красиво, на OSB", "chiroyli, qimmatroq": "красиво, дороже", "dekabr": "декабрь", "dona": "шт", "eng arzon": "самый дешёвый", "eng ko'p uchraydi": "самая распространённая", "eskisini olib tashlash ·": "снять старую ·", "fevral": "февраль", "g'isht yoki blok ochiq bo'lsa ·": "если кирпич или блок открыт ·", "gaz kotyoli va radiatorlar — hovli uy uchun": "газовый котёл и радиаторы — для частного дома", "gaz kotyoli va radiatorlar — hovli uy uchun · # so'm / xona + kotyol # mln": "газовый котёл и радиаторы — для частного дома · # сум / комн. + котёл # млн", "gidroizolyatsiya membranasi ·": "гидроизоляционная мембрана ·", "har bir xonaga": "в каждую комнату", "har bir xonaga · # so'm / xona": "в каждую комнату · # сум / комн.", "isitadi ham": "ещё и утепляет", "iyul": "июль", "iyun": "июнь", "jami # m²": "всего # м²", "kafel pol ostiga": "под плиточный пол", "kafel pol ostiga · # so'm / m²": "под плиточный пол · # сум / м²", "kafel, shpaklyovka, bo'yoq, pol, shift — o'rtada": "плитка, шпаклёвка, покраска, пол, потолок — в середине", "kamaytirish": "уменьшить", "kiritilgan derazalar bo'yicha": "по введённым окнам", "kiritilgan derazalar bo'yicha · # so'm / m²": "по введённым окнам · # сум / м²", "ko'paytirish": "увеличить", "komplekt": "компл.", "konditsioner, plita · # so'm": "кондиционер, плита · # сум", "kutilmagan xarajatlar uchun": "на непредвиденные расходы", "liniya": "линия", "lyustra, spot · # so'm": "люстра, спот · # сум", "m": "м", "mart": "март", "may": "май", "m²": "м²", "nishabsiz": "без уклона", "noldan, o'rtacha": "с нуля, средний", "noldan, qimmat": "с нуля, дорогой", "noyabr": "ноябрь", "nuqta": "точка", "ochiq · # mln so'm": "открыт · # млн сум", "oddiy, arzon": "просто, дёшево", "oktyabr": "октябрь", "paketda ≈ # m²": "в упаковке ≈ # м²", "paxta (mineral vata) — qishda issiq ·": "минвата — тепло зимой ·", "qishda issiq, gaz tejaladi ·": "тепло зимой, экономия газа ·", "qo'shilmagan": "не добавлено", "quvurlar, kanalizatsiya va jihozlar": "трубы, канализация и приборы", "reys": "рейс", "santexnika, eshiklar, konditsioner, mebel, tozalash — oxirida": "сантехника, двери, кондиционеры, мебель, уборка — в конце", "sentyabr": "сентябрь", "shovqinsiz": "бесшумно", "so'm": "сум", "stropila va taxtalar — yangi uy yoki eskisi chirigan bo'lsa ·": "стропила и доски — новый дом или старые сгнили ·", "tanlanmagan": "не выбрано", "tekis tom uchun": "для плоской крыши", "to'rt nishabli tomda kesish ko'p bo'ladi": "на четырёхскатной крыше много подрезки", "umumiy maydon bo'yicha": "по общей площади", "umumiy maydon bo'yicha · # so'm / m²": "по общей площади · # сум / м²", "uyning tashqi devorlari": "наружные стены дома", "xizmat": "услуга", "xona": "комн.", "yangi sim, rozetka, viklyuchatel, shchit": "новая проводка, розетки, выключатели, щит", "yangi tom yopilmaydi, faqat bo'yash hisoblanadi": "новая кровля не кладётся, считается только покраска", "yangi tom yopish yoki eskisini almashtirish": "новая кровля или замена старой", "yanvar": "январь", "yashash xonalari soniga qarab": "по числу жилых комнат", "yashash xonalari soniga qarab · # so'm / dona": "по числу жилых комнат · # сум / шт", "yig'iladi · oxirgi bosqich:": "· последний этап:", "yo'q": "нет", "yog'och bozorida shunday so'raladi": "так спрашивают на рынке древесины", "yomg'ir suvi uchun nov va quvurlar ·": "желоба и трубы для дождевой воды ·", "Обмеры — obyektga chiqib o'lchash": "Обмеры — выезд на объект и замеры", "↺ Sonlarni avtomatik qilish": "↺ Пересчитать автоматически", "⚙️ Narxlarni o'zgartirish": "⚙️ Изменить цены", "⚡ Elektrika": "⚡ Электрика", "✕ Xonani o'chirish": "✕ Удалить комнату", "🌳 Hovli hududi": "🌳 Двор", "🏠 Tom": "🏠 Крыша", "💳 Bo'lib to'lash rejasi": "💳 План накоплений", "📅 To'lov bosqichlari": "📅 Этапы оплаты", "📋 Batafsil smeta": "📋 Подробная смета", "📐 Shift va deraza o'lchami": "📐 Потолок и окна", "🚿 Santexnika": "🚿 Сантехника", "🛒 Do'kon uchun ro'yxat": "🛒 Список для магазина", "🧱 Tashqi fasad": "🧱 Наружный фасад", "Nusxalandi — Telegramga joylang.": "Скопировано — вставьте в Telegram.", "Nusxalab bo'lmadi.": "Не удалось скопировать.", "PDF saqlandi.": "PDF сохранён.", "Bekor qilindi.": "Отменено.", "PDF yaratib bo'lmadi.": "Не удалось создать PDF.", "Nusxalandi — sotuvchiga yuboring.": "Скопировано — отправьте продавцу.", "Nusxalandi ✓": "Скопировано ✓", "Xona qo'shing": "Добавьте комнату", "hozir": "сейчас", "yetadi": "хватит", "Oxirgi loyihani o'chirib bo'lmaydi": "Последний проект нельзя удалить", "O'chirilsinmi?": "Удалить?", "Loyiha #": "Проект #", "Ovozli videoni yuklab olish": "Скачать видео", "✅ Pulingiz yetadi — hammasini hozir boshlash mumkin.": "✅ Денег хватает — можно начинать всё сейчас.", "#-variant": "вариант #", "Kirish": "Вход", "✏️ O'zgartirish": "✏️ Изменить", "✓ Tayyor": "✓ Готово", "↺ Avtomatik joylashtirish": "↺ Расставить автоматически", "Xonani barmoq bilan surib joylashtiring. Ikki marta bossangiz — buriladi.": "Перетаскивайте комнаты пальцем. Двойное нажатие — поворот.", "🗺 Uy rejasi": "🗺 План дома", "Taxminiy joylashuv — xonalar o'lchami bo'yicha chizildi. Haqiqiy reja boshqacha bo'lishi mumkin.": "Примерная планировка по размерам комнат. Реальный план может отличаться.", "Ta'mir smetasi": "Смета ремонта", "#-yil yanvar": "январь # г.", "#-yil fevral": "февраль # г.", "#-yil mart": "март # г.", "#-yil aprel": "апрель # г.", "#-yil may": "май # г.", "#-yil iyun": "июнь # г.", "#-yil iyul": "июль # г.", "#-yil avgust": "август # г.", "#-yil sentyabr": "сентябрь # г.", "#-yil oktyabr": "октябрь # г.", "#-yil noyabr": "ноябрь # г.", "#-yil dekabr": "декабрь # г.", "(nusxa)": "(копия)"};const RUW=[["Aniq smeta uchun smetachi", "Точная смета у сметчика"], ["TA'MIR UCHUN MATERIALLAR", "МАТЕРИАЛЫ ДЛЯ РЕМОНТА"], ["Hovli va tashqi", "Двор и снаружи"], ["Bolalar xonasi", "Детская"], ["oxirgi bosqich", "последний этап"], ["TA'MIR SMETASI", "СМЕТА РЕМОНТА"], ["Ustalar ishi", "Работа мастеров"], ["qo'shilmagan", "не добавлено"], ["gipsokarton", "гипсокартон"], ["Mening uyim", "Мой дом"], ["Materiallar", "Материалы"], ["Mehmonxona", "Гостиная"], ["Santexnika", "Сантехника"], ["Qo'shimcha", "Дополнительно"], ["atachenta", "отточенто"], ["pvx panel", "ПВХ-панели"], ["natyajnoy", "натяжной"], ["Yotoqxona", "Спальня"], ["Hojatxona", "Туалет"], ["yig'iladi", "накопятся"], ["Elektrika", "Электрика"], ["Linoleum", "Линолеум"], ["emulsiya", "эмульсия"], ["komplekt", "компл."], ["Kvartira", "Квартира"], ["Hovli uy", "Частный дом"], ["Laminat", "Ламинат"], ["Oshxona", "Кухня"], ["Koridor", "Коридор"], ["kanistr", "канистр."], ["(nusxa)", "(копия)"], ["rozetka", "розеток"], ["Hammom", "Ванная"], ["Balkon", "Балкон"], ["pachka", "упак."], ["chelak", "ведро"], ["liniya", "линии"], ["Loyiha", "Проект"], ["Umumiy", "Общее"], ["Muddat", "Срок"], ["Maydon", "Площадь"], ["ta'mir", "ремонт"], ["chiroq", "светильн."], ["yengil", "лёгкий"], ["to'liq", "полный"], ["Yengil", "Лёгкий"], ["To'liq", "Полный"], ["Hovli", "Двор"], ["Kafel", "Плитка"], ["kafel", "плитка"], ["ochiq", "открыт"], ["hafta", "нед."], ["nuqta", "точ."], ["rulon", "рул."], ["paket", "упак."], ["Fasad", "Фасад"], ["jihoz", "приборов"], ["lyuks", "люкс"], ["Lyuks", "Люкс"], ["so'm", "сум"], ["oboy", "обои"], ["oyda", "мес."], ["Jami", "Итого"], ["dona", "шт"], ["list", "лист."], ["litr", "л"], ["xona", "комн."], ["JAMI", "ИТОГО"], ["yo'q", "нет"], ["mln", "млн"], ["pul", "деньги"], ["yil", "г."], ["qop", "меш."], ["Tom", "Крыша"], ["m²", "м²"], ["m", "м"]].map(([a,b])=>[new RegExp("(^|[^A-Za-z'ʻ])"+a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+"(?![A-Za-z])",'g'),b]);
+const NUMRE=/\d[\d\s,.]*\d|\d/g;
+function toRu(t){const m=String(t).match(/^(\s*)([\s\S]*?)(\s*)$/),core=m[2];if(!core)return t;let r=RU[core];
+ if(r==null){const nums=[];const key=core.replace(NUMRE,x=>{nums.push(x);return'#'});const tp=RU[key];if(tp!=null){let i=0;r=tp.replace(/#/g,()=>nums[i++]??'#')}}
+ if(r==null){r=core;for(const[re,b]of RUW)r=r.replace(re,(x,p)=>p+b)}
+ return m[1]+r+m[3]}
+const conv=t=>ABC==='cyr'?toCyr(t):ABC==='ru'?toRu(t):t;
 const ORIG=[];let busyX=false;
-const skip=n=>{const p=n.parentElement;return!p||p.closest('script,style,textarea')};
-function convNode(root,keep){if(root.nodeType===3){if(!skip(root)&&/[A-Za-z]/.test(root.data)){const v=toCyr(root.data);if(v!==root.data){if(keep)ORIG.push([root,root.data]);root.data=v}}return}
+const skip=n=>{const p=n.parentElement;return!p||p.closest('script,style,textarea,.abc')};
+function convNode(root,keep){if(root.nodeType===3){if(!skip(root)&&/[A-Za-z]/.test(root.data)){const v=conv(root.data);if(v!==root.data){if(keep)ORIG.push([root,root.data]);root.data=v}}return}
  if(root.nodeType!==1||root.closest('script,style'))return;
  const tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let t;const list=[];while(t=tw.nextNode())list.push(t);for(const x of list)convNode(x,keep);
- for(const el of[root,...root.querySelectorAll('[placeholder],[aria-label],[title]')])for(const at of['placeholder','aria-label','title']){const v=el.getAttribute&&el.getAttribute(at);if(v&&/[A-Za-z]/.test(v)){const c=toCyr(v);if(c!==v){if(keep)ORIG.push([el,v,at]);el.setAttribute(at,c)}}}}
-new MutationObserver(ms=>{if(ABC!=='cyr'||busyX)return;busyX=true;for(const m of ms){if(m.type==='characterData')convNode(m.target);else for(const n of m.addedNodes)convNode(n);if(m.type==='attributes')convNode(m.target)}busyX=false})
+ for(const el of[root,...root.querySelectorAll('[placeholder],[aria-label],[title]')])for(const at of['placeholder','aria-label','title']){const v=el.getAttribute&&el.getAttribute(at);if(v&&/[A-Za-z]/.test(v)&&!el.closest('.abc')){const c=conv(v);if(c!==v){if(keep)ORIG.push([el,v,at]);el.setAttribute(at,c)}}}}
+new MutationObserver(ms=>{if(ABC==='lat'||busyX)return;busyX=true;for(const m of ms){if(m.type==='characterData')convNode(m.target);else for(const n of m.addedNodes)convNode(n);if(m.type==='attributes')convNode(m.target)}busyX=false})
  .observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title']});
-function setAbc(v){ABC=v;try{localStorage.setItem('smeta-abc',v)}catch(e){}document.querySelectorAll('[data-abc]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.abc===v));
- document.documentElement.lang=v==='cyr'?'uz-Cyrl':'uz';
- if(v==='cyr'){busyX=true;convNode(document.body,true);document.title=toCyr("Ta'mir smetasi — uy ta'miri kalkulyatori");busyX=false}
- else{busyX=true;for(const[n,o,at]of ORIG.splice(0)){if(at)n.setAttribute(at,o);else n.data=o}document.title="Ta'mir smetasi — uy ta'miri kalkulyatori | Smetachi Quvonchbek";busyX=false;renderTop();renderRooms();update()}}
+function setAbc(v){busyX=true;for(const[n,o,at]of ORIG.splice(0).reverse()){if(at)n.setAttribute(at,o);else n.data=o}busyX=false;
+ ABC='lat';renderTop();renderRooms();update();
+ ABC=v;try{localStorage.setItem('smeta-abc',v)}catch(e){}document.querySelectorAll('[data-abc]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.abc===v));
+ {const b=document.querySelector('.lngm [data-abc="'+v+'"]');if(b){$('#lngCur').innerHTML=b.querySelector('svg').outerHTML+'<span>'+({lat:'Lotin',cyr:'Кирилл',ru:'Рус'})[v]+'</span>';$('#lngH').textContent=({lat:'Tilni tanlang',cyr:'Тилни танланг',ru:'Выберите язык'})[v];$('#lng').open=false}}
+ document.documentElement.lang=v==='cyr'?'uz-Cyrl':v==='ru'?'ru':'uz';
+ if(v!=='lat'){busyX=true;convNode(document.body,true);busyX=false}
+ document.title=v==='cyr'?toCyr("Ta'mir smetasi — uy ta'miri kalkulyatori"):v==='ru'?'Смета ремонта — калькулятор ремонта | Smetachi':"Ta'mir smetasi — uy ta'miri kalkulyatori | Smetachi Quvonchbek"}
 document.querySelector('.abc').addEventListener('click',e=>{const b=e.target.closest('[data-abc]');if(b&&b.dataset.abc!==ABC)setAbc(b.dataset.abc)});
-window.__cyr=t=>ABC==='cyr'?toCyr(t):t;
+window.__cyr=t=>ABC==='cyr'?toCyr(t):ABC==='ru'?String(t).split('\n').map(toRu).join('\n'):t;
 
+function accSum(){const g=id=>{const e=$('#'+id);return e?e.textContent.trim():''};
+ const r=REG.find(x=>x[0]===S.reg),k=KIND.find(x=>x[0]===S.kind);
+ $('#sum1').innerHTML=[r&&r[1],S.obj==='hovli'?'Hovli uy':'Kvartira',k&&k[1]].filter(Boolean).map(x=>'<span>'+x+'</span>').join(' · ');
+ $('#sum2').textContent=g('rtot');
+ const e3=[engOn('el')&&g('sumEl'),engOn('san')&&g('sumSn')].filter(Boolean);$('#sum3').textContent=e3.length?e3.join(' · '):"qo'shilmagan";
+ const e4=[roofOn()&&'Tom',S.fas.on&&'Fasad',S.obj==='hovli'&&num(S.yard.plit)>0&&'Hovli'].filter(Boolean);$('#sum4').innerHTML=e4.length?e4.map(x=>'<span>'+x+'</span>').join(' · '):"<span>qo'shilmagan</span>"}
+{const _u=update;update=function(...a){const r=_u.apply(this,a);try{accSum()}catch(e){}return r}}
+let accOk=false;setTimeout(()=>accOk=true,800);
+document.querySelectorAll('.acc').forEach(d=>d.addEventListener('toggle',()=>{if(!d.open||!accOk)return;document.querySelectorAll('.acc[open]').forEach(o=>{if(o!==d)o.open=false});
+ requestAnimationFrame(()=>{const t=d.getBoundingClientRect().top;if(t<8||t>innerHeight*.45)window.scrollTo({top:scrollY+t-10,behavior:'smooth'})})}));
+document.addEventListener('click',e=>{const l=$('#lng');if(l&&l.open&&!e.target.closest('#lng'))l.open=false});
+
+const PLC={meh:'#e3ebff',yot:'#ece6ff',bol:'#fff1d9',osh:'#ffeadc',ham:'#dff4f7',hoj:'#dff4f7',kor:'#eef1f6',bal:'#e4f5e4'};
+const ROTS={t:'r',r:'b',b:'l',l:'t'},rotSide=(sd,n)=>{for(let i=0;i<n;i++)sd=ROTS[sd];return sd};
+let PLEDIT=false;
+function planAuto(){const R=S.rooms.map(r=>({r,a:Math.max(num(r.L)||0,num(r.W)||0),b:Math.min(num(r.L)||0,num(r.W)||0)})).filter(o=>o.b>0);
+ const live=R.filter(o=>['meh','yot','bol'].includes(o.r.t)).sort((p,q)=>q.a*q.b-p.a*p.b),
+  wet=R.filter(o=>!['meh','yot','bol','kor','bal'].includes(o.r.t)).sort((p,q)=>q.a*q.b-p.a*p.b),
+  kor=R.filter(o=>o.r.t==='kor'),bal=R.filter(o=>o.r.t==='bal');
+ const all=[...live,...wet],tw=all.reduce((t,o)=>t+o.b,0);let top=[],bot=[],acc=0;
+ all.forEach(o=>{if(acc<tw/2||!top.length){top.push(o);acc+=o.b}else bot.push(o)});
+ const P=[];const tH=top.length?Math.max(...top.map(o=>o.a)):0;let x=0;
+ top.forEach(o=>{P.push({o,x,y:tH-o.a,w:o.b,h:o.a,pos:'top'});x+=o.b});
+ let y=tH,kx=0,kH=0;kor.forEach(o=>{P.push({o,x:kx,y,w:o.a,h:o.b,pos:'kor'});kx+=o.a;kH=Math.max(kH,o.b)});y+=kH;
+ x=0;bot.forEach(o=>{P.push({o,x,y,w:o.b,h:o.a,pos:'bot'});x+=o.b});
+ const tops=P.filter(p=>p.pos==='top');let bx=0;
+ bal.forEach((o,i)=>{const host=tops[i]||null,hx=host?host.x:bx;P.push({o,x:hx,y:(host?host.y:0)-o.b,w:o.a,h:o.b,pos:'bal'});bx=hx+o.a});
+ if(P.length){const mx=Math.min(...P.map(p=>p.x)),my=Math.min(...P.map(p=>p.y));P.forEach(p=>{p.x-=mx;p.y-=my})}
+ return P}
+function planPlaced(){if(!S.plan)S.plan={};const P=planAuto();let man=P.filter(p=>S.plan[p.o.r.id]);
+ if(man.length){const mb=Math.max(...man.map(p=>{const m=S.plan[p.o.r.id];return m.y+((m.rot||0)%2?p.w:p.h)}));let nx=0;
+  P.forEach(p=>{const m=S.plan[p.o.r.id];p.rot=0;
+   if(m){p.rot=m.rot||0;if(p.rot%2){const t=p.w;p.w=p.h;p.h=t}p.x=m.x;p.y=m.y}
+   else{p.x=nx;p.y=mb+.6;nx+=p.w+.3}})}
+ else P.forEach(p=>p.rot=0);
+ return P}
+function planSVG(){const P=planPlaced();if(!P.length)return'';
+ const minX=Math.min(...P.map(p=>p.x)),minY=Math.min(...P.map(p=>p.y)),maxX=Math.max(...P.map(p=>p.x+p.w)),maxY=Math.max(...P.map(p=>p.y+p.h));
+ const pad=.9,W=maxX-minX,H=maxY-minY,wl=.14,ww=Math.min(num(S.ww)||1.5,2.2);
+ let g='';const cnt={};
+ P.forEach(p=>{const t=p.o.r.t,r=p.o.r,fill=PLC[t]||'#f3f4f8';cnt[t]=(cnt[t]||0)+1;
+  const X=p.x,Y=p.y,w=p.w,h=p.h,rot=p.rot||0;let q=`<rect x="${X}" y="${Y}" width="${w}" height="${h}" fill="${fill}" stroke="#2a3550" stroke-width="${wl}"/>`;
+  const seg=(sd,a,b)=>sd==='t'?[X+a,Y,X+b,Y]:sd==='b'?[X+a,Y+h,X+b,Y+h]:sd==='l'?[X,Y+a,X,Y+b]:[X+w,Y+a,X+w,Y+b];
+  const slen=sd=>sd==='t'||sd==='b'?w:h;
+  const ln=(c,col,sw)=>`<line x1="${c[0]}" y1="${c[1]}" x2="${c[2]}" y2="${c[3]}" stroke="${col}" stroke-width="${sw}"/>`;
+  const wn=Math.round(num(r.wn)||0),ws=p.pos==='kor'?null:rotSide(p.pos==='bot'?'b':'t',rot);
+  if(wn>0&&ws){const L=slen(ws),len=Math.min(ww,(L-.4)/wn);for(let i=0;i<wn&&len>.3;i++){const c=L*(i+.5)/wn,sg=seg(ws,c-len/2,c+len/2);q+=ln(sg,'#fff',wl*1.6)+ln(sg,'#2f7de1',wl*.7)}}
+  const dn=Math.round(num(r.dn)||0);
+  if(dn>0){const ds=rotSide(p.pos==='top'?'b':p.pos==='kor'?'l':p.pos==='bal'?'b':'t',rot),L=slen(ds),d=Math.min(.8,L-.3,(ds==='t'||ds==='b'?h:w)-.3);
+   if(d>.3){const a=.2,sg=seg(ds,a,a+d);
+    if(p.pos==='kor')q+=ln(sg,'#f26b1d',wl*1.6);
+    else{q+=ln(sg,fill,wl*1.4);const[hx,hy]=[sg[0],sg[1]],[ex,ey]=[sg[2],sg[3]],nx=ds==='l'?1:ds==='r'?-1:0,ny=ds==='t'?1:ds==='b'?-1:0,lx=hx+nx*d,ly=hy+ny*d;
+     const cr=(ex-hx)*(ly-hy)-(ey-hy)*(lx-hx);q+=`<path d="M${hx} ${hy} L${lx} ${ly} A${d} ${d} 0 0 ${cr>0?0:1} ${ex} ${ey}" fill="none" stroke="#2a3550" stroke-width=".04"/>`}}}
+  const many=S.rooms.filter(z=>z.t===t).length>1,nm=(T[t]?T[t].n:t)+(many?' '+cnt[t]:''),cx=X+w/2;
+  const fs=Math.max(.12,Math.min(.42,(w-.3)/(nm.length*.8),h/2.2)),dims=`${fq(+(w).toFixed(2))} × ${fq(+(h).toFixed(2))} m`,ar=`${fq(+(w*h).toFixed(1))} m²`;
+  const f2=Math.min(fs*.82,(w-.2)/(dims.length*.55)),lines=h>=fs*1.3+f2*2.6?3:h>=fs*1.3+f2*1.4?2:1,th=fs+(lines-1)*f2*1.25,y0=Y+h/2-th/2+fs*.8;
+  q+=`<text class="pn" x="${cx}" y="${y0}" font-size="${fs}" text-anchor="middle">${nm}</text>`;
+  if(lines>=2)q+=`<text class="pd" x="${cx}" y="${y0+f2*1.3}" font-size="${f2}" text-anchor="middle">${lines===3?dims:ar}</text>`;
+  if(lines===3)q+=`<text class="pd" x="${cx}" y="${y0+f2*2.55}" font-size="${f2}" text-anchor="middle">${ar}</text>`;
+  g+=`<g data-rid="${r.id}">${q}</g>`});
+ const dy=minY-pad*.55;g+=`<g stroke="#8a94a8" stroke-width=".03"><line x1="${minX}" y1="${dy}" x2="${maxX}" y2="${dy}"/><line x1="${minX}" y1="${dy-.15}" x2="${minX}" y2="${dy+.15}"/><line x1="${maxX}" y1="${dy-.15}" x2="${maxX}" y2="${dy+.15}"/></g><rect x="${minX+W/2-.75}" y="${dy-.2}" width="1.5" height=".4" rx=".2" fill="#fbfcff"/><text class="pd" x="${minX+W/2}" y="${dy+.11}" font-size=".3" text-anchor="middle">${fq(+W.toFixed(1))} m</text>`;
+ return`<svg viewBox="${minX-pad} ${minY-pad} ${W+pad*2} ${H+pad*1.6}" role="img" aria-label="Uy rejasi">${g}</svg><div class="pl"><span><i style="background:#2f7de1"></i>Deraza</span><span><i style="background:#f26b1d"></i>Kirish</span><span><i style="background:#2a3550;height:2px"></i>Eshik</span></div>`}
+function renderPlan(){if(!S.plan)S.plan={};const c=$('#planC');if(!c)return;const n=S.rooms.length,a=S.rooms.reduce((t,r)=>t+(num(r.L)||0)*(num(r.W)||0),0);
+ $('#sumPl').textContent=n?`${n} xona · ${fq(+a.toFixed(1))} m²`:'';
+ c.classList.toggle('pedit',PLEDIT);$('#plEdit').setAttribute('aria-pressed',PLEDIT);$('#plEdit').textContent=PLEDIT?'✓ Tayyor':"✏️ O'zgartirish";
+ $('#plAuto').hidden=!Object.keys(S.plan||{}).length;
+ if(c.open&&!PLDRAG)$('#plan').innerHTML=planSVG()}
+let PLDRAG=null,PLTAP={id:null,t:0};
+function plFreeze(){if(!S.plan)S.plan={};if(Object.keys(S.plan).length)return;planAuto().forEach(p=>{S.plan[p.o.r.id]={x:+p.x.toFixed(2),y:+p.y.toFixed(2),rot:0}})}
+function plPt(svg,e){const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())}
+$('#planC').addEventListener('toggle',renderPlan);
+$('#plEdit').addEventListener('click',()=>{PLEDIT=!PLEDIT;renderPlan()});
+$('#plAuto').addEventListener('click',()=>{S.plan={};save();renderPlan()});
+$('#plan').addEventListener('pointerdown',e=>{if(!PLEDIT)return;const g=e.target.closest('g[data-rid]');if(!g)return;e.preventDefault();
+ const svg=g.ownerSVGElement,p0=plPt(svg,e);PLDRAG={g,id:g.dataset.rid,p0,dx:0,dy:0,svg,moved:false};g.classList.add('drag');g.parentNode.appendChild(g);try{g.setPointerCapture(e.pointerId)}catch(_){}});
+$('#plan').addEventListener('pointermove',e=>{if(!PLDRAG)return;const p=plPt(PLDRAG.svg,e);PLDRAG.dx=p.x-PLDRAG.p0.x;PLDRAG.dy=p.y-PLDRAG.p0.y;
+ if(Math.abs(PLDRAG.dx)+Math.abs(PLDRAG.dy)>.08)PLDRAG.moved=true;PLDRAG.g.setAttribute('transform',`translate(${PLDRAG.dx} ${PLDRAG.dy})`)});
+function plEnd(){if(!PLDRAG)return;const d=PLDRAG;PLDRAG=null;plFreeze();const m=S.plan[d.id];
+ if(!m){renderPlan();return}
+ if(!d.moved){const now=Date.now();if(PLTAP.id===d.id&&now-PLTAP.t<400){m.rot=((m.rot||0)+1)%4;PLTAP={id:null,t:0};save();renderPlan();return}PLTAP={id:d.id,t:now};renderPlan();return}
+ const P=planPlaced(),me=P.find(p=>p.o.r.id===d.id);if(!me){renderPlan();return}
+ let nx=me.x+d.dx,ny=me.y+d.dy;const SN=.35;let bx=SN,by=SN,sx=nx,sy=ny;
+ P.forEach(o=>{if(o===me)return;[[o.x,0],[o.x+o.w,0],[o.x,me.w],[o.x+o.w,me.w]].forEach(([e,off])=>{const c=e-off,dd=Math.abs(nx-c);if(dd<bx){bx=dd;sx=c}});
+  [[o.y,0],[o.y+o.h,0],[o.y,me.h],[o.y+o.h,me.h]].forEach(([e,off])=>{const c=e-off,dd=Math.abs(ny-c);if(dd<by){by=dd;sy=c}})});
+ m.x=+(Math.round(sx*20)/20).toFixed(2);m.y=+(Math.round(sy*20)/20).toFixed(2);save();renderPlan()}
+$('#plan').addEventListener('pointerup',plEnd);$('#plan').addEventListener('pointercancel',plEnd);
+{const _u2=update;update=function(...a){const r=_u2.apply(this,a);try{renderPlan()}catch(e){console.error(e)}return r}}
 renderTop();renderRooms();update();setAbc(ABC);
 }
 {const d=document.getElementById('vdlg'),v=document.getElementById('vv');
@@ -830,5 +1157,6 @@ document.querySelectorAll('[data-src]').forEach(b=>b.addEventListener('click',()
 const c=()=>{v.pause();d.close()};document.getElementById('vclose').addEventListener('click',c);
 d.addEventListener('click',e=>{if(e.target===d)c()});d.addEventListener('close',()=>v.pause())}
 </script>
+<script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))</script>
 </body>
 </html>
